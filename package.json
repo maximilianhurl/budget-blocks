@@ -8,5 +8,9 @@
   "dependencies": {
     "alt": "^0.17.9",
     "react-native": "^0.14.2"
+  },
+  "devDependencies": {
+    "eslint": "=1.5.1",
+    "eslint-plugin-react": "=3.5.0"
   }
 }
