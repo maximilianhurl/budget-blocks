@@ -6,16 +6,42 @@ export class BudgetStore {
 
   constructor () {
     this.budgets = [
-        {'title': 'cat'}
+      {
+        'id': '1',
+        'title': 'cat',
+        'outgoings': [
+          {
+            'title': 'cat food',
+            'value': '10'
+          }
+        ]
+      }
     ];
 
+    this.income = '0';
+
+    //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
-      handleUpdateBudgets: BudgetActions.UPDATE_BUDGETS,
+      handleUpdateIncome: BudgetActions.UPDATE_INCOME,
+      handleAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK
     });
   }
 
-  handleUpdateBudgets(budgets) {
-    this.budgets = budgets;
+  handleAddBudgetBlock(title) {
+    console.log('handleAddBlock ' + title);
+    this.budgets.push({
+      'id': '1',
+      'title': title,
+      'outgoings': []
+    });
+  }
+
+  handleAddBudgetBlockOutgoing(blockId, title, value) {
+    console.log('handleAddBlockOutgoing ' + title + ' ' + value);
+  }
+
+  handleUpdateIncome(income) {
+    this.income = income;
   }
 
 }
