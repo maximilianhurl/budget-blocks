@@ -1,5 +1,7 @@
 var React = require('react-native');
 let { Text, View, TouchableHighlight, TextInput } = React;
+import { BudgetBlock } from './BudgetBlock';
+import objectMap from '../utils/objectMap';
 
 export class BudgetList extends React.Component {
 
@@ -13,8 +15,14 @@ export class BudgetList extends React.Component {
 
   render() {
 
-    let budgets = this.props.budgetstore.budgets.map(budget => {
-      return (<Text>Budget: { budget.title }</Text>);
+    let budgets = objectMap(this.props.budgetstore.budgets).map(item => {
+      return (
+        <BudgetBlock
+          budgetBlock={item.obj}
+          key={item.key}
+          storeKey={item.key}
+          income={this.props.budgetstore.income}/>
+      );
     });
 
     return (

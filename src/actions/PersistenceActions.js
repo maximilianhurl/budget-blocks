@@ -1,14 +1,7 @@
 import alt from '../alt';
 
-export class PersistenceActions {
-
-  loadPersistentState() {
-    this.dispatch();
-  }
-
-  persistState() {
-    this.dispatch();
-  }
-}
+const PersistenceActions = alt.generateActions(
+  'loadPersistentState', 'persistState'
+);
 
 export default alt.createActions(PersistenceActions);

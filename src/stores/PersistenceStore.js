@@ -9,11 +9,7 @@ const STORAGE_KEY = '@BasicBudgets:state-data';
 export class PersistenceStore {
 
   constructor () {
-
-    this.bindListeners({
-      handlePersistState: PersistenceActions.PERSIST_STATE,
-      handlelLoadPersistentState: PersistenceActions.LOAD_PERSISTENT_STATE,
-    });
+    this.bindActions(PersistenceActions);
   }
 
   /*
@@ -26,7 +22,7 @@ export class PersistenceStore {
   or should use the alt.js datasource (http://alt.js.org/docs/async/)
 
   If as actions it should have an action for loadingPersistState and
-  dispatch another for loadedPersistantState.
+  dispatch another for loadedPersistantState. (http://alt.js.org/guide/async/)
 
   */
 
