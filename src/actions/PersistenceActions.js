@@ -4,4 +4,4 @@ const PersistenceActions = alt.generateActions(
   'loadPersistentState', 'persistState'
 );
 
-export default alt.createActions(PersistenceActions);
+export default PersistenceActions;

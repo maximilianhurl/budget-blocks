@@ -27,12 +27,12 @@ export class BudgetStore {
 
     //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
-      handleUpdateIncome: BudgetActions.UPDATE_INCOME,
-      handleAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK
+      onUpdateIncome: BudgetActions.UPDATE_INCOME,
+      onAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK
     });
   }
 
-  handleAddBudgetBlock(title) {
+  onAddBudgetBlock(title) {
     console.log('handleAddBlock ' + title);
     this.budgets[uuid()] = {
       'title': title,
@@ -40,7 +40,7 @@ export class BudgetStore {
     };
   }
 
-  handleAddBudgetBlockOutgoing(blockId, title, value) {
+  onAddBudgetBlockOutgoing(blockId, title, value) {
     console.log('handleAddBlockOutgoing ' + title + ' ' + value);
     this.budgets[blockId][uuid] = {
       'title': title,
@@ -48,7 +48,7 @@ export class BudgetStore {
     };
   }
 
-  handleUpdateIncome(income) {
+  onUpdateIncome(income) {
     this.income = income;
   }
 

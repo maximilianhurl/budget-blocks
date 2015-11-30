@@ -26,7 +26,7 @@ export class PersistenceStore {
 
   */
 
-  handlePersistState() {
+  onPersistState() {
     console.log('persist state');
     let snapshot = alt.takeSnapshot();
     console.log(snapshot);
@@ -38,7 +38,7 @@ export class PersistenceStore {
     });
   }
 
-  handlelLoadPersistentState() {
+  onLoadPersistentState() {
     console.log('load state');
 
     AsyncStorage.getItem(STORAGE_KEY).then((persistentState) => {
