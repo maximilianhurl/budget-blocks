@@ -1,7 +1,6 @@
 var React = require('react-native');
 let {
   StyleSheet,
-  Text,
   View,
 } = React;
 
@@ -14,16 +13,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
 
 export class App extends React.Component {
@@ -35,22 +24,6 @@ export class App extends React.Component {
 
         <BudgetListContainer />
 
-        <Text style={styles.welcome}>
-          Welcome to React Native!!!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
       </View>
     );
   }

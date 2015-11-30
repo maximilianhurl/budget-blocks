@@ -1,21 +1,55 @@
 import alt from '../alt';
 
 import BudgetActions from '../actions/BudgetActions';
+import uuid from '../utils/uuid';
 
 export class BudgetStore {
 
   constructor () {
-    this.budgets = [
-        {'title': 'cat'}
-    ];
+    this.budgets = {
+      '1': {
+        'id': '1',
+        'title': 'cat',
+        'outgoings': {
+          '2' : {
+            'title': 'cat food',
+            'value': '10'
+          },
+          '3' : {
+            'title': 'dog food',
+            'value': '10'
+          }
+        }
+      },
+    };
 
+    this.income = '0';
+
+    //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
-      handleUpdateBudgets: BudgetActions.UPDATE_BUDGETS,
+      onUpdateIncome: BudgetActions.UPDATE_INCOME,
+      onAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK
     });
   }
 
-  handleUpdateBudgets(budgets) {
-    this.budgets = budgets;
+  onAddBudgetBlock(title) {
+    console.log('handleAddBlock ' + title);
+    this.budgets[uuid()] = {
+      'title': title,
+      'outgoings': {}
+    };
+  }
+
+  onAddBudgetBlockOutgoing(blockId, title, value) {
+    console.log('handleAddBlockOutgoing ' + title + ' ' + value);
+    this.budgets[blockId][uuid] = {
+      'title': title,
+      'value': value
+    };
+  }
+
+  onUpdateIncome(income) {
+    this.income = income;
   }
 
 }

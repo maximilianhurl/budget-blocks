@@ -2,10 +2,13 @@ import alt from '../alt';
 
 export class BudgetActions {
 
-  updateBudgets(messages) {
-    this.dispatch(messages);
+  addBudgetBlock(title) {
+    this.dispatch(title);
   }
 
+  updateIncome(income) {
+    this.dispatch(income);
+  }
 }
 
 export default alt.createActions(BudgetActions);
