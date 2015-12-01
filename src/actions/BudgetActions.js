@@ -2,12 +2,20 @@ import alt from '../alt';
 
 export class BudgetActions {
 
+  updateIncome(income) {
+    this.dispatch(income);
+  }
+
   addBudgetBlock(title) {
     this.dispatch(title);
   }
 
-  updateIncome(income) {
-    this.dispatch(income);
+  updateBudgetBlockItemValue(blockId, blockItemId, value) {
+    this.dispatch({
+      blockId: blockId,
+      blockItemId: blockItemId,
+      value: value
+    });
   }
 }
 
