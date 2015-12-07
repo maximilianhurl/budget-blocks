@@ -3,14 +3,44 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start"
+    "start": "react-native start",
+    "test": "npm run babel && jest",
+    "babel": "rm -rf testOutput && babel src --out-dir testOutput --source-maps"
+  },
+  "jest": {
+    "setupEnvScriptFile": "./node_modules/react-native/jestSupport/env.js",
+    "testPathIgnorePatterns": [
+      "node_modules/"
+    ],
+    "unmockedModulePathPatterns": [
+      "promise",
+      "source-map",
+      "key-mirror",
+      "immutable",
+      "fetch",
+      "react-addons-test-utils",
+      "react",
+      "fbjs"
+    ],
+    "verbose": true,
+    "testPathDirs": [
+      "testOutput/"
+    ]
   },
   "dependencies": {
     "alt": "^0.17.9",
     "react-native": "^0.14.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.3.15",
+    "babel-core": "^6.3.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.0.15",
     "eslint": "=1.5.1",
-    "eslint-plugin-react": "=3.5.0"
+    "eslint-plugin-react": "=3.5.0",
+    "jest-cli": "^0.8.0",
+    "react": "^0.14.3",
+    "react-addons-test-utils": "^0.14.3"
   }
 }

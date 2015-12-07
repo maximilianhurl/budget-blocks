@@ -20,6 +20,8 @@ DerivedData
 /node_modules/
 *.sublime-workspace
 *.sublime-project
+/coverage/
+/testOutput/
 
 # android
 *.apk
