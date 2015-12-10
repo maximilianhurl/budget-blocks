@@ -4,16 +4,14 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "npm run babel && jest",
-    "babel": "rm -rf testOutput && babel src --out-dir testOutput --source-maps"
+    "test": "jest"
   },
   "jest": {
-    "setupEnvScriptFile": "./node_modules/react-native/jestSupport/env.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "setupEnvScriptFile": "<rootDir>/node_modules/react-native/jestSupport/env.js",
     "testFileExtensions": ["es6", "js"],
     "moduleFileExtensions": ["js", "json", "es6"],
-    "testPathIgnorePatterns": [
-      "node_modules/"
-    ],
+    "testPathIgnorePatterns": ["node_modules/"],
     "preprocessCachingDisabled": true,
     "unmockedModulePathPatterns": [
       "promise",
@@ -27,10 +25,7 @@
       "core-js",
       "babel-polyfill"
     ],
-    "verbose": true,
-    "testPathDirs": [
-      "testOutput/"
-    ]
+    "verbose": true
   },
   "dependencies": {
     "alt": "^0.17.9",
@@ -39,6 +34,7 @@
   "devDependencies": {
     "babel-cli": "^6.3.15",
     "babel-core": "^6.3.2",
+    "babel-jest": "^6.0.1",
     "babel-plugin-syntax-async-functions": "^6.3.13",
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",

@@ -35,6 +35,6 @@ describe('sum', function () {
   var navNode = ReactDOM.findDOMNode(navobj);
 
   console.log(navobj)
-  console.log(navNode.innerHTML())
+  console.log(navNode.innerHTML)
 
 });
