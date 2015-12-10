@@ -12,7 +12,9 @@ ReactNative.StyleSheet = {
 };
 
 class View extends React.Component {
-    render() { return false; }
+    render() {
+      return (<div> { this.props.children } </div>);
+    }
 }
 class PixelRatio extends React.Component {
     static get() { return 1; }
