@@ -1,4 +1,4 @@
-import 'babel/polyfill';
+import 'babel-polyfill';
 
 //takes a dictionary and returns an array
 

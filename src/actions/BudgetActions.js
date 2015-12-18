@@ -1,21 +1,31 @@
 import alt from '../alt';
 
+/*
+
+Could be simplified to the following as they have no transforms
+
+const PersistenceActions = alt.generateActions(
+  'updateIncome', 'addBudgetBlock', 'updateBudgetBlockItemValue'
+);
+
+*/
+
 export class BudgetActions {
 
   updateIncome(income) {
-    this.dispatch(income);
+    return income;
   }
 
   addBudgetBlock(title) {
-    this.dispatch(title);
+    return title;
   }
 
   updateBudgetBlockItemValue(blockId, blockItemId, value) {
-    this.dispatch({
+    return {
       blockId: blockId,
       blockItemId: blockItemId,
       value: value
-    });
+    };
   }
 }
 

@@ -1,4 +1,9 @@
+# OSX
+#
+.DS_Store
+
 # Xcode
+#
 build/
 *.pbxuser
 !default.pbxuser
@@ -15,24 +20,19 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+project.xcworkspace
 
-# sublime and node
-/node_modules/
-*.sublime-workspace
-*.sublime-project
-/coverage/
-/testOutput/
-
-# android
-*.apk
-*.ap_
-*.dex
-*.class
-bin/
-gen/
-.gradle/
-android/build/
+# Android/IJ
+#
+.idea
+.gradle
 local.properties
-proguard/
-*.log
-.navigation/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+
+*.sublime-workspace
+
+*.sublime-project
