@@ -6,7 +6,7 @@ import objectMap from '../utils/objectMap';
 export class BudgetList extends React.Component {
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('cat2');
+    this.props.budgetactions.addBudgetBlock('New outgoing');
   }
 
   updateIncome(text) {

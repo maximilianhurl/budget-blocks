@@ -20,11 +20,26 @@ export class BudgetActions {
     return title;
   }
 
+  updateBudgetBlockTitle(blockId, title) {
+    return {
+      blockId: blockId,
+      title: title
+    };
+  }
+
   updateBudgetBlockItemValue(blockId, blockItemId, value) {
     return {
       blockId: blockId,
       blockItemId: blockItemId,
       value: value
+    };
+  }
+
+  updateBudgetBlockItemTitle(blockId, blockItemId, title) {
+    return {
+      blockId: blockId,
+      blockItemId: blockItemId,
+      title: title
     };
   }
 }

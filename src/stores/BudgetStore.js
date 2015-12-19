@@ -31,45 +31,13 @@ export class BudgetStore {
     this.bindListeners({
       onUpdateIncome: BudgetActions.UPDATE_INCOME,
       onAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK,
-      onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE
+      onUpdateBudgetBlockTitle: BudgetActions.UPDATE_BUDGET_BLOCK_TITLE,
+      onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
+      onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE
     });
   }
 
-  onAddBudgetBlock(title) {
-    console.log('handleAddBlock ' + title);
-    this.budgets[uuid()] = {
-      'title': title,
-      'subtotal': '0',
-      'items': {}
-    };
-    this.recalculateBlockTotals();
-  }
-
-  onAddBudgetBlockOutgoing(blockId, title, value) {
-    console.log('handleAddBlockOutgoing ' + title + ' ' + value);
-    this.budgets[blockId][uuid()] = {
-      'title': title,
-      'value': value
-    };
-    this.recalculateBlockTotals();
-  }
-
-  onUpdateIncome(income) {
-    this.income = income;
-    this.recalculateBlockTotals();
-  }
-
-  onUpdateBudgetBlockItemValue(data) {
-
-    this.budgets[data.blockId].items[data.blockItemId] = {
-      'title': this.budgets[data.blockId].items[data.blockItemId].title,
-      'value': minFloat(data.value)
-    };
-
-    this.recalculateBlockTotals();
-  }
-
-  recalculateBlockTotals() {
+  _recalculateBlockTotals() {
 
     var incomeSubtotal = minFloat(this.income);
 
@@ -83,6 +51,53 @@ export class BudgetStore {
 
       block.subtotal = incomeSubtotal;
     }
+  }
+
+  onUpdateIncome(income) {
+    this.income = income;
+    this._recalculateBlockTotals();
+  }
+
+  // Block actions
+
+  onAddBudgetBlock(title) {
+    console.log('handleAddBlock ' + title);
+    this.budgets[uuid()] = {
+      'title': title,
+      'subtotal': '0',
+      'items': {}
+    };
+    this._recalculateBlockTotals();
+  }
+
+  onUpdateBudgetBlockTitle(payload) {
+    this.budgets[payload.blockId].title = payload.title;
+  }
+
+  onAddBudgetBlockOutgoing(blockId, title, value) {
+    console.log('handleAddBlockOutgoing ' + title + ' ' + value);
+    this.budgets[blockId][uuid()] = {
+      'title': title,
+      'value': value
+    };
+    this._recalculateBlockTotals();
+  }
+
+  // Block Item actions
+
+  onUpdateBudgetBlockItemValue(payload) {
+    this.budgets[payload.blockId].items[payload.blockItemId] = {
+      'title': this.budgets[payload.blockId].items[payload.blockItemId].title,
+      'value': minFloat(payload.value)
+    };
+    this._recalculateBlockTotals();
+  }
+
+  onUpdateBudgetBlockItemTitle(payload) {
+    this.budgets[payload.blockId].items[payload.blockItemId] = {
+      'title': payload.title,
+      'value': this.budgets[payload.blockId].items[payload.blockItemId].value,
+    };
   }
 
 }
