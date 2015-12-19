@@ -21,7 +21,6 @@
     "testPathIgnorePatterns": [
       "node_modules/"
     ],
-    "preprocessCachingDisabled": true,
     "unmockedModulePathPatterns": [
       "promise",
       "source-map",
@@ -34,7 +33,9 @@
       "core-js",
       "babel-polyfill"
     ],
-    "verbose": true
+    "verbose": true,
+    "preprocessCachingDisabled": true,
+    "collectCoverage": true
   },
   "dependencies": {
     "alt": "=0.18.1",
@@ -55,7 +56,6 @@
     "eslint-plugin-react": "=3.5.0",
     "jest-cli": "^0.8.0",
     "react": "^0.14.3",
-    "react-addons-test-utils": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-addons-test-utils": "^0.14.3"
   }
 }

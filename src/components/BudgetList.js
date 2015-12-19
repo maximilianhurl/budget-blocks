@@ -1,4 +1,4 @@
-var React = require('react-native');
+import React from 'react-native';
 let { Text, ScrollView, TouchableHighlight, TextInput } = React;
 import { BudgetBlock } from './BudgetBlock';
 import objectMap from '../utils/objectMap';

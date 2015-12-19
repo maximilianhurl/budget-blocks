@@ -16,13 +16,18 @@ class View extends React.Component {
       return (<div> { this.props.children } </div>);
     }
 }
+class Text extends React.Component {
+    render() {
+      return (<p> { this.props.children } </p>);
+    }
+}
 class PixelRatio extends React.Component {
     static get() { return 1; }
 }
 
 ReactNative.View = View;
 ReactNative.ScrollView = View;
-ReactNative.Text = View;
+ReactNative.Text = Text;
 ReactNative.TouchableOpacity = View;
 ReactNative.TouchableWithoutFeedback = View;
 ReactNative.ToolbarAndroid = View;
