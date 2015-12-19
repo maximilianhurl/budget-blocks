@@ -20,10 +20,22 @@ export class BudgetActions {
     return title;
   }
 
+  removeBudgetBlock(blockId) {
+    return blockId;
+  }
+
   updateBudgetBlockTitle(blockId, title) {
     return {
       blockId: blockId,
       title: title
+    };
+  }
+
+  addBudgetBlockItem(blockId, title, value) {
+    return {
+      blockId: blockId,
+      title: title,
+      value: value
     };
   }
 

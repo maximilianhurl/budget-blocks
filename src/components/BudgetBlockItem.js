@@ -25,7 +25,6 @@ export class BudgetBlockItem extends React.Component {
           style={{height: 20, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
           onChangeText={(text) => this.updateTitle(text)}
           value={ this.props.blockItem.title } />
-        <Text>key: { this.props.blockItemId }</Text>
         <Text>£{ this.props.blockItem.value }</Text>
         <TextInput
           style={{height: 18, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}

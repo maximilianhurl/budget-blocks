@@ -31,7 +31,9 @@ export class BudgetStore {
     this.bindListeners({
       onUpdateIncome: BudgetActions.UPDATE_INCOME,
       onAddBudgetBlock: BudgetActions.ADD_BUDGET_BLOCK,
+      onRemoveBudgetBlock: BudgetActions.REMOVE_BUDGET_BLOCK,
       onUpdateBudgetBlockTitle: BudgetActions.UPDATE_BUDGET_BLOCK_TITLE,
+      onAddBudgetBlockItem: BudgetActions.ADD_BUDGET_BLOCK_ITEM,
       onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
       onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE
     });
@@ -70,20 +72,22 @@ export class BudgetStore {
     this._recalculateBlockTotals();
   }
 
+  onRemoveBudgetBlock(blockId) {
+    delete this.budgets[blockId];
+  }
+
   onUpdateBudgetBlockTitle(payload) {
     this.budgets[payload.blockId].title = payload.title;
   }
 
-  onAddBudgetBlockOutgoing(blockId, title, value) {
-    console.log('handleAddBlockOutgoing ' + title + ' ' + value);
-    this.budgets[blockId][uuid()] = {
-      'title': title,
-      'value': value
-    };
-    this._recalculateBlockTotals();
-  }
-
   // Block Item actions
+
+  onAddBudgetBlockItem(payload) {
+    this.budgets[payload.blockId].items[uuid()] = {
+      'title': payload.title,
+      'value': payload.value
+    };
+  }
 
   onUpdateBudgetBlockItemValue(payload) {
     this.budgets[payload.blockId].items[payload.blockItemId] = {
