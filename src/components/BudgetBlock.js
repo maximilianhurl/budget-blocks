@@ -1,4 +1,4 @@
-var React = require('react-native');
+import React from 'react-native';
 let { Text, View } = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
