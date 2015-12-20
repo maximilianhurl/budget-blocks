@@ -2,6 +2,8 @@
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
 
+jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
+
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';
 let { Text } = React;
@@ -38,11 +40,11 @@ describe('BudgetBlock', function () {
     expect(title.props.children[0]).toEqual('Block Title: ');
     expect(title.props.children[1]).toEqual(block.title);
 
-    var blocks = output.props.children[2];
+    var blocks = output.props.children[3];
     expect(blocks.length).toEqual(1);
     expect(blocks[0].props.blockItem).toEqual(block.items[0]);
 
-    var subtotal = output.props.children[3];
+    var subtotal = output.props.children[5];
     expect(subtotal.type).toEqual(Text);
     expect(subtotal.props.children[0]).toEqual('Subtotal: £');
     expect(subtotal.props.children[1]).toEqual(block.subtotal);
