@@ -29,6 +29,7 @@ export class BudgetBlock extends React.Component {
     let budgets = objectMap(this.props.budgetBlock.items).map(item => {
       return (
         <BudgetBlockItem
+          key={item.key}
           blockItem={item.obj}
           blockItemId={item.key}
           blockId={this.props.blockId}
@@ -57,7 +58,7 @@ export class BudgetBlock extends React.Component {
           )}>
           <Text
             style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-            Remove
+            Remove Block
           </Text>
         </TouchableHighlight>
 

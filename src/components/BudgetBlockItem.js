@@ -1,5 +1,6 @@
 import React from 'react-native';
-let { Text, View, TextInput } = React;
+let { Text, View, TextInput, TouchableHighlight } = React;
+import alert from '../utils/alerts/alert';
 
 
 export class BudgetBlockItem extends React.Component {
@@ -13,6 +14,12 @@ export class BudgetBlockItem extends React.Component {
   updateTitle(title) {
     this.props.budgetactions.updateBudgetBlockItemTitle(
       this.props.blockId, this.props.blockItemId, title
+    );
+  }
+
+  removeBlockItem() {
+    this.props.budgetactions.removeBudgetBlockItem(
+      this.props.blockId, this.props.blockItemId
     );
   }
 
@@ -31,6 +38,20 @@ export class BudgetBlockItem extends React.Component {
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
           value={this.props.blockItem.value} />
+        <TouchableHighlight
+          onPress={() => alert(
+            'Are you sure you want to remove this outgoing?',
+            null,
+            [
+              {text: 'Remove', onPress: () => this.removeBlockItem()},
+              {text: 'Cancel'},
+            ]
+          )}>
+          <Text
+            style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
+            Remove Outgoing
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }

@@ -34,6 +34,7 @@ export class BudgetStore {
       onRemoveBudgetBlock: BudgetActions.REMOVE_BUDGET_BLOCK,
       onUpdateBudgetBlockTitle: BudgetActions.UPDATE_BUDGET_BLOCK_TITLE,
       onAddBudgetBlockItem: BudgetActions.ADD_BUDGET_BLOCK_ITEM,
+      onRemoveBudgetBlockItem: BudgetActions.REMOVE_BUDGET_BLOCK_ITEM,
       onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
       onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE
     });
@@ -87,6 +88,10 @@ export class BudgetStore {
       'title': payload.title,
       'value': payload.value
     };
+  }
+
+  onRemoveBudgetBlockItem(payload) {
+    delete this.budgets[payload.blockId].items[payload.blockItemId];
   }
 
   onUpdateBudgetBlockItemValue(payload) {

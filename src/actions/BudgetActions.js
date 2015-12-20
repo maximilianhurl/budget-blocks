@@ -39,6 +39,13 @@ export class BudgetActions {
     };
   }
 
+  removeBudgetBlockItem(blockId, blockItemId) {
+    return {
+      blockId: blockId,
+      blockItemId: blockItemId,
+    };
+  }
+
   updateBudgetBlockItemValue(blockId, blockItemId, value) {
     return {
       blockId: blockId,
