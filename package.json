@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "jest"
+    "test": "npm run eslint . && jest",
+    "eslint": "eslint"
   },
   "jest": {
     "scriptPreprocessor": "./jest/scriptPreprocessor",

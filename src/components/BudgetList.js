@@ -31,7 +31,10 @@ export class BudgetList extends React.Component {
 
         <Text>Income: £ { this.props.budgetstore.income }</Text>
         <TextInput
-          style={{height: 40, width: 270, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white', marginBottom: 20}}
+          style={{
+            height: 40, width: 270, borderColor: 'gray',
+            borderWidth: 1, backgroundColor: 'white', marginBottom: 20
+          }}
           onChangeText={(text) => this.updateIncome(text)}
           keyboardType={'numeric'}
           value={this.props.budgetstore.income} />
