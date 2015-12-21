@@ -18,7 +18,7 @@ describe('BudgetListContainer', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetListContainer />);
     var output = shallowRenderer.getRenderOutput();
-    expect(output).toEqual(true);
+    expect(output).toBeTruthy();
   });
 
 });

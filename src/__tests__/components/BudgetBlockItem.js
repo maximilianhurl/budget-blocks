@@ -14,11 +14,21 @@ describe('BudgetBlockItem', function () {
 
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
+  var blockId = 'id1';
+  var blockItemId = 'idItem1';
+  var blockItem = {
+    title: 'cat',
+    value: 10
+  };
+
   it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<BudgetBlockItem />);
+    shallowRenderer.render(<BudgetBlockItem
+      blockId={blockId}
+      blockItemId={blockItemId}
+      blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
-    expect(output).toEqual(true);
+    expect(output).toBeTruthy();
   });
 
 });
