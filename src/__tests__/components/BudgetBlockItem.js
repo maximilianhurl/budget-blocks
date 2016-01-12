@@ -1,6 +1,5 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlockItem');
-jest.dontMock('../../utils/objectMap');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars

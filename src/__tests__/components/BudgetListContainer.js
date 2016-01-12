@@ -1,6 +1,8 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetListContainer');
-jest.dontMock('../../utils/objectMap');
+
+jest.setMock('alt', require('../../__mocks__/alt'));
+jest.setMock('alt-container/src/AltNativeContainerLegacy', require('../../__mocks__/AltNativeContainerLegacy'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
