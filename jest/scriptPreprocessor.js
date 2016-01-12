@@ -8,7 +8,6 @@ module.exports = {
     if (filename.indexOf('node_modules') === -1 && babel.util.canCompile(filename)) {
       return babel.transform(src, {
         presets: ['react', 'es2015'],
-        plugins: ['syntax-async-functions'],
         babelrc: false,
         filename: filename,
         retainLines: true
