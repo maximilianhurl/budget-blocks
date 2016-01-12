@@ -1,10 +1,11 @@
 
 const alt = {
-  generateActions: function (actions) {
+  generateActions: function (...actions) {
     return actions;
   },
 
-  createActions: function (actions) {
+  createActions: function (ActionClass) {
+    var actions = new ActionClass();
     return actions;
   },
 
