@@ -1,7 +1,7 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetListContainer');
 
-jest.setMock('alt', require('../../__mocks__/alt'));
+jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('alt-container/src/AltNativeContainerLegacy', require('../../__mocks__/AltNativeContainerLegacy'));
 
 import TestUtils from 'react-addons-test-utils';

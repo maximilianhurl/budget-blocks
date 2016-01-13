@@ -1,7 +1,7 @@
 import alt from '../alt';
 
 var React = require('react-native');
-var { AsyncStorage } = React;
+const { AsyncStorage } = React;
 import PersistenceActions from '../actions/PersistenceActions';
 
 const STORAGE_KEY = '@BasicBudgets:state-data';
@@ -29,7 +29,6 @@ export class PersistenceStore {
   onPersistState() {
     console.log('persist state');
     let snapshot = alt.takeSnapshot();
-    console.log(snapshot);
 
     AsyncStorage.setItem(STORAGE_KEY, snapshot).then(() => {
       console.log('State persisted');

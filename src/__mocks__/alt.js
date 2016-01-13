@@ -11,6 +11,14 @@ const alt = {
 
   createStore: function (store) {
     return store;
+  },
+
+  takeSnapshot: function () {
+    return false;
+  },
+
+  bootstrap: function () {
+    return false;
   }
 };
 

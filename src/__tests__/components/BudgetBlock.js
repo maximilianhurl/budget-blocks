@@ -6,7 +6,7 @@ jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';
-let { Text } = React;
+const { Text } = React;
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
