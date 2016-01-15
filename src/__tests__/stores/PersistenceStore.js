@@ -10,12 +10,13 @@ import React from 'react-native';
 
 describe('Test PersistenceStore', function () {
 
-  var store;
+  var store, persistenceActions;
 
   beforeEach(function () {
     require('../../stores/PersistenceStore').default;
+    persistenceActions = require('../../actions/PersistenceActions');
     const PersistenceStore = require('../../stores/PersistenceStore').PersistenceStore;
-    PersistenceStore.prototype.bindActions = () => {};
+    PersistenceStore.prototype.bindActions = jest.genMockFunction();
     store = new PersistenceStore();
   });
 
@@ -35,6 +36,7 @@ describe('Test PersistenceStore', function () {
     store.onPersistState();
     expect(React.AsyncStorage.setItem.mock.calls.length).toBeGreaterThan(0);
     expect(React.AsyncStorage.setItem).lastCalledWith('@BasicBudgets:state-data', snapshot);
+    expect(store.bindActions).lastCalledWith(persistenceActions);
   });
 
   it('Should load state', function () {
