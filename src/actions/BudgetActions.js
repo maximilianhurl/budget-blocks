@@ -20,11 +20,45 @@ export class BudgetActions {
     return title;
   }
 
+  removeBudgetBlock(blockId) {
+    return blockId;
+  }
+
+  updateBudgetBlockTitle(blockId, title) {
+    return {
+      blockId: blockId,
+      title: title
+    };
+  }
+
+  addBudgetBlockItem(blockId, title, value) {
+    return {
+      blockId: blockId,
+      title: title,
+      value: value
+    };
+  }
+
+  removeBudgetBlockItem(blockId, blockItemId) {
+    return {
+      blockId: blockId,
+      blockItemId: blockItemId,
+    };
+  }
+
   updateBudgetBlockItemValue(blockId, blockItemId, value) {
     return {
       blockId: blockId,
       blockItemId: blockItemId,
       value: value
+    };
+  }
+
+  updateBudgetBlockItemTitle(blockId, blockItemId, title) {
+    return {
+      blockId: blockId,
+      blockItemId: blockItemId,
+      title: title
     };
   }
 }

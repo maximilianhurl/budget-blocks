@@ -16,14 +16,26 @@ class View extends React.Component {
       return (<div> { this.props.children } </div>);
     }
 }
+
 class Text extends React.Component {
     render() {
       return (<p> { this.props.children } </p>);
     }
 }
+
 class PixelRatio extends React.Component {
     static get() { return 1; }
 }
+
+ReactNative.AsyncStorage = {
+  setItem: function () {
+    return false;
+  },
+
+  getItem: function () {
+    return false;
+  }
+};
 
 ReactNative.View = View;
 ReactNative.ScrollView = View;

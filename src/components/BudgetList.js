@@ -6,7 +6,7 @@ import objectMap from '../utils/objectMap';
 export class BudgetList extends React.Component {
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('cat2');
+    this.props.budgetactions.addBudgetBlock('New outgoing block');
   }
 
   updateIncome(text) {
@@ -31,7 +31,10 @@ export class BudgetList extends React.Component {
 
         <Text>Income: £ { this.props.budgetstore.income }</Text>
         <TextInput
-          style={{height: 40, width: 270, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+          style={{
+            height: 40, width: 270, borderColor: 'gray',
+            borderWidth: 1, backgroundColor: 'white', marginBottom: 20
+          }}
           onChangeText={(text) => this.updateIncome(text)}
           keyboardType={'numeric'}
           value={this.props.budgetstore.income} />
@@ -40,7 +43,7 @@ export class BudgetList extends React.Component {
 
         <TouchableHighlight onPress={() => this.addBudgetBlock()}>
           <Text
-            style={{height: 40, width: 270, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
             >
             Add Block
           </Text>
@@ -48,7 +51,7 @@ export class BudgetList extends React.Component {
 
         <TouchableHighlight onPress={() => this.props.persistenceactions.persistState()}>
           <Text
-            style={{height: 40, width: 270, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
             >
             Save State
           </Text>
@@ -56,7 +59,7 @@ export class BudgetList extends React.Component {
 
         <TouchableHighlight onPress={() => this.props.persistenceactions.loadPersistentState()}>
           <Text
-            style={{height: 40, width: 270, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
             >
             Load State
           </Text>
