@@ -75,6 +75,7 @@ export class BudgetStore {
 
   onRemoveBudgetBlock(blockId) {
     delete this.budgets[blockId];
+    this._recalculateBlockTotals();
   }
 
   onUpdateBudgetBlockTitle(payload) {
@@ -88,10 +89,12 @@ export class BudgetStore {
       'title': payload.title,
       'value': payload.value
     };
+    this._recalculateBlockTotals();
   }
 
   onRemoveBudgetBlockItem(payload) {
     delete this.budgets[payload.blockId].items[payload.blockItemId];
+    this._recalculateBlockTotals();
   }
 
   onUpdateBudgetBlockItemValue(payload) {
