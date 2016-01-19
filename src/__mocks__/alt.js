@@ -22,5 +22,4 @@ const alt = {
   }
 };
 
-
 module.exports = alt;
