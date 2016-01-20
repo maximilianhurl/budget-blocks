@@ -1,23 +1,23 @@
 
 const alt = {
-  generateActions: function (...actions) {
+  generateActions(...actions) {
     return actions;
   },
 
-  createActions: function (ActionClass) {
+  createActions (ActionClass) {
     var actions = new ActionClass();
     return actions;
   },
 
-  createStore: function (store) {
+  createStore(store) {
     return store;
   },
 
-  takeSnapshot: function () {
+  takeSnapshot() {
     return false;
   },
 
-  bootstrap: function () {
+  bootstrap() {
     return false;
   }
 };

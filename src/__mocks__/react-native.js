@@ -28,11 +28,11 @@ class PixelRatio extends React.Component {
 }
 
 ReactNative.AsyncStorage = {
-  setItem: function () {
+  setItem() {
     return false;
   },
 
-  getItem: function () {
+  getItem() {
     return false;
   }
 };
