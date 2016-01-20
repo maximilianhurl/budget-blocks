@@ -3,6 +3,7 @@ jest.dontMock('../../components/BudgetBlockItem');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
+let { View, TextInput, TouchableHighlight, Text } = React; // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -28,6 +29,14 @@ describe('BudgetBlockItem', function () {
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
+    expect(output.props.children[0]).toEqual(
+      <Text>Budget: { blockItem.title }</Text>
+    );
+    expect(output.props.children[1].props.value).toEqual(blockItem.title);
+    expect(output.props.children[2]).toEqual(
+      <Text>£{ blockItem.value }</Text>
+    );
+    expect(output.props.children[3].props.value).toEqual(blockItem.value);
   });
 
 });
