@@ -24,7 +24,6 @@ export class BudgetBlockItem extends React.Component {
   }
 
   render() {
-
     return (
       <View style={{marginTop: 10}}>
         <Text>Budget: { this.props.blockItem.title }</Text>

@@ -43,4 +43,38 @@ describe('BudgetList', function () {
     expect(output).toBeTruthy();
   });
 
+  it('should add budget block', function () {
+    var budgetstore = {
+      budgets: {}
+    };
+
+    var actions = {
+      addBudgetBlock: jest.genMockFunction()
+    };
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetList
+      budgetactions={actions}
+      budgetstore={budgetstore} />);
+    var output = shallowRenderer.getRenderOutput();
+    output.props.children[3].props.onPress();
+    expect(actions.addBudgetBlock).toBeCalledWith('New outgoing block');
+  });
+
+  it('should add budget block', function () {
+    var budgetstore = {
+      budgets: {}
+    };
+
+    var actions = {
+      updateIncome: jest.genMockFunction()
+    };
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetList
+      budgetactions={actions}
+      budgetstore={budgetstore} />);
+    var output = shallowRenderer.getRenderOutput();
+    output.props.children[1].props.onChangeText('cats');
+    expect(actions.updateIncome).toBeCalledWith('cats');
+  });
+
 });
