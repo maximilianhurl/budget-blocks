@@ -124,35 +124,11 @@ export class BudgetStore {
 
   onReorderBudgetBlocks(payload) {
     console.log("onReorderBudgetBlocks")
+    let replacedBlockOrder = this.budgets[payload.replacedBlockId].order;
+    let movingBlockOrder = this.budgets[payload.movingBlockId].order;
 
-    let count = 1;
-
-    let budgetsBlocks = objectMap(this.budgets).sort((a, b) => a.obj.order - b.obj.order);
-
-    let newBudgets = {};
-    for (let block of budgetsBlocks) {
-      console.log(block)
-      if (block.key === payload.replacedBlockId) {
-        console.log('set key: ' + payload.movingBlockId)
-        newBudgets[payload.movingBlockId] = this.budgets[payload.movingBlockId];
-        newBudgets[payload.movingBlockId].order = count;
-        count++;
-      }
-
-      if (block.key !== payload.movingBlockId) {
-        console.log('set key: ' + block.key)
-        newBudgets[block.key] = this.budgets[block.key];
-        console.log(newBudgets[block.key])
-        newBudgets[block.key].order = count;
-        count++;
-      }
-    }
-
-    console.log(payload)
-    console.log(Object.keys(newBudgets))
-    //console.log(newBudgets)
-
-    this.budgets = newBudgets;
+    this.budgets[payload.movingBlockId].order = replacedBlockOrder;
+    this.budgets[payload.replacedBlockId].order = movingBlockOrder;
   }
 
 }

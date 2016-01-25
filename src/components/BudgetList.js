@@ -8,14 +8,11 @@ export class BudgetList extends React.Component {
   constructor(props) {
     super(props);
     this.contentYOffset = 0;
-  }
+    this.layouts = {};
 
-  componentWillReceiveProps(nextProps) {
-    //if reordering see if items should be re-ordered
-    let blockreorderstore = nextProps.blockreorderstore;
-    if (blockreorderstore.reordering && blockreorderstore.yPos && blockreorderstore.reorderingItemId) {
-      this.checkDragPosition(nextProps);
-    }
+    this.state = {
+      reordering: false
+    };
   }
 
   onScroll(e) {
@@ -23,34 +20,46 @@ export class BudgetList extends React.Component {
     this.contentYOffset = contentOffset.y;
   }
 
-  checkDragPosition (nextProps) {
-    //Check if the current scroll position is inside another block
-    //if so then re-order so scrolling block is in that position
+  dragStartCallback() {
+    console.log('dragStartCallback')
+    this.setState({
+      reordering: true
+    });
+  }
 
-    let yPos = this.contentYOffset + nextProps.blockreorderstore.yPos;
+  dragEndedCallback() {
+    console.log('dragEndedCallback')
+    this.setState({
+      reordering: false
+    });
+  }
 
-    console.log(this.contentYOffset, nextProps.blockreorderstore.yPos)
+  dragMoveCallback(dragItemKey, gestureState) {
+    console.log(dragItemKey, gestureState.moveY)
 
-    for (let refKey of Object.keys(this.blockRefs)) {
-      if (refKey !== nextProps.blockreorderstore.reorderingItemId) {
-        this.blockRefs[refKey].refs.outerView.measure((x, y, width, height) => {
+    let yPos = this.contentYOffset + gestureState.moveY;
 
-          console.log(yPos)
+    console.log(this.contentYOffset, gestureState.moveY)
 
-          if (yPos >= y && yPos <= y + height && nextProps.blockreorderstore.reorderingItemId) {
-            console.log("=====================================")
-            console.log(yPos, y)
-            console.log(nextProps.blockreorderstore.reorderingItemId + ' inside ' + refKey)
+    for (let key of Object.keys(this.layouts)) {
 
-            //swap them round!
-            nextProps.budgetactions.reorderBudgetBlocks(
-              nextProps.blockreorderstore.reorderingItemId, refKey
-            );
-            return;
-          }
-        });
+      if (dragItemKey !== key) {
+        let layout = this.layouts[key];
+        if (yPos >= layout.y && yPos <= layout.y + layout.height) {
+          console.log("=====================================")
+          console.log(yPos, layout.y)
+          console.log(dragItemKey + ' inside ' + key)
+
+          //swap them round!
+          this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
+        }
       }
     }
+
+  }
+
+  handleItemLayout (e, key) {
+    this.layouts[key] = e.nativeEvent.layout;
   }
 
   addBudgetBlock() {
@@ -63,23 +72,19 @@ export class BudgetList extends React.Component {
 
   render() {
 
-    //store refs to the objects to get layout positions when dragging
-    this.blockRefs = {};
-
     let budgetsBlocks = objectMap(this.props.budgetstore.budgets).sort((a, b) => a.obj.order - b.obj.order);
 
     let budgets = budgetsBlocks.map(item => {
-      console.log(item)
       return (
         <BudgetBlock
           budgetBlock={item.obj}
           key={item.key}
-          //store refs to the objects to get layout positions when dragging
-          ref={(ref) => this.blockRefs[item.key] = ref}
+          onLayout={(e) => this.handleItemLayout(e, item.key)}
+          dragStartCallback={() => this.dragStartCallback()}
+          dragEndedCallback={() => this.dragEndedCallback()}
+          dragMoveCallback={(dragItemKey, gestureState) => this.dragMoveCallback(dragItemKey, gestureState)}
           blockId={item.key}
           budgetactions={this.props.budgetactions}
-          blockreorderactions={this.props.blockreorderactions}
-          blockreorderstore={this.props.blockreorderstore}
           income={this.props.budgetstore.income}/>
       );
     });
@@ -87,7 +92,7 @@ export class BudgetList extends React.Component {
     return (
       <ScrollView
         style={{ marginTop: 60 }}
-        scrollEnabled={!this.props.blockreorderstore.reordering}
+        scrollEnabled={!this.state.reordering}
         onScroll={(e) => this.onScroll(e)}
         scrollEventThrottle={20}>
 

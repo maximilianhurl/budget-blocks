@@ -13,14 +13,34 @@ export class BudgetBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pan: new Animated.ValueXY(0, 0)
+      pan: new Animated.ValueXY(0, 0),
+      reordering: false
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    //if reordering see if items should be re-ordered
-    console.log('new props')
-  }
+  componentWillMount() {
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder : () => true,
+      onMoveShouldSetResponderCapture: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderGrant: () => {
+        this.props.dragStartCallback();
+        this.setState({
+          reordering: true
+        });
+      },
+      onPanResponderMove: Animated.event(
+        [ null, {dy: this.state.pan.y}],
+        {
+          listener: (e, gestureState) => {
+            this.props.dragMoveCallback(this.props.blockId, gestureState);
+          }
+        }
+      ),
+      onPanResponderRelease: () => this.dragEnded(),
+      onPanResponderTerminate: () => this.dragEnded(),
+    });
+  };
 
   removeBlock() {
     this.props.budgetactions.removeBudgetBlock(
@@ -38,37 +58,17 @@ export class BudgetBlock extends React.Component {
     );
   };
 
-  componentWillMount() {
-    this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder : () => true,
-      onMoveShouldSetResponderCapture: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => this.dragStarted(),
-      onPanResponderMove: Animated.event(
-        [ null, {dy: this.state.pan.y}],
-        {
-          listener: (e, gestureState) => {
-            this.props.blockreorderactions.moveReorder(gestureState.moveY);
-          }
-        }
-      ),
-      onPanResponderRelease: () => this.dragEnded(),
-      onPanResponderTerminate: () => this.dragEnded(),
-    });
-  };
-
   dragEnded() {
-    this.props.blockreorderactions.finishReorder();
+    this.setState({
+      reordering: false
+    });
 
+    this.props.dragEndedCallback();
     Animated.spring(this.state.pan, {
       toValue: 0,   // Returns to the start
       tension: 200, //speed
       friction: 12, //overshoot
     }).start();
-  }
-
-  dragStarted() {
-    this.props.blockreorderactions.startReorder(this.props.blockId);
   }
 
   render() {
@@ -86,12 +86,12 @@ export class BudgetBlock extends React.Component {
     });
 
     return (
-      <View ref="outerView" style={{
+      <View ref="outerView" onLayout={this.props.onLayout} style={{
         marginBottom: 20,
         width: 270,
         borderWidth: 1,
         borderColor: 'red',
-        backgroundColor: this.props.blockreorderstore.reordering ? 'green' : null,
+        backgroundColor: this.state.reordering ? 'green' : null,
       }}>
         <Animated.View style={{
           top: this.state.pan.y,
@@ -105,7 +105,7 @@ export class BudgetBlock extends React.Component {
             onChangeText={(text) => this.updateTitle(text)}
             value={ this.props.budgetBlock.title } />
 
-          <Text {...this._panResponder.panHandlers}>MOVE ME</Text>
+          <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
 
           <TouchableHighlight
             onPress={() => alert(
