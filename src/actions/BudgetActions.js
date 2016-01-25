@@ -61,6 +61,13 @@ export class BudgetActions {
       title: title
     };
   }
+
+  reorderBudgetBlocks(movingBlockId, replacedBlockId) {
+    return {
+      movingBlockId: movingBlockId,
+      replacedBlockId: replacedBlockId
+    };
+  }
 }
 
 export default alt.createActions(BudgetActions);
