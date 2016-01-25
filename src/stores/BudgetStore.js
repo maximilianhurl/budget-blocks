@@ -3,6 +3,8 @@ import alt from '../alt';
 import BudgetActions from '../actions/BudgetActions';
 import uuid from '../utils/uuid';
 import minFloat from '../utils/minFloat';
+import objectMap from '../utils/objectMap';
+
 
 export class BudgetStore {
 
@@ -10,17 +12,23 @@ export class BudgetStore {
     this.budgets = {
       '1': {
         'id': '1',
-        'title': 'cat',
-        'items': {
-          '2' : {
-            'title': 'cat food',
-            'value': '10'
-          },
-          '3' : {
-            'title': 'dog food',
-            'value': '40'
-          }
-        },
+        'title': 'cat1',
+        'order': 2,
+        'items': {},
+        'subtotal': '-20'
+      },
+      '2': {
+        'id': '2',
+        'title': 'cat2',
+        'order': 1,
+        'items': {},
+        'subtotal': '-20'
+      },
+      '3': {
+        'id': '3',
+        'title': 'cat3',
+        'order': 3,
+        'items': {},
         'subtotal': '-20'
       },
     };
@@ -36,7 +44,8 @@ export class BudgetStore {
       onAddBudgetBlockItem: BudgetActions.ADD_BUDGET_BLOCK_ITEM,
       onRemoveBudgetBlockItem: BudgetActions.REMOVE_BUDGET_BLOCK_ITEM,
       onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
-      onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE
+      onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE,
+      onReorderBudgetBlocks: BudgetActions.REORDER_BUDGET_BLOCKS
     });
   }
 
@@ -68,6 +77,7 @@ export class BudgetStore {
     this.budgets[uuid()] = {
       'title': title,
       'subtotal': '0',
+      'order': Object.keys(this.budgets).length + 1,
       'items': {}
     };
     this._recalculateBlockTotals();
@@ -110,6 +120,39 @@ export class BudgetStore {
       'title': payload.title,
       'value': this.budgets[payload.blockId].items[payload.blockItemId].value,
     };
+  }
+
+  onReorderBudgetBlocks(payload) {
+    console.log("onReorderBudgetBlocks")
+
+    let count = 1;
+
+    let budgetsBlocks = objectMap(this.budgets).sort((a, b) => a.obj.order - b.obj.order);
+
+    let newBudgets = {};
+    for (let block of budgetsBlocks) {
+      console.log(block)
+      if (block.key === payload.replacedBlockId) {
+        console.log('set key: ' + payload.movingBlockId)
+        newBudgets[payload.movingBlockId] = this.budgets[payload.movingBlockId];
+        newBudgets[payload.movingBlockId].order = count;
+        count++;
+      }
+
+      if (block.key !== payload.movingBlockId) {
+        console.log('set key: ' + block.key)
+        newBudgets[block.key] = this.budgets[block.key];
+        console.log(newBudgets[block.key])
+        newBudgets[block.key].order = count;
+        count++;
+      }
+    }
+
+    console.log(payload)
+    console.log(Object.keys(newBudgets))
+    //console.log(newBudgets)
+
+    this.budgets = newBudgets;
   }
 
 }

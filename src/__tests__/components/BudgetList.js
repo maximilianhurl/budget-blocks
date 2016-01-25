@@ -14,9 +14,13 @@ describe('BudgetList', function () {
 
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
+  var budgetstore = {
+    budgets: {}
+  };
+
   it('should render data correctly', function () {
 
-    var budgetstore = {
+    budgetstore = {
       budgets: {
         id1: {},
         id2: {}
@@ -44,10 +48,6 @@ describe('BudgetList', function () {
   });
 
   it('should add budget block', function () {
-    var budgetstore = {
-      budgets: {}
-    };
-
     var actions = {
       addBudgetBlock: jest.genMockFunction()
     };
@@ -61,10 +61,6 @@ describe('BudgetList', function () {
   });
 
   it('should add budget block', function () {
-    var budgetstore = {
-      budgets: {}
-    };
-
     var actions = {
       updateIncome: jest.genMockFunction()
     };
