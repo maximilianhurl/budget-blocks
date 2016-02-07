@@ -12,10 +12,31 @@ export class BudgetBlock extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.yPos = 0;
+
     this.state = {
       pan: new Animated.ValueXY(0, 0),
-      reordering: false
+      reordering: false,
     };
+  }
+
+  dragEnded() {
+    this.setState({
+      reordering: false
+    });
+
+    this.props.dragEndedCallback();
+    Animated.spring(this.state.pan, {
+      toValue: 0,   // Returns to the start
+      tension: 200, //speed
+      friction: 12, //overshoot
+    }).start();
+  }
+
+  onLayout(e) {
+    this.yPos = e.nativeEvent.layout.y;
+    this.props.onLayout(e);
   }
 
   componentWillMount() {
@@ -29,14 +50,14 @@ export class BudgetBlock extends React.Component {
           reordering: true
         });
       },
-      onPanResponderMove: Animated.event(
-        [ null, {dy: this.state.pan.y}],
-        {
-          listener: (e, gestureState) => {
-            this.props.dragMoveCallback(this.props.blockId, gestureState);
-          }
-        }
-      ),
+      onPanResponderMove: (event) => {
+        //console.log((gestureState.nativeEvent.pageY - this.yPos) - this.props.yOffset);
+        console.log('offset: ' + this.props.yOffset, this.props.scrollOffset)
+        var gestureYPos = (event.nativeEvent.pageY - this.yPos - this.props.yOffset) + this.props.scrollOffset;
+
+        this.state.pan.setValue({x: 0, y: gestureYPos});
+        this.props.dragMoveCallback(this.props.blockId, event.nativeEvent.pageY);
+      },
       onPanResponderRelease: () => this.dragEnded(),
       onPanResponderTerminate: () => this.dragEnded(),
     });
@@ -58,19 +79,6 @@ export class BudgetBlock extends React.Component {
     );
   };
 
-  dragEnded() {
-    this.setState({
-      reordering: false
-    });
-
-    this.props.dragEndedCallback();
-    Animated.spring(this.state.pan, {
-      toValue: 0,   // Returns to the start
-      tension: 200, //speed
-      friction: 12, //overshoot
-    }).start();
-  }
-
   render() {
 
     let budgets = objectMap(this.props.budgetBlock.items).map(item => {
@@ -86,7 +94,7 @@ export class BudgetBlock extends React.Component {
     });
 
     return (
-      <View ref="outerView" onLayout={this.props.onLayout} style={{
+      <View ref="outerView" onLayout={(e) => this.onLayout(e)} style={{
         marginBottom: 20,
         width: 270,
         borderWidth: 1,
@@ -96,16 +104,15 @@ export class BudgetBlock extends React.Component {
         <Animated.View style={{
           top: this.state.pan.y,
           backgroundColor: 'grey',
-          position: 'relative',
         }}>
+
+          <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
 
           <Text>Block Title: { this.props.budgetBlock.title }</Text>
           <TextInput
             style={{height: 20, width: 270, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
             onChangeText={(text) => this.updateTitle(text)}
             value={ this.props.budgetBlock.title } />
-
-          <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
 
           <TouchableHighlight
             onPress={() => alert(

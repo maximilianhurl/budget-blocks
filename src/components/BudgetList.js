@@ -7,7 +7,10 @@ export class BudgetList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.contentYOffset = 0;
+
+    this.yPos = 0;
+    this.scrollOffset = 0;
+
     this.layouts = {};
 
     this.state = {
@@ -17,7 +20,11 @@ export class BudgetList extends React.Component {
 
   onScroll(e) {
     const {contentOffset} = e.nativeEvent;
-    this.contentYOffset = contentOffset.y;
+    this.scrollOffset = contentOffset.y;
+  }
+
+  onLayout(e) {
+    this.yPos = e.nativeEvent.layout.y;
   }
 
   dragStartCallback() {
@@ -34,24 +41,28 @@ export class BudgetList extends React.Component {
     });
   }
 
-  dragMoveCallback(dragItemKey, gestureState) {
-    console.log(dragItemKey, gestureState.moveY)
+  dragMoveCallback(dragItemKey, eventYPos) {
 
-    let yPos = this.contentYOffset + gestureState.moveY;
+    //Adjust pan pos for scroll
+    eventYPos = eventYPos + this.scrollOffset - this.yPos;
 
-    console.log(this.contentYOffset, gestureState.moveY)
+    let scrollerTop = eventYPos;
+    let scrollerBottom = eventYPos + this.layouts[dragItemKey].height;
 
     for (let key of Object.keys(this.layouts)) {
 
       if (dragItemKey !== key) {
         let layout = this.layouts[key];
-        if (yPos >= layout.y && yPos <= layout.y + layout.height) {
+        if (
+          (scrollerTop >= layout.y && scrollerTop <= layout.y + layout.height) ||
+          (scrollerBottom >= layout.y && scrollerBottom <= layout.y + layout.height)
+        ) {
           console.log("=====================================")
-          console.log(yPos, layout.y)
+          console.log(eventYPos, layout.y)
           console.log(dragItemKey + ' inside ' + key)
 
           //swap them round!
-          this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
+          //this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
         }
       }
     }
@@ -79,6 +90,8 @@ export class BudgetList extends React.Component {
         <BudgetBlock
           budgetBlock={item.obj}
           key={item.key}
+          yOffset={this.yPos}
+          scrollOffset={this.scrollOffset}
           onLayout={(e) => this.handleItemLayout(e, item.key)}
           dragStartCallback={() => this.dragStartCallback()}
           dragEndedCallback={() => this.dragEndedCallback()}
@@ -94,6 +107,7 @@ export class BudgetList extends React.Component {
         style={{ marginTop: 60 }}
         scrollEnabled={!this.state.reordering}
         onScroll={(e) => this.onScroll(e)}
+        onLayout={(e) => this.onLayout(e)}
         scrollEventThrottle={20}>
 
         <Text>Income: £ { this.props.budgetstore.income }</Text>
