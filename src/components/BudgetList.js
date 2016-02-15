@@ -10,8 +10,9 @@ export class BudgetList extends React.Component {
 
     this.yPos = 0;
     this.scrollOffset = 0;
-
     this.layouts = {};
+
+    this.animatingReorder = false;
 
     this.state = {
       reordering: false
@@ -43,6 +44,10 @@ export class BudgetList extends React.Component {
 
   dragMoveCallback(dragItemKey, eventYPos) {
 
+    if (this.animatingReorder) {
+      return;
+    }
+
     //Adjust pan pos for scroll
     eventYPos = eventYPos + this.scrollOffset - this.yPos;
 
@@ -61,6 +66,11 @@ export class BudgetList extends React.Component {
           console.log(eventYPos, layout.y)
           console.log(dragItemKey + ' inside ' + key)
 
+          this.animatingReorder = true;
+
+          this.refs[key].animateYPos(this.layouts[dragItemKey].y - this.layouts[key].y);
+          this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
+          break;
           //swap them round!
           //this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
         }
@@ -91,6 +101,7 @@ export class BudgetList extends React.Component {
           budgetBlock={item.obj}
           key={item.key}
           yOffset={this.yPos}
+          ref={item.key}
           scrollOffset={this.scrollOffset}
           onLayout={(e) => this.handleItemLayout(e, item.key)}
           dragStartCallback={() => this.dragStartCallback()}

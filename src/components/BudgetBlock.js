@@ -1,7 +1,7 @@
 import React from 'react-native';
 let {
   Text, View, TextInput, TouchableHighlight,
-  PanResponder, Animated, StyleSheet
+  PanResponder, Animated, StyleSheet, LayoutAnimation
 } = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
@@ -13,12 +13,23 @@ export class BudgetBlock extends React.Component {
   constructor(props) {
     super(props);
 
-    this.yPos = 0;
+    this.layoutYPos = 0;
 
     this.state = {
       pan: new Animated.ValueXY(0, 0),
       reordering: false,
     };
+  }
+
+  animateYPos(yPos) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    return;
+
+    Animated.spring(this.state.pan, {
+      toValue: {x: 0, y: yPos},
+      tension: 200, //speed
+      friction: 12, //overshoot
+    }).start();
   }
 
   dragEnded() {
@@ -35,7 +46,7 @@ export class BudgetBlock extends React.Component {
   }
 
   onLayout(e) {
-    this.yPos = e.nativeEvent.layout.y;
+    this.layoutYPos = e.nativeEvent.layout.y;
     this.props.onLayout(e);
   }
 
@@ -51,9 +62,7 @@ export class BudgetBlock extends React.Component {
         });
       },
       onPanResponderMove: (event) => {
-        //console.log((gestureState.nativeEvent.pageY - this.yPos) - this.props.yOffset);
-        console.log('offset: ' + this.props.yOffset, this.props.scrollOffset)
-        var gestureYPos = (event.nativeEvent.pageY - this.yPos - this.props.yOffset) + this.props.scrollOffset;
+        var gestureYPos = (event.nativeEvent.pageY - this.layoutYPos - this.props.yOffset) + this.props.scrollOffset;
 
         this.state.pan.setValue({x: 0, y: gestureYPos});
         this.props.dragMoveCallback(this.props.blockId, event.nativeEvent.pageY);
@@ -94,12 +103,10 @@ export class BudgetBlock extends React.Component {
     });
 
     return (
-      <View ref="outerView" onLayout={(e) => this.onLayout(e)} style={{
+      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={{
         marginBottom: 20,
         width: 270,
-        borderWidth: 1,
-        borderColor: 'red',
-        backgroundColor: this.state.reordering ? 'green' : null,
+        backgroundColor: this.state.reordering ? 'green' : 'transparent',
       }}>
         <Animated.View style={{
           top: this.state.pan.y,
@@ -141,7 +148,7 @@ export class BudgetBlock extends React.Component {
           <Text>Subtotal: £{ this.props.budgetBlock.subtotal }</Text>
 
         </Animated.View>
-      </View>
+      </Animated.View>
     );
   }
 }
