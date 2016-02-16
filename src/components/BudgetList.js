@@ -29,20 +29,18 @@ export class BudgetList extends React.Component {
   }
 
   dragStartCallback() {
-    console.log('dragStartCallback')
     this.setState({
       reordering: true
     });
   }
 
   dragEndedCallback() {
-    console.log('dragEndedCallback')
     this.setState({
       reordering: false
     });
   }
 
-  dragMoveCallback(dragItemKey, eventYPos) {
+  dragMoveCallback(dragItemKey, eventYPos, movingDown) {
 
     if (this.animatingReorder) {
       return;
@@ -51,28 +49,29 @@ export class BudgetList extends React.Component {
     //Adjust pan pos for scroll
     eventYPos = eventYPos + this.scrollOffset - this.yPos;
 
-    let scrollerTop = eventYPos;
-    let scrollerBottom = eventYPos + this.layouts[dragItemKey].height;
+    var scrollerTop = eventYPos;
+    var scrollerBottom = eventYPos + this.layouts[dragItemKey].height;
+
+    var bh = this.layouts[dragItemKey].height / 2;
 
     for (let key of Object.keys(this.layouts)) {
 
+      //check if dragged item overlaps any other blocks
       if (dragItemKey !== key) {
         let layout = this.layouts[key];
         if (
-          (scrollerTop >= layout.y && scrollerTop <= layout.y + layout.height) ||
-          (scrollerBottom >= layout.y && scrollerBottom <= layout.y + layout.height)
+          (scrollerTop >= layout.y && scrollerTop <= layout.y + layout.height - bh && !movingDown) ||
+          (scrollerBottom >= layout.y + bh && scrollerBottom <= layout.y + layout.height && movingDown)
         ) {
-          console.log("=====================================")
-          console.log(eventYPos, layout.y)
-          console.log(dragItemKey + ' inside ' + key)
 
           this.animatingReorder = true;
 
-          this.refs[key].animateYPos(this.layouts[dragItemKey].y - this.layouts[key].y);
+          this.refs[key].animatePositionChange();
           this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
+
+          //ignore drag events whlie animation completes
+          setTimeout(() => this.animatingReorder = false, 300 );
           break;
-          //swap them round!
-          //this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
         }
       }
     }
@@ -106,7 +105,9 @@ export class BudgetList extends React.Component {
           onLayout={(e) => this.handleItemLayout(e, item.key)}
           dragStartCallback={() => this.dragStartCallback()}
           dragEndedCallback={() => this.dragEndedCallback()}
-          dragMoveCallback={(dragItemKey, gestureState) => this.dragMoveCallback(dragItemKey, gestureState)}
+          dragMoveCallback={(dragItemKey, gestureState, movingDown) => {
+            return this.dragMoveCallback(dragItemKey, gestureState, movingDown);
+          }}
           blockId={item.key}
           budgetactions={this.props.budgetactions}
           income={this.props.budgetstore.income}/>

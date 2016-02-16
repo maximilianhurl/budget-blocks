@@ -1,7 +1,7 @@
 import React from 'react-native';
 let {
   Text, View, TextInput, TouchableHighlight,
-  PanResponder, Animated, StyleSheet, LayoutAnimation
+  PanResponder, Animated, LayoutAnimation
 } = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
@@ -21,15 +21,8 @@ export class BudgetBlock extends React.Component {
     };
   }
 
-  animateYPos(yPos) {
+  animatePositionChange() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    return;
-
-    Animated.spring(this.state.pan, {
-      toValue: {x: 0, y: yPos},
-      tension: 200, //speed
-      friction: 12, //overshoot
-    }).start();
   }
 
   dragEnded() {
@@ -62,10 +55,13 @@ export class BudgetBlock extends React.Component {
         });
       },
       onPanResponderMove: (event) => {
-        var gestureYPos = (event.nativeEvent.pageY - this.layoutYPos - this.props.yOffset) + this.props.scrollOffset;
+        const gestureYPos = (event.nativeEvent.pageY - this.layoutYPos - this.props.yOffset) + this.props.scrollOffset;
+
+        const touches = event.touchHistory.touchBank[1];
+        const movingDown = touches.previousPageY < touches.currentPageY ? true : false;
 
         this.state.pan.setValue({x: 0, y: gestureYPos});
-        this.props.dragMoveCallback(this.props.blockId, event.nativeEvent.pageY);
+        this.props.dragMoveCallback(this.props.blockId, event.nativeEvent.pageY, movingDown);
       },
       onPanResponderRelease: () => this.dragEnded(),
       onPanResponderTerminate: () => this.dragEnded(),
