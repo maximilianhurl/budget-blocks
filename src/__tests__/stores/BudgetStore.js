@@ -5,6 +5,7 @@ jest.dontMock('../../utils/uuid');
 jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('../../actions/BudgetActions', require('../../__mocks__/BudgetActions'));
 jest.dontMock('../../stores/BudgetStore');
+jest.dontMock('../../utils/objectMap');
 
 describe('Test BudgetStore', function () {
 

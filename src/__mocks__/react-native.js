@@ -46,7 +46,27 @@ ReactNative.ToolbarAndroid = View;
 ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
-
 ReactNative.Platform = {};
+ReactNative.PanResponder = {
+  create: function (panSettings) {
+    this.panSettings = panSettings;
+
+    return {
+      panHandlers: []
+    };
+  }
+};
+
+ReactNative.Animated = {
+  ValueXY: function (x, y) {
+    this.x = x;
+    this.y = y;
+  },
+  spring: function () {
+    return {
+      start: function () {}
+    };
+  }
+};
 
 module.exports = ReactNative;

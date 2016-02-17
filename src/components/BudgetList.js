@@ -1,7 +1,6 @@
 import React from 'react-native';
 let { Text, ScrollView, TouchableHighlight, TextInput } = React;
 import { BudgetBlock } from './BudgetBlock';
-import objectMap from '../utils/objectMap';
 
 export class BudgetList extends React.Component {
 
@@ -92,9 +91,7 @@ export class BudgetList extends React.Component {
 
   render() {
 
-    let budgetsBlocks = objectMap(this.props.budgetstore.budgets).sort((a, b) => a.obj.order - b.obj.order);
-
-    let budgets = budgetsBlocks.map(item => {
+    let budgets = this.props.budgetstore.getOrderedBlocks().map(item => {
       return (
         <BudgetBlock
           budgetBlock={item.obj}

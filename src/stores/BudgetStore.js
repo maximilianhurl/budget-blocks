@@ -10,17 +10,17 @@ export class BudgetStore {
 
   constructor () {
     this.budgets = {
-      '1': {
-        'id': '1',
-        'title': 'cat1',
-        'order': 2,
-        'items': {},
-        'subtotal': '-20'
-      },
       '2': {
         'id': '2',
         'title': 'cat2',
         'order': 1,
+        'items': {},
+        'subtotal': '-20'
+      },
+      '1': {
+        'id': '1',
+        'title': 'cat1',
+        'order': 2,
         'items': {},
         'subtotal': '-20'
       },
@@ -33,7 +33,13 @@ export class BudgetStore {
       },
     };
 
-    this.income = '0';
+    this.income = '100';
+
+    // getters
+
+    this.getOrderedBlocks = function() {
+      return objectMap(this.budgets).sort((a, b) => a.obj.order - b.obj.order);
+    };
 
     //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
@@ -53,15 +59,18 @@ export class BudgetStore {
 
     var incomeSubtotal = minFloat(this.income);
 
-    for (let key of Object.keys(this.budgets)) {
-      var block = this.budgets[key];
+    for (let keyBlock of this.getOrderedBlocks()) {
+
+      const blockKey = keyBlock.key;
+      const block = keyBlock.obj;
+
       if (block.items) {
         for (let budgetKey of Object.keys(block.items)) {
           incomeSubtotal -= parseFloat(block.items[budgetKey].value);
         }
       }
 
-      block.subtotal = incomeSubtotal;
+      this.budgets[blockKey].subtotal = incomeSubtotal;
     }
   }
 
@@ -73,7 +82,6 @@ export class BudgetStore {
   // Block actions
 
   onAddBudgetBlock(title) {
-    console.log('handleAddBlock ' + title);
     this.budgets[uuid()] = {
       'title': title,
       'subtotal': '0',
@@ -123,12 +131,13 @@ export class BudgetStore {
   }
 
   onReorderBudgetBlocks(payload) {
-    console.log("onReorderBudgetBlocks")
     let replacedBlockOrder = this.budgets[payload.replacedBlockId].order;
     let movingBlockOrder = this.budgets[payload.movingBlockId].order;
 
     this.budgets[payload.movingBlockId].order = replacedBlockOrder;
     this.budgets[payload.replacedBlockId].order = movingBlockOrder;
+
+    this._recalculateBlockTotals();
   }
 
 }
