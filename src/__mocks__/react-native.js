@@ -66,7 +66,8 @@ ReactNative.Animated = {
     return {
       start: function () {}
     };
-  }
+  },
+  View: View
 };
 
 module.exports = ReactNative;

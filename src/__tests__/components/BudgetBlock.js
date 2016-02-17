@@ -1,4 +1,4 @@
-/* global jest, describe, it, expect */
+  /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
 jest.dontMock('../../__mocks__/alert');
@@ -39,16 +39,18 @@ describe('BudgetBlock', function () {
 
     var output = shallowRenderer.getRenderOutput();
 
-    var title = output.props.children[0];
+    var innerView = output.props.children;
+
+    var title = innerView.props.children[1];
     expect(title.type).toEqual(Text);
     expect(title.props.children[0]).toEqual('Block Title: ');
     expect(title.props.children[1]).toEqual(block.title);
 
-    var blocks = output.props.children[3];
+    var blocks = innerView.props.children[4];
     expect(blocks.length).toEqual(1);
     expect(blocks[0].props.blockItem).toEqual(block.items[0]);
 
-    var subtotal = output.props.children[5];
+    var subtotal = innerView.props.children[6];
     expect(subtotal.type).toEqual(Text);
     expect(subtotal.props.children[0]).toEqual('Subtotal: £');
     expect(subtotal.props.children[1]).toEqual(block.subtotal);
@@ -64,8 +66,9 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={actions}/>);
-    var output = shallowRenderer.getRenderOutput();
-    output.props.children[2].props.onPress();
+    const output = shallowRenderer.getRenderOutput();
+    const innerView = output.props.children;
+    innerView.props.children[3].props.onPress();
     expect(actions.removeBudgetBlock).toBeCalledWith(blockId);
   });
 
@@ -79,8 +82,9 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={actions}/>);
-    var output = shallowRenderer.getRenderOutput();
-    output.props.children[4].props.onPress();
+    const output = shallowRenderer.getRenderOutput();
+    const innerView = output.props.children;
+    innerView.props.children[5].props.onPress();
     expect(actions.addBudgetBlockItem).toBeCalledWith(blockId, 'New outgoing', 0);
   });
 
@@ -94,8 +98,9 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={actions}/>);
-    var output = shallowRenderer.getRenderOutput();
-    output.props.children[1].props.onChangeText('cat title');
+    const output = shallowRenderer.getRenderOutput();
+    const innerView = output.props.children;
+    innerView.props.children[2].props.onChangeText('cat title');
     expect(actions.updateBudgetBlockTitle).toBeCalledWith(blockId, 'cat title');
   });
 
