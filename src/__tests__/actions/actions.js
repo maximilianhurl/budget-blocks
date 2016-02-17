@@ -23,7 +23,8 @@ describe('Test BudgetActions', function () {
       'addBudgetBlockItem',
       'removeBudgetBlockItem',
       'updateBudgetBlockItemValue',
-      'updateBudgetBlockItemTitle'
+      'updateBudgetBlockItemTitle',
+      'reorderBudgetBlocks'
     ]);
   });
 

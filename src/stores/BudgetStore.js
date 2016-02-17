@@ -3,29 +3,43 @@ import alt from '../alt';
 import BudgetActions from '../actions/BudgetActions';
 import uuid from '../utils/uuid';
 import minFloat from '../utils/minFloat';
+import objectMap from '../utils/objectMap';
+
 
 export class BudgetStore {
 
   constructor () {
     this.budgets = {
+      '2': {
+        'id': '2',
+        'title': 'cat2',
+        'order': 1,
+        'items': {},
+        'subtotal': '-20'
+      },
       '1': {
         'id': '1',
-        'title': 'cat',
-        'items': {
-          '2' : {
-            'title': 'cat food',
-            'value': '10'
-          },
-          '3' : {
-            'title': 'dog food',
-            'value': '40'
-          }
-        },
+        'title': 'cat1',
+        'order': 2,
+        'items': {},
+        'subtotal': '-20'
+      },
+      '3': {
+        'id': '3',
+        'title': 'cat3',
+        'order': 3,
+        'items': {},
         'subtotal': '-20'
       },
     };
 
-    this.income = '0';
+    this.income = '100';
+
+    // getters
+
+    this.getOrderedBlocks = function() {
+      return objectMap(this.budgets).sort((a, b) => a.obj.order - b.obj.order);
+    };
 
     //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
@@ -36,7 +50,8 @@ export class BudgetStore {
       onAddBudgetBlockItem: BudgetActions.ADD_BUDGET_BLOCK_ITEM,
       onRemoveBudgetBlockItem: BudgetActions.REMOVE_BUDGET_BLOCK_ITEM,
       onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
-      onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE
+      onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE,
+      onReorderBudgetBlocks: BudgetActions.REORDER_BUDGET_BLOCKS
     });
   }
 
@@ -44,15 +59,18 @@ export class BudgetStore {
 
     var incomeSubtotal = minFloat(this.income);
 
-    for (let key of Object.keys(this.budgets)) {
-      var block = this.budgets[key];
+    for (let keyBlock of this.getOrderedBlocks()) {
+
+      const blockKey = keyBlock.key;
+      const block = keyBlock.obj;
+
       if (block.items) {
         for (let budgetKey of Object.keys(block.items)) {
           incomeSubtotal -= parseFloat(block.items[budgetKey].value);
         }
       }
 
-      block.subtotal = incomeSubtotal;
+      this.budgets[blockKey].subtotal = incomeSubtotal;
     }
   }
 
@@ -64,10 +82,10 @@ export class BudgetStore {
   // Block actions
 
   onAddBudgetBlock(title) {
-    console.log('handleAddBlock ' + title);
     this.budgets[uuid()] = {
       'title': title,
       'subtotal': '0',
+      'order': Object.keys(this.budgets).length + 1,
       'items': {}
     };
     this._recalculateBlockTotals();
@@ -110,6 +128,16 @@ export class BudgetStore {
       'title': payload.title,
       'value': this.budgets[payload.blockId].items[payload.blockItemId].value,
     };
+  }
+
+  onReorderBudgetBlocks(payload) {
+    let replacedBlockOrder = this.budgets[payload.replacedBlockId].order;
+    let movingBlockOrder = this.budgets[payload.movingBlockId].order;
+
+    this.budgets[payload.movingBlockId].order = replacedBlockOrder;
+    this.budgets[payload.replacedBlockId].order = movingBlockOrder;
+
+    this._recalculateBlockTotals();
   }
 
 }

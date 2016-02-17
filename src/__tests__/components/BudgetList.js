@@ -1,6 +1,5 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetList');
-jest.dontMock('../../utils/objectMap');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -14,12 +13,22 @@ describe('BudgetList', function () {
 
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
+  var budgetstore = {
+    budgets: {}
+  };
+
   it('should render data correctly', function () {
 
-    var budgetstore = {
+    budgetstore = {
       budgets: {
         id1: {},
         id2: {}
+      },
+      getOrderedBlocks: function () {
+        return [
+          { key: 'id1', obj: {} },
+          { key: 'id2', obj: {} },
+        ];
       },
       income: 120
     };
@@ -44,10 +53,6 @@ describe('BudgetList', function () {
   });
 
   it('should add budget block', function () {
-    var budgetstore = {
-      budgets: {}
-    };
-
     var actions = {
       addBudgetBlock: jest.genMockFunction()
     };
@@ -61,10 +66,6 @@ describe('BudgetList', function () {
   });
 
   it('should add budget block', function () {
-    var budgetstore = {
-      budgets: {}
-    };
-
     var actions = {
       updateIncome: jest.genMockFunction()
     };
