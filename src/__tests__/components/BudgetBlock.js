@@ -1,10 +1,6 @@
   /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
-jest.dontMock('../../__mocks__/alert');
-jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
-
-jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';

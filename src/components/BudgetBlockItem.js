@@ -1,6 +1,5 @@
 import React from 'react-native';
-let { Text, View, TextInput, TouchableHighlight } = React;
-import alert from '../utils/alerts/alert';
+let { Text, View, TextInput, TouchableHighlight, Alert } = React;
 
 
 export class BudgetBlockItem extends React.Component {
@@ -38,7 +37,7 @@ export class BudgetBlockItem extends React.Component {
           keyboardType={'numeric'}
           value={this.props.blockItem.value} />
         <TouchableHighlight
-          onPress={() => alert(
+          onPress={() => Alert.alert(
             'Are you sure you want to remove this outgoing?',
             null,
             [
