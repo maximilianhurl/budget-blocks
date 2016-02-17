@@ -47,6 +47,14 @@ ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
+ReactNative.Alert = {
+  alert(title, message, buttons) {
+    //mock to make sure tests dont blow up due to react native dynamic loading
+    if (buttons && buttons.length) {
+      buttons[0].onPress();
+    }
+  }
+};
 ReactNative.PanResponder = {
   create: function (panSettings) {
     this.panSettings = panSettings;
