@@ -33,6 +33,6 @@ local.properties
 node_modules/
 npm-debug.log
 
-*.sublime-workspace
-*.sublime-project
 coverage/
+*.sublime-project
+*.sublime-workspace
