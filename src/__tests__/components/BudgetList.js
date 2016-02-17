@@ -1,6 +1,5 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetList');
-jest.dontMock('../../utils/objectMap');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -24,6 +23,12 @@ describe('BudgetList', function () {
       budgets: {
         id1: {},
         id2: {}
+      },
+      getOrderedBlocks: function () {
+        return [
+          { key: 'id1', obj: {} },
+          { key: 'id2', obj: {} },
+        ];
       },
       income: 120
     };

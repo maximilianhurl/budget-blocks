@@ -1,5 +1,5 @@
 import React from 'react-native';
-import AltContainer from 'alt-container/src/AltNativeContainerLegacy';
+import AltContainer from 'alt-container/native';
 
 import PersistenceActions from '../actions/PersistenceActions';
 import BudgetActions from '../actions/BudgetActions';
