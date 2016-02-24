@@ -186,4 +186,58 @@ describe('BudgetList', function () {
     expect(instance.layouts['cat']).toEqual('cat layout');
   });
 
+  it('should attach listeners to block items view', function () {
+    budgetstore = {
+      budgets: {
+        id1: {},
+      },
+      getOrderedBlocks: function () {
+        return [
+          { key: 'id1', obj: {} },
+        ];
+      },
+      income: 120
+    };
+
+    const reorderBudgetBlocks = jest.genMockFunction();
+    const animatePositionChange = jest.genMockFunction();
+
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetList
+      budgetactions={{ reorderBudgetBlocks }}
+      budgetstore={budgetstore} />);
+    shallowRenderer.getRenderOutput();
+    var instance = shallowRenderer._instance._instance;
+
+    instance.scrollOffset = 10;
+    instance.yPos = 20;
+    instance.refs = {
+      cats2: {
+        animatePositionChange: animatePositionChange
+      }
+    };
+    instance.layouts = {
+      cats1: {
+        y: 0,
+        height: 100
+      },
+      cats2: {
+        y: 200,
+        height: 100
+      }
+    };
+
+    instance.dragMoveCallback('cats1', 149, true);
+    jest.runAllTimers();
+
+    expect(animatePositionChange).not.toBeCalled();
+    expect(reorderBudgetBlocks).not.toBeCalled();
+
+    instance.dragMoveCallback('cats1', 160, true);
+    jest.runAllTimers();
+
+    expect(animatePositionChange).toBeCalledWith();
+    expect(reorderBudgetBlocks).toBeCalledWith('cats1', 'cats2');
+  });
+
 });
