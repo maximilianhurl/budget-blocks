@@ -56,11 +56,9 @@ ReactNative.Alert = {
   }
 };
 ReactNative.PanResponder = {
-  create: function (panSettings) {
-    this.panSettings = panSettings;
-
+  create: function (panHandlers) {
     return {
-      panHandlers: []
+      panHandlers: panHandlers
     };
   }
 };
@@ -69,6 +67,7 @@ ReactNative.Animated = {
   ValueXY: function (x, y) {
     this.x = x;
     this.y = y;
+    this.setValue = function () {};
   },
   spring: function () {
     return {
@@ -76,6 +75,15 @@ ReactNative.Animated = {
     };
   },
   View: View
+};
+
+ReactNative.LayoutAnimation = {
+  configureNext () {
+    return;
+  },
+  Presets: {
+    easeInEaseOut: 'cats'
+  }
 };
 
 module.exports = ReactNative;

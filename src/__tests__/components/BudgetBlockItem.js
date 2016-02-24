@@ -88,4 +88,5 @@ describe('BudgetBlockItem', function () {
     expect(actions.removeBudgetBlockItem).toBeCalledWith(blockId, blockItemId);
   });
 
+
 });
