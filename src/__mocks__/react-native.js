@@ -47,6 +47,13 @@ ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
+ReactNative.AppRegistry = {
+  registerComponent: () => {}
+};
+ReactNative.AppStateIOS = {};
+ReactNative.StatusBarIOS = {
+  setStyle: () => {}
+};
 ReactNative.Alert = {
   alert(title, message, buttons) {
     //mock to make sure tests dont blow up due to react native dynamic loading

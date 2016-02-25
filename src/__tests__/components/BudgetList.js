@@ -1,4 +1,4 @@
-    /* global jest, describe, it, expect */
+/* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetList');
 jest.dontMock('../../stores/BudgetStore');
 jest.dontMock('../../utils/objectMap');
