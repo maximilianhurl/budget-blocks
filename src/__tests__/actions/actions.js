@@ -59,6 +59,10 @@ describe('Test BudgetActions', function () {
       blockItemId: data2,
       title: data3
     });
+    expect(actions.reorderBudgetBlocks(data, data2)).toEqual({
+      movingBlockId: data,
+      replacedBlockId: data2
+    });
   });
 
 });
