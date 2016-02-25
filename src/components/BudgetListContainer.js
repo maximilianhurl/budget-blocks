@@ -1,7 +1,5 @@
 import React from 'react-native';
 import AltContainer from 'alt-container/native';
-
-import PersistenceActions from '../actions/PersistenceActions';
 import BudgetActions from '../actions/BudgetActions';
 import BudgetStore from '../stores/BudgetStore';
 import { BudgetList } from './BudgetList';
@@ -21,7 +19,6 @@ export class BudgetListContainer extends React.Component {
         actions={
           {
             budgetactions: BudgetActions,
-            persistenceactions: PersistenceActions
           }
         }>
         <BudgetList/>

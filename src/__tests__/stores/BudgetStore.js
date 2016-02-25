@@ -151,7 +151,6 @@ describe('Test BudgetStore', function () {
 
     expect(store.budgets[block1Id].subtotal).toEqual(25);
     expect(store.budgets[block1Id].order).toEqual(2);
-
   });
 
 });
