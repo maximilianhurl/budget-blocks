@@ -1,7 +1,6 @@
 /* global jest, describe, it, expect */
-jest.dontMock('../../index.ios');
+jest.dontMock('../nav');
 jest.setMock('alt-container/native', require('../__mocks__/native'));
-jest.setMock('../actions/PersistenceActions', require('../__mocks__/PersistenceActions'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -9,15 +8,15 @@ import React from 'react-native'; // eslint-disable-line no-unused-vars
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
 // do not understand ES6 modules yet
-const BasicBudgets = require('../../index.ios').default;
+const Navigation = require('../nav').Navigation;
 
-describe('Index iOS', function () {
+describe('nav.js', function () {
 
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
-  it('should render data correctly', function () {
+  it('should render', function () {
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<BasicBudgets/>);
+    shallowRenderer.render(<Navigation/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
   });
