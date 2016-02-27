@@ -47,6 +47,7 @@ ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
+ReactNative.Navigator = {};
 ReactNative.AppRegistry = {
   registerComponent: () => {}
 };
