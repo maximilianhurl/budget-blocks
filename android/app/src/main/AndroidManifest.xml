@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.basicbudgets">
+    package="com.budgetblocks">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

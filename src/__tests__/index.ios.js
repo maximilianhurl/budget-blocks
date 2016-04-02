@@ -9,7 +9,7 @@ import React from 'react-native'; // eslint-disable-line no-unused-vars
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
 // do not understand ES6 modules yet
-const BasicBudgets = require('../../index.ios').default;
+const BudgetBlocks = require('../../index.ios').default;
 
 describe('Index iOS', function () {
 
@@ -17,7 +17,7 @@ describe('Index iOS', function () {
 
   it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<BasicBudgets/>);
+    shallowRenderer.render(<BudgetBlocks/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
   });

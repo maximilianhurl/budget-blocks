@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/maximilianhurl/basic-budgets.svg?branch=master)](https://travis-ci.org/maximilianhurl/basic-budgets)
-[![Code Climate](https://codeclimate.com/github/maximilianhurl/basic-budgets/badges/gpa.svg)](https://codeclimate.com/github/maximilianhurl/basic-budgets)
-[![Test Coverage](https://codeclimate.com/github/maximilianhurl/basic-budgets/badges/coverage.svg)](https://codeclimate.com/github/maximilianhurl/basic-budgets/coverage)
+[![Build Status](https://travis-ci.org/maximilianhurl/budget-blocks.svg?branch=master)](https://travis-ci.org/maximilianhurl/budget-blocks)
+[![Code Climate](https://codeclimate.com/github/maximilianhurl/budget-blocks/badges/gpa.svg)](https://codeclimate.com/github/maximilianhurl/budget-blocks)
+[![Test Coverage](https://codeclimate.com/github/maximilianhurl/budget-blocks/badges/coverage.svg)](https://codeclimate.com/github/maximilianhurl/budget-blocks/coverage)
 
-# Basic Budgets
+# Budget Blocks
 
 A basic budgeting app for iOS and soon Android
 

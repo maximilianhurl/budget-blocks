@@ -4,7 +4,7 @@ import PersistenceActions from './src/actions/PersistenceActions';
 
 const { AppRegistry, AppStateIOS, StatusBarIOS } = React;
 
-export default class BasicBudgets extends React.Component {
+export default class BudgetBlocks extends React.Component {
 
   componentWillMount() {
     StatusBarIOS.setStyle('light-content');
@@ -38,4 +38,4 @@ export default class BasicBudgets extends React.Component {
   }
 }
 
-AppRegistry.registerComponent('BasicBudgets', () => BasicBudgets);
+AppRegistry.registerComponent('BudgetBlocks', () => BudgetBlocks);

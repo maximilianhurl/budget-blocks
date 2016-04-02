@@ -1,5 +1,5 @@
 {
-  "name": "BasicBudgets",
+  "name": "BudgetBlocks",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -42,7 +42,7 @@
   "dependencies": {
     "alt": "=0.18.2",
     "alt-container": "=1.0.2",
-    "react-native": "=0.20.0"
+    "react-native": "=0.22.0"
   },
   "devDependencies": {
     "babel-cli": "=6.4.0",
