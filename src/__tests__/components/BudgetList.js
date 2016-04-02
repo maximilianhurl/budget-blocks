@@ -1,5 +1,7 @@
-    /* global jest, describe, it, expect */
+/* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetList');
+jest.dontMock('../../stores/BudgetStore');
+jest.dontMock('../../utils/objectMap');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -24,12 +26,6 @@ describe('BudgetList', function () {
         id1: {},
         id2: {}
       },
-      getOrderedBlocks: function () {
-        return [
-          { key: 'id1', obj: {} },
-          { key: 'id2', obj: {} },
-        ];
-      },
       income: 120
     };
 
@@ -38,16 +34,10 @@ describe('BudgetList', function () {
       updateIncome: () => {}
     };
 
-    var persistenceactions = {
-      persistState: () => {},
-      loadPersistentState: () => {}
-    };
-
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetstore={budgetstore}
-      budgetactions={budgetactions}
-      persistenceactions={persistenceactions}/>);
+      budgetactions={budgetactions}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
   });
@@ -79,11 +69,7 @@ describe('BudgetList', function () {
   });
 
   it('should attach listeners to scroll view', function () {
-    budgetstore = {
-      getOrderedBlocks: function () {
-        return [];
-      },
-    };
+    budgetstore = {};
 
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
@@ -106,11 +92,6 @@ describe('BudgetList', function () {
     budgetstore = {
       budgets: {
         id1: {},
-      },
-      getOrderedBlocks: function () {
-        return [
-          { key: 'id1', obj: {} },
-        ];
       },
       income: 120
     };
@@ -143,7 +124,6 @@ describe('BudgetList', function () {
   it('should hanlde event call backs', function () {
     budgetstore = {
       budgets: {},
-      getOrderedBlocks: () => [],
       income: 0
     };
 
@@ -184,6 +164,55 @@ describe('BudgetList', function () {
       }
     }, 'cat');
     expect(instance.layouts['cat']).toEqual('cat layout');
+  });
+
+  it('should attach listeners to block items view', function () {
+    budgetstore = {
+      budgets: {
+        id1: {},
+      },
+      income: 120
+    };
+
+    const reorderBudgetBlocks = jest.genMockFunction();
+    const animatePositionChange = jest.genMockFunction();
+
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetList
+      budgetactions={{ reorderBudgetBlocks }}
+      budgetstore={budgetstore} />);
+    shallowRenderer.getRenderOutput();
+    var instance = shallowRenderer._instance._instance;
+
+    instance.scrollOffset = 10;
+    instance.yPos = 20;
+    instance.refs = {
+      cats2: {
+        animatePositionChange: animatePositionChange
+      }
+    };
+    instance.layouts = {
+      cats1: {
+        y: 0,
+        height: 100
+      },
+      cats2: {
+        y: 200,
+        height: 100
+      }
+    };
+
+    instance.dragMoveCallback('cats1', 149, true);
+    jest.runAllTimers();
+
+    expect(animatePositionChange).not.toBeCalled();
+    expect(reorderBudgetBlocks).not.toBeCalled();
+
+    instance.dragMoveCallback('cats1', 160, true);
+    jest.runAllTimers();
+
+    expect(animatePositionChange).toBeCalledWith();
+    expect(reorderBudgetBlocks).toBeCalledWith('cats1', 'cats2');
   });
 
 });

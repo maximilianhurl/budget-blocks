@@ -47,12 +47,26 @@ ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
+ReactNative.Navigator = {};
+ReactNative.AppRegistry = {
+  registerComponent: () => {}
+};
+ReactNative.AppStateIOS = {};
+ReactNative.StatusBarIOS = {
+  setStyle: () => {}
+};
+ReactNative.Alert = {
+  alert(title, message, buttons) {
+    //mock to make sure tests dont blow up due to react native dynamic loading
+    if (buttons && buttons.length) {
+      buttons[0].onPress();
+    }
+  }
+};
 ReactNative.PanResponder = {
-  create: function (panSettings) {
-    this.panSettings = panSettings;
-
+  create: function (panHandlers) {
     return {
-      panHandlers: []
+      panHandlers: panHandlers
     };
   }
 };
@@ -61,6 +75,7 @@ ReactNative.Animated = {
   ValueXY: function (x, y) {
     this.x = x;
     this.y = y;
+    this.setValue = function () {};
   },
   spring: function () {
     return {
@@ -68,6 +83,15 @@ ReactNative.Animated = {
     };
   },
   View: View
+};
+
+ReactNative.LayoutAnimation = {
+  configureNext () {
+    return;
+  },
+  Presets: {
+    easeInEaseOut: 'cats'
+  }
 };
 
 module.exports = ReactNative;

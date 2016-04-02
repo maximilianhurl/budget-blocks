@@ -35,7 +35,7 @@ describe('Test PersistenceStore', function () {
 
     store.onPersistState();
     expect(React.AsyncStorage.setItem.mock.calls.length).toBeGreaterThan(0);
-    expect(React.AsyncStorage.setItem).lastCalledWith('@BasicBudgets:state-data', snapshot);
+    expect(React.AsyncStorage.setItem).lastCalledWith('@BudgetBlocks:state-data', snapshot);
     expect(store.bindActions).lastCalledWith(persistenceActions);
   });
 

@@ -114,4 +114,43 @@ describe('Test BudgetStore', function () {
     });
   });
 
+  it('Should re-order blocks', function () {
+    store.budgets = {};
+    store.onUpdateIncome(200);
+
+    store.onAddBudgetBlock('cats');
+    const block1Id = Object.keys(store.budgets)[0];
+    // add block item
+    store.onAddBudgetBlockItem({
+      blockId: block1Id,
+      title: 'cat food',
+      value: '75'
+    });
+    expect(store.budgets[block1Id].subtotal).toEqual(125);
+    expect(store.budgets[block1Id].order).toEqual(1);
+
+    store.onAddBudgetBlock('bills');
+    const block2Id = Object.keys(store.budgets)[1];
+    // add block item
+    store.onAddBudgetBlockItem({
+      blockId: block2Id,
+      title: 'vet bills',
+      value: '100'
+    });
+    expect(store.budgets[block2Id].subtotal).toEqual(25);
+    expect(store.budgets[block2Id].order).toEqual(2);
+
+    //reorder blocks
+    store.onReorderBudgetBlocks({
+      replacedBlockId: block2Id,
+      movingBlockId: block1Id
+    });
+
+    expect(store.budgets[block2Id].subtotal).toEqual(100);
+    expect(store.budgets[block2Id].order).toEqual(1);
+
+    expect(store.budgets[block1Id].subtotal).toEqual(25);
+    expect(store.budgets[block1Id].order).toEqual(2);
+  });
+
 });

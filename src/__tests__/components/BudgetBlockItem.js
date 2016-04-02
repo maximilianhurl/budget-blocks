@@ -1,7 +1,5 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlockItem');
-jest.dontMock('../../__mocks__/alert');
-jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -89,5 +87,6 @@ describe('BudgetBlockItem', function () {
     output.props.children[4].props.onPress();
     expect(actions.removeBudgetBlockItem).toBeCalledWith(blockId, blockItemId);
   });
+
 
 });

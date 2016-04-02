@@ -3,11 +3,11 @@ import { Navigation } from './src/nav';
 
 const { AppRegistry } = React;
 
-class BasicBudgets extends React.Component {
+class BudgetBlocks extends React.Component {
 
   render() {
     return <Navigation/>;
   }
 }
 
-AppRegistry.registerComponent('BasicBudgets', () => BasicBudgets);
+AppRegistry.registerComponent('BudgetBlocks', () => BudgetBlocks);

@@ -5,41 +5,20 @@ import uuid from '../utils/uuid';
 import minFloat from '../utils/minFloat';
 import objectMap from '../utils/objectMap';
 
+export function orderedBlocks(blocks) {
+
+  if (!blocks) {
+    return [];
+  }
+
+  return objectMap(blocks).sort((a, b) => a.obj.order - b.obj.order);
+}
 
 export class BudgetStore {
 
   constructor () {
-    this.budgets = {
-      '2': {
-        'id': '2',
-        'title': 'cat2',
-        'order': 1,
-        'items': {},
-        'subtotal': '-20'
-      },
-      '1': {
-        'id': '1',
-        'title': 'cat1',
-        'order': 2,
-        'items': {},
-        'subtotal': '-20'
-      },
-      '3': {
-        'id': '3',
-        'title': 'cat3',
-        'order': 3,
-        'items': {},
-        'subtotal': '-20'
-      },
-    };
-
-    this.income = '100';
-
-    // getters
-
-    this.getOrderedBlocks = function() {
-      return objectMap(this.budgets).sort((a, b) => a.obj.order - b.obj.order);
-    };
+    this.budgets = {};
+    this.income = '0';
 
     //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
@@ -59,7 +38,7 @@ export class BudgetStore {
 
     var incomeSubtotal = minFloat(this.income);
 
-    for (let keyBlock of this.getOrderedBlocks()) {
+    for (let keyBlock of orderedBlocks(this.budgets)) {
 
       const blockKey = keyBlock.key;
       const block = keyBlock.obj;

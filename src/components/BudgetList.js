@@ -1,6 +1,7 @@
 import React from 'react-native';
 let { Text, ScrollView, TouchableHighlight, TextInput } = React;
 import { BudgetBlock } from './BudgetBlock';
+import { orderedBlocks } from '../stores/BudgetStore';
 
 export class BudgetList extends React.Component {
 
@@ -91,7 +92,7 @@ export class BudgetList extends React.Component {
 
   render() {
 
-    let budgets = this.props.budgetstore.getOrderedBlocks().map(item => {
+    let budgets = orderedBlocks(this.props.budgetstore.budgets).map(item => {
       return (
         <BudgetBlock
           budgetBlock={item.obj}
@@ -138,23 +139,6 @@ export class BudgetList extends React.Component {
             Add Block
           </Text>
         </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => this.props.persistenceactions.persistState()}>
-          <Text
-            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
-            >
-            Save State
-          </Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => this.props.persistenceactions.loadPersistentState()}>
-          <Text
-            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
-            >
-            Load State
-          </Text>
-        </TouchableHighlight>
-
 
       </ScrollView>
     );

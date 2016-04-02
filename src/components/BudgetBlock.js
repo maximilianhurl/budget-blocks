@@ -1,11 +1,10 @@
 import React from 'react-native';
 let {
   Text, View, TextInput, TouchableHighlight,
-  PanResponder, Animated, LayoutAnimation
+  PanResponder, Animated, LayoutAnimation, Alert
 } = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
-import alert from '../utils/alerts/alert';
 
 
 export class BudgetBlock extends React.Component {
@@ -118,7 +117,7 @@ export class BudgetBlock extends React.Component {
             value={ this.props.budgetBlock.title } />
 
           <TouchableHighlight
-            onPress={() => alert(
+            onPress={() => Alert.alert(
               'Are you sure you want to remove this block?',
               null,
               [

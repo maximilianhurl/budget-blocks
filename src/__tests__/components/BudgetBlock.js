@@ -1,10 +1,6 @@
   /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
-jest.dontMock('../../__mocks__/alert');
-jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
-
-jest.setMock('../../utils/alerts/alert', require('../../__mocks__/alert'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';
@@ -102,6 +98,87 @@ describe('BudgetBlock', function () {
     const innerView = output.props.children;
     innerView.props.children[2].props.onChangeText('cat title');
     expect(actions.updateBudgetBlockTitle).toBeCalledWith(blockId, 'cat title');
+  });
+
+  it('should save layout block', function () {
+    const onLayout = jest.genMockFunction();
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetBlock
+      blockId={blockId}
+      budgetBlock={block}
+      budgetactions={{}}
+      onLayout={onLayout}/>);
+    var output = shallowRenderer.getRenderOutput();
+    const instance = shallowRenderer._instance._instance;
+    const layoutEvent = {
+      nativeEvent: {
+        layout: {
+          y: 133
+        }
+      }
+    };
+    output.props.onLayout(layoutEvent);
+    expect(onLayout).toBeCalledWith(layoutEvent);
+    expect(instance.layoutYPos).toEqual(133);
+  });
+
+  it('should save end drag', function () {
+    const dragEndedCallback = jest.genMockFunction();
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetBlock
+      blockId={blockId}
+      budgetBlock={block}
+      budgetactions={{}}
+      dragEndedCallback={dragEndedCallback}/>);
+    shallowRenderer.getRenderOutput();
+    const instance = shallowRenderer._instance._instance;
+    instance.dragEnded();
+    expect(dragEndedCallback).toBeCalledWith();
+
+    instance.animatePositionChange();
+  });
+
+  it('should do stuff when panning', function () {
+    const dragStartCallback = jest.genMockFunction();
+    const dragMoveCallback = jest.genMockFunction();
+    const dragEndedCallback = jest.genMockFunction();
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetBlock
+      blockId={blockId}
+      budgetBlock={block}
+      budgetactions={{}}
+      scrollOffset={10}
+      yOffset={10}
+      dragStartCallback={dragStartCallback}
+      dragMoveCallback={dragMoveCallback}
+      dragEndedCallback={dragEndedCallback}/>);
+    shallowRenderer.getRenderOutput();
+    const instance = shallowRenderer._instance._instance;
+
+    expect(instance.panResponder.panHandlers.onStartShouldSetPanResponder()).toBe(true);
+    expect(instance.panResponder.panHandlers.onMoveShouldSetResponderCapture()).toBe(true);
+    expect(instance.panResponder.panHandlers.onMoveShouldSetPanResponderCapture()).toBe(true);
+    instance.panResponder.panHandlers.onPanResponderTerminate();
+    instance.panResponder.panHandlers.onPanResponderRelease();
+
+    instance.panResponder.panHandlers.onPanResponderGrant();
+    expect(dragStartCallback).toBeCalledWith();
+
+    instance.panResponder.panHandlers.onPanResponderMove({
+      nativeEvent:{
+        pageY: 100
+      },
+      touchHistory:{
+        touchBank: [{
+
+        }, {
+          previousPageY: 5,
+          currentPageY: 10
+        }]
+      }
+    });
+    expect(dragMoveCallback).toBeCalledWith(blockId, 100, true);
+    expect(instance.state.reordering).toBe(true);
   });
 
 });

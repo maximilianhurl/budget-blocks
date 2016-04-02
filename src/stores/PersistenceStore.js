@@ -4,7 +4,7 @@ var React = require('react-native');
 const { AsyncStorage } = React;
 import PersistenceActions from '../actions/PersistenceActions';
 
-const STORAGE_KEY = '@BasicBudgets:state-data';
+const STORAGE_KEY = '@BudgetBlocks:state-data';
 
 export class PersistenceStore {
 
