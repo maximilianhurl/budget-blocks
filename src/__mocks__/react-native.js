@@ -52,8 +52,8 @@ ReactNative.AppRegistry = {
   registerComponent: () => {}
 };
 ReactNative.AppStateIOS = {};
-ReactNative.StatusBarIOS = {
-  setStyle: () => {}
+ReactNative.StatusBar = {
+  barStyle: () => {}
 };
 ReactNative.Alert = {
   alert(title, message, buttons) {

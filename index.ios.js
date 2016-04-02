@@ -2,12 +2,12 @@ import React from 'react-native';
 import { Navigation } from './src/nav';
 import PersistenceActions from './src/actions/PersistenceActions';
 
-const { AppRegistry, AppStateIOS, StatusBarIOS } = React;
+const { AppRegistry, AppStateIOS, StatusBar } = React;
 
 export default class BudgetBlocks extends React.Component {
 
   componentWillMount() {
-    StatusBarIOS.setStyle('light-content');
+    StatusBar.barStyle('light-content');
     this.handleAppStateChange('started');
   }
 
