@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-native start",
     "test": "npm run eslint src/ && jest",
-    "report-coverage": "CODECLIMATE_REPO_TOKEN=772fa6cb93e879b4122da58b04edae6f7c2e429a3c38ed07ac088cff7f151e1f codeclimate-test-reporter < coverage/lcov.info",
+    "report-coverage": "CODECLIMATE_REPO_TOKEN=f0623894a9328faef3f1c97fbc03db0fc11a083bd187538dbd04b6a14a148f09 codeclimate-test-reporter < coverage/lcov.info",
     "eslint": "eslint"
   },
   "jest": {
