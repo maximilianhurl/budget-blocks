@@ -5,7 +5,10 @@ let {
   Text,
   StyleSheet,
   Picker,
-  TouchableHighlight
+  TouchableHighlight,
+  Animated,
+  Easing,
+  Dimensions
 } = React;
 
 let RatingTracker = new RatingRequestor('1059221816', {
@@ -23,26 +26,82 @@ const styles = StyleSheet.create({
   }
 });
 
+class PickerView extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      positionAnimation: new Animated.Value(Dimensions.get('window').height),
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.uistore.currencyPickerVisible) {
+      this.animateIn();
+    } else {
+      this.animateOut();
+    }
+  }
+
+  animateIn() {
+    Animated.timing(
+      this.state.positionAnimation,
+      {
+        toValue: 0,
+        duration: 250,
+        easing: Easing.easeInOutQuint
+      }
+    ).start();
+  }
+
+  animateOut() {
+    Animated.timing(
+      this.state.positionAnimation,
+      {
+        toValue: Dimensions.get('window').height,
+        duration: 250,
+        easing: Easing.easeInOutQuint
+      }
+    ).start();
+  }
+
+  render() {
+    return (
+      <Animated.View style={{top: this.state.positionAnimation}}>
+        <Picker
+          selectedValue={this.props.uistore.currencySymbol}
+          onValueChange={(symbol) => this.props.uiactions.setCurrencySymbol(symbol)}>
+          {this.props.uistore.currencySymbols.map((currencySymbol) => {
+            return (<Picker.Item
+              key={currencySymbol}
+              label={currencySymbol}
+              value={currencySymbol} />);
+          })}
+        </Picker>
+      </Animated.View>
+    );
+  }
+}
 
 export class Settings extends React.Component {
 
   render() {
+
     return (
-      <View style={[styles.container]}>
-        <Text>Settings</Text>
-        <Text>Currency Symbol: £</Text>
-        <Picker
-          style={{backgroundColor: 'red'}}
-          selectedValue={'£'}
-          onValueChange={(symbol) => console.log(symbol)}>
-          <Picker.Item label="£" value="£" />
-          <Picker.Item label="$" value="$" />
-          <Picker.Item label="€" value="€" />
-          <Picker.Item label="¥" value="¥" />
-        </Picker>
-        <TouchableHighlight onPress={() => RatingTracker.showRatingPopup()}>
-          <Text>Leave rating</Text>
-        </TouchableHighlight>
+      <View>
+        <View style={[styles.container]}>
+          <Text>Settings</Text>
+          <TouchableHighlight onPress={() => this.props.uiactions.toggleCurrencyPicker()}>
+            <Text>Currency Symbol: {this.props.uistore.currencySymbol}</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => RatingTracker.showRatingPopup()}>
+            <Text>Leave rating</Text>
+          </TouchableHighlight>
+        </View>
+
+        <PickerView {...this.props}/>
+
       </View>
     );
   }

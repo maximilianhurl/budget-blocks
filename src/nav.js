@@ -1,6 +1,6 @@
 import React from 'react-native';
 import { BudgetListContainer } from './components/BudgetListContainer';
-import { Settings } from './components/Settings';
+import { SettingsContainer } from './components/SettingsContainer';
 let {
   Navigator,
   View,
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   },
   navigator: {
     flex: 1,
-    padding:20,
     justifyContent: 'center',
   },
   navBar: {
@@ -60,7 +59,7 @@ export class NavBar extends React.Component {
         </Text>
         <TouchableHighlight
           onPress={() => {
-            if (this.props.navigator.getCurrentRoutes().slice(-1)[0].name === 'Settings') {
+            if (this.props.navigator.getCurrentRoutes().slice(-1)[0].name === ROUTES.SETTINGS) {
               this.props.navigator.pop();
             } else {
               this.props.navigator.push({
@@ -87,7 +86,7 @@ export class Navigation extends React.Component {
     }
 
     if (route.name === ROUTES.SETTINGS) {
-      return (<Settings navigator={navigator} />);
+      return (<SettingsContainer navigator={navigator} />);
     }
   }
 

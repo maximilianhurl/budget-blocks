@@ -43,6 +43,7 @@
     "alt": "=0.18.2",
     "alt-container": "=1.0.2",
     "react-native": "=0.22.0",
+    "react-native-picker": "^2.0.5",
     "react-native-rating-requestor": "https://github.com/maximilianhurl/react-native-rating-requestor/tarball/master"
   },
   "devDependencies": {

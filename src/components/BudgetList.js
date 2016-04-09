@@ -120,7 +120,7 @@ export class BudgetList extends React.Component {
         onLayout={(e) => this.onLayout(e)}
         scrollEventThrottle={20}>
 
-        <Text>Income: £ { this.props.budgetstore.income }</Text>
+        <Text>Income: {this.props.uistore.currencySymbol} { this.props.budgetstore.income }</Text>
         <TextInput
           style={{
             height: 40, width: 270, borderColor: 'gray',
