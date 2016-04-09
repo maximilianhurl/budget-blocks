@@ -7,7 +7,7 @@ const { AppRegistry, AppStateIOS, StatusBar } = React;
 export default class BudgetBlocks extends React.Component {
 
   componentWillMount() {
-    StatusBar.barStyle('light-content');
+    StatusBar.setBarStyle('default');
     this.handleAppStateChange('started');
   }
 

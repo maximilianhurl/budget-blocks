@@ -53,7 +53,7 @@ ReactNative.AppRegistry = {
 };
 ReactNative.AppStateIOS = {};
 ReactNative.StatusBar = {
-  barStyle: () => {}
+  setBarStyle: () => {}
 };
 ReactNative.Alert = {
   alert(title, message, buttons) {

@@ -8,7 +8,6 @@ import '../stores/PersistenceStore';
 export class BudgetListContainer extends React.Component {
 
   render() {
-
     return (
       <AltContainer
         stores={
