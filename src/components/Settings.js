@@ -68,6 +68,11 @@ class PickerView extends React.Component {
   render() {
     return (
       <Animated.View style={{top: this.state.positionAnimation}}>
+        <View>
+           <TouchableHighlight onPress={() => this.props.uiactions.toggleCurrencyPicker()}>
+            <Text>Done</Text>
+          </TouchableHighlight>
+        </View>
         <Picker
           selectedValue={this.props.uistore.currencySymbol}
           onValueChange={(symbol) => this.props.uiactions.setCurrencySymbol(symbol)}>

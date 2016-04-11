@@ -1,6 +1,7 @@
 import React from 'react-native';
 import { BudgetListContainer } from './components/BudgetListContainer';
 import { SettingsContainer } from './components/SettingsContainer';
+import UIActions from './actions/UIActions';
 let {
   Navigator,
   View,
@@ -70,6 +71,13 @@ export class NavBar extends React.Component {
           style={styles.navBarLeftButton}>
           <Text style={[styles.navBarText, styles.navBarButtonText]}>
             Settings
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress={() => UIActions.toggleEditControls()}
+          style={styles.navBarLeftButton}>
+          <Text style={[styles.navBarText, styles.navBarButtonText]}>
+            Edit
           </Text>
         </TouchableHighlight>
       </View>

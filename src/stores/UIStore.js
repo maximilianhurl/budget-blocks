@@ -9,11 +9,17 @@ export class UIStore {
 
     this.currencyPickerVisible = false;
 
+    this.editControlsVisible = false;
+
     this.bindActions(UIActions);
   }
 
   onToggleCurrencyPicker() {
     this.currencyPickerVisible = !this.currencyPickerVisible;
+  }
+
+  onToggleEditControls() {
+    this.editControlsVisible = !this.editControlsVisible;
   }
 
   onSetCurrencySymbol(symbol) {

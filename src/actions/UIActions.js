@@ -1,7 +1,7 @@
 import alt from '../alt';
 
 const UIActions = alt.generateActions(
-  'toggleCurrencyPicker', 'setCurrencySymbol'
+  'toggleCurrencyPicker', 'setCurrencySymbol', 'toggleEditControls'
 );
 
 export default UIActions;
