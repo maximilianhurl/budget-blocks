@@ -26,12 +26,19 @@ describe('BudgetBlock', function () {
     subtotal: '1.00'
   };
 
+  var uistore = {
+    editControlsVisible: true
+  };
+
   var blockId = 'cats1234';
 
   it('should render data correctly', function () {
 
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<BudgetBlock budgetBlock={block} blockId={blockId}/>);
+    shallowRenderer.render(<BudgetBlock
+      budgetBlock={block}
+      uistore={uistore}
+      blockId={blockId}/>);
 
     var output = shallowRenderer.getRenderOutput();
 
@@ -61,6 +68,7 @@ describe('BudgetBlock', function () {
     shallowRenderer.render(<BudgetBlock
       blockId={blockId}
       budgetBlock={block}
+      uistore={uistore}
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
@@ -77,6 +85,7 @@ describe('BudgetBlock', function () {
     shallowRenderer.render(<BudgetBlock
       blockId={blockId}
       budgetBlock={block}
+      uistore={uistore}
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
@@ -93,6 +102,7 @@ describe('BudgetBlock', function () {
     shallowRenderer.render(<BudgetBlock
       blockId={blockId}
       budgetBlock={block}
+      uistore={uistore}
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
@@ -107,6 +117,7 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={{}}
+      uistore={uistore}
       onLayout={onLayout}/>);
     var output = shallowRenderer.getRenderOutput();
     const instance = shallowRenderer._instance._instance;
@@ -129,6 +140,7 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={{}}
+      uistore={uistore}
       dragEndedCallback={dragEndedCallback}/>);
     shallowRenderer.getRenderOutput();
     const instance = shallowRenderer._instance._instance;
@@ -147,6 +159,7 @@ describe('BudgetBlock', function () {
       blockId={blockId}
       budgetBlock={block}
       budgetactions={{}}
+      uistore={uistore}
       scrollOffset={10}
       yOffset={10}
       dragStartCallback={dragStartCallback}

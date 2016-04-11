@@ -19,6 +19,10 @@ describe('BudgetList', function () {
     budgets: {}
   };
 
+  var uistore = {
+    currencySymbol: '£'
+  };
+
   it('should render data correctly', function () {
 
     budgetstore = {
@@ -37,6 +41,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetstore={budgetstore}
+      uistore={uistore}
       budgetactions={budgetactions}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
@@ -49,6 +54,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={actions}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     output.props.children[3].props.onPress();
@@ -62,6 +68,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={actions}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     output.props.children[1].props.onChangeText('cats');
@@ -74,6 +81,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
@@ -99,6 +107,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
@@ -130,6 +139,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
@@ -179,6 +189,7 @@ describe('BudgetList', function () {
 
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
+      uistore={uistore}
       budgetactions={{ reorderBudgetBlocks }}
       budgetstore={budgetstore} />);
     shallowRenderer.getRenderOutput();

@@ -22,11 +22,16 @@ describe('BudgetBlockItem', function () {
     value: 10
   };
 
+  var uistore = {
+    editControlsVisible: true
+  };
+
   it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
       blockItemId={blockItemId}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
@@ -49,6 +54,7 @@ describe('BudgetBlockItem', function () {
       blockId={blockId}
       blockItemId={blockItemId}
       budgetactions={actions}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
@@ -65,6 +71,7 @@ describe('BudgetBlockItem', function () {
       blockId={blockId}
       blockItemId={blockItemId}
       budgetactions={actions}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
@@ -80,6 +87,7 @@ describe('BudgetBlockItem', function () {
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
       blockItemId={blockItemId}
+      uistore={uistore}
       budgetactions={actions}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
