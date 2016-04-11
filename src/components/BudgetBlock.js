@@ -74,7 +74,7 @@ export class BudgetBlock extends React.Component {
   };
 
   addBudgetBlockItem() {
-    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'New outgoing', 0);
+    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'New outgoing', '0');
   };
 
   updateTitle(title) {
