@@ -108,6 +108,7 @@ export class BudgetList extends React.Component {
           }}
           blockId={item.key}
           budgetactions={this.props.budgetactions}
+          uistore={this.props.uistore}
           income={this.props.budgetstore.income}/>
       );
     });

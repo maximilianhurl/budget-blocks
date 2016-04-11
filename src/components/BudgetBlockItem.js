@@ -22,6 +22,26 @@ export class BudgetBlockItem extends React.Component {
     );
   }
 
+  renderRemoveButton() {
+    if (this.props.uistore.editControlsVisible) {
+      return (<TouchableHighlight
+        onPress={() => Alert.alert(
+          'Are you sure you want to remove this outgoing?',
+          null,
+          [
+            {text: 'Remove', onPress: () => this.removeBlockItem()},
+            {text: 'Cancel'},
+          ]
+        )}>
+        <Text
+          style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
+          Remove Outgoing
+        </Text>
+      </TouchableHighlight>);
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={{marginTop: 10}}>
@@ -36,20 +56,9 @@ export class BudgetBlockItem extends React.Component {
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
           value={this.props.blockItem.value} />
-        <TouchableHighlight
-          onPress={() => Alert.alert(
-            'Are you sure you want to remove this outgoing?',
-            null,
-            [
-              {text: 'Remove', onPress: () => this.removeBlockItem()},
-              {text: 'Cancel'},
-            ]
-          )}>
-          <Text
-            style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-            Remove Outgoing
-          </Text>
-        </TouchableHighlight>
+
+        { this.renderRemoveButton() }
+
       </View>
     );
   }

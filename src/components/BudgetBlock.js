@@ -83,6 +83,26 @@ export class BudgetBlock extends React.Component {
     );
   };
 
+  renderRemoveButton() {
+    if (this.props.uistore.editControlsVisible) {
+      return (<TouchableHighlight
+        onPress={() => Alert.alert(
+          'Are you sure you want to remove this block?',
+          null,
+          [
+            {text: 'Remove', onPress: () => this.removeBlock()},
+            {text: 'Cancel'},
+          ]
+        )}>
+        <Text
+          style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
+          Remove Block
+        </Text>
+      </TouchableHighlight>);
+    }
+    return null;
+  }
+
   render() {
 
     let budgets = objectMap(this.props.budgetBlock.items).map(item => {
@@ -92,6 +112,7 @@ export class BudgetBlock extends React.Component {
           blockItem={item.obj}
           blockItemId={item.key}
           blockId={this.props.blockId}
+          uistore={this.props.uistore}
           budgetactions={this.props.budgetactions}
           />
       );
@@ -116,20 +137,7 @@ export class BudgetBlock extends React.Component {
             onChangeText={(text) => this.updateTitle(text)}
             value={ this.props.budgetBlock.title } />
 
-          <TouchableHighlight
-            onPress={() => Alert.alert(
-              'Are you sure you want to remove this block?',
-              null,
-              [
-                {text: 'Remove', onPress: () => this.removeBlock()},
-                {text: 'Cancel'},
-              ]
-            )}>
-            <Text
-              style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-              Remove Block
-            </Text>
-          </TouchableHighlight>
+          { this.renderRemoveButton() }
 
           { budgets }
 
