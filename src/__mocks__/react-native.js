@@ -47,11 +47,18 @@ ReactNative.Image = View;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
-ReactNative.Navigator = {};
+ReactNative.Navigator = {
+  SceneConfigs: {
+    VerticalDownSwipeJump: 'VerticalDownSwipeJump'
+  }
+};
 ReactNative.AppRegistry = {
   registerComponent: () => {}
 };
-ReactNative.AppStateIOS = {};
+ReactNative.AppStateIOS = {
+  addEventListener: () => {},
+  removeEventListener: () => {}
+};
 ReactNative.StatusBar = {
   setBarStyle: () => {}
 };
