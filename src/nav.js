@@ -2,6 +2,7 @@ import React from 'react-native';
 import { BudgetListContainer } from './components/BudgetListContainer';
 import { SettingsContainer } from './components/SettingsContainer';
 import UIActions from './actions/UIActions';
+import { COLOURS, GLOBAL_STYLES } from './utils/styles';
 let {
   Navigator,
   View,
@@ -19,29 +20,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   navBar: {
-    backgroundColor: 'red',
+    backgroundColor: COLOURS.LIGHTBLUE,
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     alignItems: 'center',
-    borderBottomColor: '#eee',
-    borderColor: 'transparent',
     borderWidth: 1,
     justifyContent: 'center',
+    borderColor: 'transparent',
     paddingTop: 20,
+    paddingHorizontal: 12,
     flexDirection: 'row'
   },
   navBarText: {
-    fontSize: 16,
-    marginVertical: 10,
+    fontSize: 20,
+    margin: 5,
+    color: 'white',
+    flex: 0.8
   },
-  navBarLeftButton: {
-    paddingLeft: 10,
-    backgroundColor: 'green'
+  navBarButton: {
+    marginHorizontal: 5,
+    borderBottomColor: 'black',
+    borderTopColor: 'black',
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
   },
   navBarButtonText: {
-    color: '#5890FF',
+    fontSize: 12,
+    margin: 0,
+    marginVertical: 2,
   },
 });
 
@@ -55,8 +63,8 @@ export class NavBar extends React.Component {
   render() {
     return (
       <View style={[styles.navBar]}>
-        <Text style={[styles.navBarText]}>
-          Budget Blocks
+        <Text style={[styles.navBarText, GLOBAL_STYLES.BOLDFONT]}>
+          BUDGET BLOCKS
         </Text>
         <TouchableHighlight
           onPress={() => {
@@ -68,16 +76,16 @@ export class NavBar extends React.Component {
               });
             }
           }}
-          style={styles.navBarLeftButton}>
-          <Text style={[styles.navBarText, styles.navBarButtonText]}>
-            Settings
+          style={styles.navBarButton}>
+          <Text style={[styles.navBarButtonText, GLOBAL_STYLES.BOLDFONT]}>
+            SETTINGS
           </Text>
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => UIActions.toggleEditControls()}
-          style={styles.navBarLeftButton}>
-          <Text style={[styles.navBarText, styles.navBarButtonText]}>
-            Edit
+          style={styles.navBarButton}>
+          <Text style={[styles.navBarButtonText, GLOBAL_STYLES.BOLDFONT]}>
+            EDIT
           </Text>
         </TouchableHighlight>
       </View>

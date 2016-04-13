@@ -71,7 +71,7 @@ describe('BudgetList', function () {
       uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
-    output.props.children[1].props.onChangeText('cats');
+    output.props.children[1].props.children.props.onChangeText('cats');
     expect(actions.updateIncome).toBeCalledWith('cats');
   });
 

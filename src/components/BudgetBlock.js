@@ -1,10 +1,24 @@
 import React from 'react-native';
-let {
-  Text, View, TextInput, TouchableHighlight,
-  PanResponder, Animated, LayoutAnimation, Alert
-} = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
+import { COLOURS } from '../utils/styles';
+
+let {
+  Text, View, TextInput, TouchableHighlight,
+  PanResponder, Animated, LayoutAnimation, Alert,
+  StyleSheet
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    flex: 1,
+  },
+  innerContainer: {
+    backgroundColor: COLOURS.LIGHTBLUE,
+    padding: 10,
+  }
+});
 
 
 export class BudgetBlock extends React.Component {
@@ -119,15 +133,11 @@ export class BudgetBlock extends React.Component {
     });
 
     return (
-      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={{
-        marginBottom: 20,
-        width: 270,
-        backgroundColor: this.state.reordering ? 'green' : 'transparent',
-      }}>
-        <Animated.View style={{
-          top: this.state.pan.y,
-          backgroundColor: 'grey',
-        }}>
+      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={[
+        { backgroundColor: this.state.reordering ? 'gray' : 'transparent' },
+        styles.container
+      ]}>
+        <Animated.View style={[{top: this.state.pan.y}, styles.innerContainer]}>
 
           <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
 

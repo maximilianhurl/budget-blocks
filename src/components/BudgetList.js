@@ -1,7 +1,36 @@
 import React from 'react-native';
-let { Text, ScrollView, TouchableHighlight, TextInput } = React;
 import { BudgetBlock } from './BudgetBlock';
 import { orderedBlocks } from '../stores/BudgetStore';
+import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
+
+let {
+  Text,
+  ScrollView,
+  TouchableHighlight,
+  TextInput,
+  StyleSheet,
+  View
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLOURS.DARKBLUE,
+    marginTop: 55,
+    paddingHorizontal: 20,
+    paddingVertical: 25,
+    flex: 1,
+  },
+  incomeInput: {
+    height: 40,
+    paddingHorizontal: 5,
+    color: 'white',
+  },
+  incomeBorder: {
+    borderBottomColor: '#000000',
+    borderBottomWidth: 2,
+    marginBottom: 20,
+  }
+});
 
 export class BudgetList extends React.Component {
 
@@ -115,30 +144,25 @@ export class BudgetList extends React.Component {
 
     return (
       <ScrollView
-        style={{ marginTop: 60 }}
         scrollEnabled={!this.state.reordering}
         onScroll={(e) => this.onScroll(e)}
         onLayout={(e) => this.onLayout(e)}
-        scrollEventThrottle={20}>
+        scrollEventThrottle={20}
+        style={[styles.container]}>
 
         <Text>Income: {this.props.uistore.currencySymbol} { this.props.budgetstore.income }</Text>
-        <TextInput
-          style={{
-            height: 40, width: 270, borderColor: 'gray',
-            borderWidth: 1, backgroundColor: 'white', marginBottom: 20
-          }}
-          onChangeText={(text) => this.updateIncome(text)}
-          keyboardType={'numeric'}
-          value={this.props.budgetstore.income} />
+        <View style={[styles.incomeBorder]}>
+          <TextInput
+            style={[styles.incomeInput]}
+            onChangeText={(text) => this.updateIncome(text)}
+            keyboardType={'numeric'}
+            value={this.props.budgetstore.income} />
+        </View>
 
         { budgets }
 
-        <TouchableHighlight onPress={() => this.addBudgetBlock()}>
-          <Text
-            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
-            >
-            Add Block
-          </Text>
+        <TouchableHighlight onPress={() => this.addBudgetBlock()} style={[GLOBAL_STYLES.ADDBUTTON]}>
+          <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>+ ADD BLOCK</Text>
         </TouchableHighlight>
 
       </ScrollView>
