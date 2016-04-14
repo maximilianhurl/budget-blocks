@@ -6,7 +6,7 @@ jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ioni
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';
-const { Text } = React;
+const { TextInput } = React;
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -29,7 +29,8 @@ describe('BudgetBlock', function () {
   };
 
   var uistore = {
-    editControlsVisible: true
+    editControlsVisible: true,
+    currencySymbol: '£'
   };
 
   var blockId = 'cats1234';
@@ -45,20 +46,19 @@ describe('BudgetBlock', function () {
     var output = shallowRenderer.getRenderOutput();
 
     var innerView = output.props.children;
+    var titleView = innerView.props.children[0];
 
-    var title = innerView.props.children[1];
-    expect(title.type).toEqual(Text);
-    expect(title.props.children[0]).toEqual('Block Title: ');
-    expect(title.props.children[1]).toEqual(block.title);
+    var title = titleView.props.children[0];
+    expect(title.type).toEqual(TextInput);
+    expect(title.props.value).toEqual(block.title);
 
-    var blocks = innerView.props.children[4];
+    var blocks = innerView.props.children[1];
     expect(blocks.length).toEqual(1);
     expect(blocks[0].props.blockItem).toEqual(block.items[0]);
 
-    var subtotal = innerView.props.children[6];
-    expect(subtotal.type).toEqual(Text);
-    expect(subtotal.props.children[0]).toEqual('Subtotal: £');
-    expect(subtotal.props.children[1]).toEqual(block.subtotal);
+    var subtotal = innerView.props.children[3];
+    expect(subtotal.props.children[0].props.children).toEqual('£');
+    expect(subtotal.props.children[1].props.children).toEqual(block.subtotal);
   });
 
   it('should remove block', function () {
@@ -74,8 +74,22 @@ describe('BudgetBlock', function () {
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
-    innerView.props.children[3].props.onPress();
+    const titleView = innerView.props.children[0];
+    titleView.props.children[2].props.onPress();
     expect(actions.removeBudgetBlock).toBeCalledWith(blockId);
+  });
+
+  it('should not display remove', function () {
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetBlock
+      blockId={blockId}
+      budgetBlock={block}
+      uistore={{ editControlsVisible: false}}
+      budgetactions={{}}/>);
+    const output = shallowRenderer.getRenderOutput();
+    const innerView = output.props.children;
+    const titleView = innerView.props.children[0];
+    expect(titleView.props.children[2]).toBe(null);
   });
 
   it('should add block', function () {
@@ -91,7 +105,7 @@ describe('BudgetBlock', function () {
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
-    innerView.props.children[5].props.onPress();
+    innerView.props.children[2].props.onPress();
     expect(actions.addBudgetBlockItem).toBeCalledWith(blockId, 'Outgoing...', '0');
   });
 
@@ -108,7 +122,8 @@ describe('BudgetBlock', function () {
       budgetactions={actions}/>);
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
-    innerView.props.children[2].props.onChangeText('cat title');
+    const titleView = innerView.props.children[0];
+    titleView.props.children[0].props.onChangeText('cat title');
     expect(actions.updateBudgetBlockTitle).toBeCalledWith(blockId, 'cat title');
   });
 

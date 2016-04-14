@@ -59,11 +59,11 @@ describe('BudgetList', function () {
       uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
-    output.props.children[3].props.onPress();
+    output.props.children[2].props.onPress();
     expect(actions.addBudgetBlock).toBeCalledWith('NAME BLOCK...');
   });
 
-  it('should add budget block', function () {
+  it('should update income', function () {
     var actions = {
       updateIncome: jest.genMockFunction()
     };
@@ -73,7 +73,7 @@ describe('BudgetList', function () {
       uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
-    output.props.children[1].props.children.props.onChangeText('cats');
+    output.props.children[0].props.children[1].props.onChangeText('cats');
     expect(actions.updateIncome).toBeCalledWith('cats');
   });
 
@@ -114,7 +114,7 @@ describe('BudgetList', function () {
     var output = shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
 
-    let blocks = output.props.children[2];
+    let blocks = output.props.children[1];
 
     instance.handleItemLayout = jest.genMockFunction();
     instance.dragStartCallback = jest.genMockFunction();

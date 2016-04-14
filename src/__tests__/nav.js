@@ -1,11 +1,11 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../Navigation');
+jest.dontMock('../utils/styles');
 jest.setMock('alt-container/native', require('../__mocks__/native'));
 jest.setMock('react-native-vector-icons/Ionicons', require('../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
-import UIActions from '../actions/UIActions';
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -15,11 +15,29 @@ const NavBar = require('../Navigation').NavBar;
 
 describe('nav.js', function () {
 
+  var uiactions = {
+    toggleEditControls: jest.genMockFunction()
+  };
+
+  const uistore = {
+    editControlsVisible: false,
+  };
+
+  var navigator = {
+    getCurrentRoutes() {
+      return [{
+        name: 'SETTINGS'
+      }];
+    },
+    pop: jest.genMockFunction(),
+    push: jest.genMockFunction()
+  };
+
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
   it('should render Navigation', function () {
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<Navigation/>);
+    shallowRenderer.render(<Navigation uiactions={uiactions} uistore={uistore}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
     const innerView = output.props.children;
@@ -36,60 +54,49 @@ describe('nav.js', function () {
 
   it('should render NavBar and open settings on press', function () {
 
-    var navigator = {
-      getCurrentRoutes() {
-        return [{
-          name: 'SETTINGS'
-        }];
-      },
-      pop: jest.genMockFunction()
-    };
-
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<NavBar navigator={navigator}/>);
+    shallowRenderer.render(<NavBar navigator={navigator} uiactions={uiactions} uistore={uistore}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
 
-    var settings = output.props.children[1];
+    var settings = output.props.children[2];
     settings.props.onPress();
     expect(navigator.pop).toBeCalled();
   });
 
   it('should render NavBar and hide settings on press', function () {
 
-    var navigator = {
+    var listNavigator = {
       getCurrentRoutes() {
         return [{
-          name: 'cats'
+          name: 'LIST'
         }];
       },
       push: jest.genMockFunction()
     };
 
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<NavBar navigator={navigator}/>);
+    shallowRenderer.render(<NavBar navigator={listNavigator} uiactions={uiactions} uistore={uistore}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
 
-    var settings = output.props.children[1];
+    var settings = output.props.children[2];
     settings.props.onPress();
-    expect(navigator.push).toBeCalled({
+    expect(listNavigator.push).toBeCalled({
       name: 'SETTINGS'
     });
   });
 
   it('should trigger edit action', function () {
 
-    UIActions.toggleEditControls = jest.genMockFunction();
-
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<NavBar/>);
+    shallowRenderer.render(<NavBar navigator={navigator} uiactions={uiactions} uistore={uistore}/>);
     var output = shallowRenderer.getRenderOutput();
 
-    expect(UIActions.toggleEditControls).not.toBeCalled();
-    var edit = output.props.children[2];
+    expect(uiactions.toggleEditControls).not.toBeCalled();
+    var edit = output.props.children[3];
     edit.props.onPress();
-    expect(UIActions.toggleEditControls).toBeCalled();
+    expect(uiactions.toggleEditControls).toBeCalled();
   });
 
 });

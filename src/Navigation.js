@@ -97,7 +97,7 @@ export class NavBar extends React.Component {
               this.props.navigator.pop();
             } else {
               this.props.navigator.push({
-                name: ROUTES.SETTINGS,
+                name: ROUTES.SETTINGS
               });
             }
           }}
