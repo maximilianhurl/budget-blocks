@@ -58,7 +58,7 @@ describe('BudgetList', function () {
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     output.props.children[3].props.onPress();
-    expect(actions.addBudgetBlock).toBeCalledWith('New outgoing block');
+    expect(actions.addBudgetBlock).toBeCalledWith('NAME BLOCK...');
   });
 
   it('should add budget block', function () {

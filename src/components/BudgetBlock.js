@@ -1,7 +1,7 @@
 import React from 'react-native';
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
-import { COLOURS } from '../utils/styles';
+import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
 
 let {
   Text, View, TextInput, TouchableHighlight,
@@ -16,7 +16,45 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     backgroundColor: COLOURS.LIGHTBLUE,
-    padding: 10,
+  },
+  innerContent: {
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
+  titleContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  title: {
+    color: 'white',
+    flex: 0.8,
+    height: 20,
+    margin: 0,
+  },
+  move: {
+    color: 'white',
+    flex: 0.2,
+    height: 20,
+    margin: 0,
+  },
+  totalContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: COLOURS.DARKBUTTON,
+    flexDirection: 'row',
+  },
+  totalCurrency: {
+    marginRight: 5,
+    marginTop: 3,
+    fontSize: 16,
+  },
+  totalValue: {
+    color: 'white',
+    fontSize: 18,
   }
 });
 
@@ -88,7 +126,7 @@ export class BudgetBlock extends React.Component {
   };
 
   addBudgetBlockItem() {
-    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'New outgoing', '0');
+    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'Outgoing...', '0');
   };
 
   updateTitle(title) {
@@ -100,6 +138,7 @@ export class BudgetBlock extends React.Component {
   renderRemoveButton() {
     if (this.props.uistore.editControlsVisible) {
       return (<TouchableHighlight
+        style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}
         onPress={() => Alert.alert(
           'Are you sure you want to remove this block?',
           null,
@@ -108,9 +147,8 @@ export class BudgetBlock extends React.Component {
             {text: 'Cancel'},
           ]
         )}>
-        <Text
-          style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-          Remove Block
+         <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+          - REMOVE BLOCK
         </Text>
       </TouchableHighlight>);
     }
@@ -138,27 +176,35 @@ export class BudgetBlock extends React.Component {
         styles.container
       ]}>
         <Animated.View style={[{top: this.state.pan.y}, styles.innerContainer]}>
-
-          <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
-
-          <Text>Block Title: { this.props.budgetBlock.title }</Text>
-          <TextInput
-            style={{height: 20, width: 270, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
-            onChangeText={(text) => this.updateTitle(text)}
-            value={ this.props.budgetBlock.title } />
+          <View style={[styles.titleContainer]}>
+            <TextInput
+              style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
+              onChangeText={(text) => this.updateTitle(text)}
+              value={ this.props.budgetBlock.title } />
+            <Text style={[styles.move]} {...this.panResponder.panHandlers}>MOVE</Text>
+          </View>
 
           { this.renderRemoveButton() }
 
           { budgets }
 
-          <TouchableHighlight onPress={() => this.addBudgetBlockItem()}>
-            <Text
-              style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-              Add outgoing
+          <TouchableHighlight
+            onPress={() => this.addBudgetBlockItem()}
+            style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}>
+            <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+              + ADD OUTGOING
             </Text>
           </TouchableHighlight>
 
-          <Text>Subtotal: £{ this.props.budgetBlock.subtotal }</Text>
+          <View style={[styles.totalContainer, styles.innerContent]}>
+            <Text style={[styles.totalCurrency, GLOBAL_STYLES.BOLDFONT]}>
+              { this.props.uistore.currencySymbol }
+            </Text>
+            <Text style={[styles.totalValue, GLOBAL_STYLES.REGULARFONT]}>
+              { this.props.budgetBlock.subtotal || 'Total' }
+            </Text>
+          </View>
+
 
         </Animated.View>
       </Animated.View>

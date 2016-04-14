@@ -1,5 +1,34 @@
 import React from 'react-native';
-let { Text, View, TextInput, TouchableHighlight, Alert } = React;
+import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
+let { Text, View, TextInput, TouchableHighlight, Alert, StyleSheet } = React;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 10,
+    marginHorizontal: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOURS.DARKBUTTON,
+  },
+  title: {
+    flex: 0.5,
+  },
+  total: {
+    marginLeft: 5,
+  },
+  input: {
+    flex: 0.4,
+    height: 20,
+    color: COLOURS.DARKTEXT,
+    margin: 0,
+    padding:0,
+    marginBottom: 5,
+  },
+  currency: {
+    fontSize: 16,
+  }
+});
 
 
 export class BudgetBlockItem extends React.Component {
@@ -25,6 +54,7 @@ export class BudgetBlockItem extends React.Component {
   renderRemoveButton() {
     if (this.props.uistore.editControlsVisible) {
       return (<TouchableHighlight
+        style={[GLOBAL_STYLES.ADDBUTTON]}
         onPress={() => Alert.alert(
           'Are you sure you want to remove this outgoing?',
           null,
@@ -33,9 +63,8 @@ export class BudgetBlockItem extends React.Component {
             {text: 'Cancel'},
           ]
         )}>
-        <Text
-          style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-          Remove Outgoing
+        <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+          - REMOVE OUTGOING
         </Text>
       </TouchableHighlight>);
     }
@@ -44,15 +73,14 @@ export class BudgetBlockItem extends React.Component {
 
   render() {
     return (
-      <View style={{marginTop: 10}}>
-        <Text>Budget: { this.props.blockItem.title }</Text>
+      <View style={[styles.container]}>
         <TextInput
-          style={{height: 20, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+          style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
           value={ this.props.blockItem.title } />
-        <Text>£{ this.props.blockItem.value }</Text>
+        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>£</Text>
         <TextInput
-          style={{height: 18, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+          style={[styles.input, styles.total]}
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
           value={this.props.blockItem.value} />

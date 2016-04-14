@@ -24,11 +24,20 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 5,
     color: 'white',
+    flex: 0.9,
+    fontSize: 20,
+  },
+  incomeCurrency: {
+    paddingTop: 10,
+    marginRight: 2,
+    fontSize: 20,
   },
   incomeBorder: {
     borderBottomColor: '#000000',
     borderBottomWidth: 2,
     marginBottom: 20,
+    flex: 1,
+    flexDirection: 'row',
   }
 });
 
@@ -112,11 +121,18 @@ export class BudgetList extends React.Component {
   }
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('New outgoing block');
+    this.props.budgetactions.addBudgetBlock('NAME BLOCK...');
   }
 
   updateIncome(text) {
     this.props.budgetactions.updateIncome(text);
+  }
+
+  getIcomeText() {
+    if (parseFloat(this.props.budgetstore.income) <= 0) {
+      return 'Income...';
+    }
+    return this.props.budgetstore.income;
   }
 
   render() {
@@ -150,13 +166,15 @@ export class BudgetList extends React.Component {
         scrollEventThrottle={20}
         style={[styles.container]}>
 
-        <Text>Income: {this.props.uistore.currencySymbol} { this.props.budgetstore.income }</Text>
         <View style={[styles.incomeBorder]}>
+          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.BOLDFONT]}>
+              { this.props.uistore.currencySymbol }
+          </Text>
           <TextInput
-            style={[styles.incomeInput]}
+            style={[styles.incomeInput, GLOBAL_STYLES.REGULARFONT]}
             onChangeText={(text) => this.updateIncome(text)}
             keyboardType={'numeric'}
-            value={this.props.budgetstore.income} />
+            value={this.getIcomeText()} />
         </View>
 
         { budgets }
