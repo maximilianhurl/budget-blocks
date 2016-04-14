@@ -27,6 +27,12 @@ class PixelRatio extends React.Component {
     static get() { return 1; }
 }
 
+class Image extends React.Component {
+    render() {
+      return null;
+    }
+}
+
 ReactNative.AsyncStorage = {
   setItem() {
     return false;
@@ -43,7 +49,7 @@ ReactNative.Text = Text;
 ReactNative.TouchableOpacity = View;
 ReactNative.TouchableWithoutFeedback = View;
 ReactNative.ToolbarAndroid = View;
-ReactNative.Image = View;
+ReactNative.Image = Image;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
