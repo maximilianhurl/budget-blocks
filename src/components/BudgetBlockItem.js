@@ -1,6 +1,8 @@
 import React from 'react-native';
 import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
-let { Text, View, TextInput, TouchableHighlight, Alert, StyleSheet } = React;
+import Icon from 'react-native-vector-icons/Ionicons';
+
+let { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } = React;
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOURS.DARKBUTTON,
   },
   title: {
-    flex: 0.5,
+    flex: 0.6,
   },
   total: {
     marginLeft: 5,
@@ -24,6 +26,12 @@ const styles = StyleSheet.create({
     margin: 0,
     padding:0,
     marginBottom: 5,
+  },
+  removeButton: {
+    flex: 0.1,
+  },
+  removeButtonText: {
+    textAlign: 'right'
   },
   currency: {
     fontSize: 16,
@@ -53,8 +61,9 @@ export class BudgetBlockItem extends React.Component {
 
   renderRemoveButton() {
     if (this.props.uistore.editControlsVisible) {
-      return (<TouchableHighlight
-        style={[GLOBAL_STYLES.ADDBUTTON]}
+      return (<TouchableOpacity
+        underlayColor={COLOURS.TOUCHHIGHLIGHT}
+        style={[styles.removeButton]}
         onPress={() => Alert.alert(
           'Are you sure you want to remove this outgoing?',
           null,
@@ -63,10 +72,10 @@ export class BudgetBlockItem extends React.Component {
             {text: 'Cancel'},
           ]
         )}>
-        <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
-          - REMOVE OUTGOING
+        <Text style={[styles.removeButtonText]}>
+          <Icon name="close-circled" size={20} color="black" />
         </Text>
-      </TouchableHighlight>);
+      </TouchableOpacity>);
     }
     return null;
   }
@@ -78,7 +87,9 @@ export class BudgetBlockItem extends React.Component {
           style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
           value={ this.props.blockItem.title } />
-        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>£</Text>
+        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
+          { this.props.uistore.currencySymbol }
+        </Text>
         <TextInput
           style={[styles.input, styles.total]}
           onChangeText={(text) => this.updateValue(text)}

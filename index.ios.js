@@ -1,5 +1,5 @@
 import React from 'react-native';
-import { Navigation } from './src/nav';
+import { NavContainer } from './src/NavContainer';
 import PersistenceActions from './src/actions/PersistenceActions';
 
 const { AppRegistry, AppStateIOS, StatusBar } = React;
@@ -34,7 +34,7 @@ export default class BudgetBlocks extends React.Component {
   }
 
   render() {
-    return (<Navigation/>);
+    return (<NavContainer/>);
   }
 }
 

@@ -6,7 +6,7 @@ import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
 let {
   Text,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   TextInput,
   StyleSheet,
   View
@@ -179,9 +179,14 @@ export class BudgetList extends React.Component {
 
         { budgets }
 
-        <TouchableHighlight onPress={() => this.addBudgetBlock()} style={[GLOBAL_STYLES.ADDBUTTON]}>
-          <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>+ ADD BLOCK</Text>
-        </TouchableHighlight>
+        <TouchableOpacity
+          onPress={() => this.addBudgetBlock()}
+          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 20}]}>
+          <Text
+            style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+            + ADD BLOCK
+          </Text>
+        </TouchableOpacity>
 
       </ScrollView>
     );

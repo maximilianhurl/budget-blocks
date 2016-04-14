@@ -3,6 +3,7 @@ jest.dontMock('../../components/BudgetListContainer');
 
 jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('alt-container/native', require('../../__mocks__/native'));
+jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars

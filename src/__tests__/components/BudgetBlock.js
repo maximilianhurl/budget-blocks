@@ -2,6 +2,8 @@
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
 
+jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
+
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native';
 const { Text } = React;

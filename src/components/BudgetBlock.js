@@ -2,9 +2,10 @@ import React from 'react-native';
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 let {
-  Text, View, TextInput, TouchableHighlight,
+  Text, View, TextInput, TouchableOpacity,
   PanResponder, Animated, LayoutAnimation, Alert,
   StyleSheet
 } = React;
@@ -34,12 +35,19 @@ const styles = StyleSheet.create({
     flex: 0.8,
     height: 20,
     margin: 0,
+    fontSize: 18,
   },
   move: {
-    color: 'white',
-    flex: 0.2,
+    flex: 0.07,
     height: 20,
     margin: 0,
+    textAlign: 'center',
+  },
+  removeBtn: {
+    flex: 0.07,
+  },
+  removeBtnText: {
+    textAlign: 'right',
   },
   totalContainer: {
     paddingHorizontal: 10,
@@ -137,8 +145,8 @@ export class BudgetBlock extends React.Component {
 
   renderRemoveButton() {
     if (this.props.uistore.editControlsVisible) {
-      return (<TouchableHighlight
-        style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}
+      return (<TouchableOpacity
+        style={[styles.removeBtn]}
         onPress={() => Alert.alert(
           'Are you sure you want to remove this block?',
           null,
@@ -147,10 +155,10 @@ export class BudgetBlock extends React.Component {
             {text: 'Cancel'},
           ]
         )}>
-         <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
-          - REMOVE BLOCK
+         <Text style={[styles.removeBtnText]}>
+          <Icon name="close-circled" size={18} color="white" />
         </Text>
-      </TouchableHighlight>);
+      </TouchableOpacity>);
     }
     return null;
   }
@@ -181,20 +189,23 @@ export class BudgetBlock extends React.Component {
               style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
               onChangeText={(text) => this.updateTitle(text)}
               value={ this.props.budgetBlock.title } />
-            <Text style={[styles.move]} {...this.panResponder.panHandlers}>MOVE</Text>
-          </View>
+            <Text style={[styles.move]} {...this.panResponder.panHandlers}>
+              <Icon name="navicon-round" size={20} color="white" />
+            </Text>
 
-          { this.renderRemoveButton() }
+            { this.renderRemoveButton() }
+
+          </View>
 
           { budgets }
 
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() => this.addBudgetBlockItem()}
             style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}>
             <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
               + ADD OUTGOING
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           <View style={[styles.totalContainer, styles.innerContent]}>
             <Text style={[styles.totalCurrency, GLOBAL_STYLES.BOLDFONT]}>

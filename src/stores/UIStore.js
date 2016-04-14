@@ -5,7 +5,7 @@ export class UIStore {
 
   constructor () {
     this.currencySymbol = '£';
-    this.currencySymbols = ['£', '$', '€', '¥'];
+    this.currencySymbols = ['£', '$', '€'];
 
     this.currencyPickerVisible = false;
 

@@ -1,6 +1,7 @@
 /* global jest, describe, it, expect */
-jest.dontMock('../nav');
+jest.dontMock('../Navigation');
 jest.setMock('alt-container/native', require('../__mocks__/native'));
+jest.setMock('react-native-vector-icons/Ionicons', require('../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
@@ -9,8 +10,8 @@ import UIActions from '../actions/UIActions';
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
 // do not understand ES6 modules yet
-const Navigation = require('../nav').Navigation;
-const NavBar = require('../nav').NavBar;
+const Navigation = require('../Navigation').Navigation;
+const NavBar = require('../Navigation').NavBar;
 
 describe('nav.js', function () {
 

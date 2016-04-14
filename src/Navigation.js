@@ -1,19 +1,21 @@
 import React from 'react-native';
 import { BudgetListContainer } from './components/BudgetListContainer';
 import { SettingsContainer } from './components/SettingsContainer';
-import UIActions from './actions/UIActions';
 import { COLOURS, GLOBAL_STYLES } from './utils/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 let {
   Navigator,
   View,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
+  Image
 } = React;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLOURS.DARKBLUE,
   },
   navigator: {
     flex: 1,
@@ -36,8 +38,17 @@ const styles = StyleSheet.create({
   navBarText: {
     fontSize: 20,
     margin: 5,
+    marginRight: 0,
     color: 'white',
-    flex: 0.8
+    width: 74,
+  },
+  blocksContainer: {
+    flex: 0.5,
+    paddingTop: 1,
+  },
+  blocksImage: {
+    height: 15,
+    width: 22,
   },
   navBarButton: {
     marginHorizontal: 5,
@@ -47,9 +58,14 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
   },
   navBarButtonText: {
-    fontSize: 12,
     margin: 0,
-    marginVertical: 2,
+  },
+  settings: {
+    marginRight: 5,
+    paddingHorizontal: 4,
+  },
+  navBarButtonActive: {
+    backgroundColor: COLOURS.DARKBLUE,
   },
 });
 
@@ -61,14 +77,23 @@ const ROUTES = {
 export class NavBar extends React.Component {
 
   render() {
+
+    const onSettings = this.props.navigator.getCurrentRoutes().slice(-1)[0].name === ROUTES.SETTINGS;
+
     return (
       <View style={[styles.navBar]}>
         <Text style={[styles.navBarText, GLOBAL_STYLES.BOLDFONT]}>
-          BUDGET BLOCKS
+          BUDGET
         </Text>
-        <TouchableHighlight
+        <View style={[styles.blocksContainer]}>
+          <Image
+            style={[styles.blocksImage]}
+            resizeMode={'contain'}
+            source={require('../assets/blocks.png')}/>
+        </View>
+        <TouchableOpacity
           onPress={() => {
-            if (this.props.navigator.getCurrentRoutes().slice(-1)[0].name === ROUTES.SETTINGS) {
+            if (onSettings) {
               this.props.navigator.pop();
             } else {
               this.props.navigator.push({
@@ -76,18 +101,21 @@ export class NavBar extends React.Component {
               });
             }
           }}
-          style={styles.navBarButton}>
-          <Text style={[styles.navBarButtonText, GLOBAL_STYLES.BOLDFONT]}>
-            SETTINGS
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => UIActions.toggleEditControls()}
-          style={styles.navBarButton}>
+          style={[
+            styles.settings, onSettings ? styles.navBarButtonActive : null
+          ]}>
+          <Icon name="gear-a" size={20} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.uiactions.toggleEditControls()}
+          style={[
+            styles.navBarButton,
+            this.props.uistore.editControlsVisible ? styles.navBarButtonActive : null
+          ]}>
           <Text style={[styles.navBarButtonText, GLOBAL_STYLES.BOLDFONT]}>
             EDIT
           </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -116,7 +144,10 @@ export class Navigation extends React.Component {
         <Navigator
           style={[styles.navigator]}
           navigationBar={
-            <NavBar events={this.eventEmitter}/>
+            <NavBar
+              events={this.eventEmitter}
+              uistore={this.props.uistore}
+              uiactions={this.props.uiactions}/>
           }
           initialRoute={{ name: ROUTES.LIST }}
           configureScene={this.configureScene}

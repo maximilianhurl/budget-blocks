@@ -1,12 +1,12 @@
 import React from 'react-native';
-import { Navigation } from './src/nav';
+import { NavContainer } from './src/NavContainer';
 
 const { AppRegistry } = React;
 
 class BudgetBlocks extends React.Component {
 
   render() {
-    return <Navigation/>;
+    return <NavContainer/>;
   }
 }
 
