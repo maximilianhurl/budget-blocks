@@ -1,6 +1,7 @@
   /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
+jest.dontMock('../../utils/zeroOrNaN');
 
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 

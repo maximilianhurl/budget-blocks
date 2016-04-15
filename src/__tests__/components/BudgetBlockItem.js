@@ -38,7 +38,7 @@ describe('BudgetBlockItem', function () {
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
     expect(output.props.children[0].props.value).toEqual(blockItem.title);
-    expect(output.props.children[2].props.value).toEqual(blockItem.value);
+    expect(output.props.children[2].props.value).toEqual(String(blockItem.value));
   });
 
   it('should update title', function () {

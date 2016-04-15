@@ -2,6 +2,7 @@
 jest.dontMock('../../utils/objectMap');
 jest.dontMock('../../utils/minFloat');
 jest.dontMock('../../utils/uuid');
+jest.dontMock('../../utils/zeroOrNaN');
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -9,6 +10,7 @@ jest.dontMock('../../utils/uuid');
 const objectMap = require('../../utils/objectMap').default;
 const minFloat = require('../../utils/minFloat').default;
 const uuid = require('../../utils/uuid').default;
+const zeroOrNaN = require('../../utils/zeroOrNaN').default;
 
 describe('uuid', function () {
 
@@ -29,6 +31,17 @@ describe('minfloat', function () {
     expect(minFloat('100')).toEqual(100);
     expect(minFloat('cat')).toEqual(0);
     expect(minFloat('')).toEqual(0);
+  });
+
+});
+
+describe('zeroOrNaN', function () {
+
+  it('is zero or nan', function () {
+    expect(zeroOrNaN('0')).toEqual(true);
+    expect(zeroOrNaN('cat')).toEqual(true);
+    expect(zeroOrNaN('')).toEqual(true);
+    expect(zeroOrNaN('10')).toEqual(false);
   });
 
 });
