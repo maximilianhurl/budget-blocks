@@ -91,10 +91,10 @@ export class BudgetBlockItem extends React.Component {
           { this.props.uistore.currencySymbol }
         </Text>
         <TextInput
-          style={[styles.input, styles.total]}
+          style={[styles.input, styles.total, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
-          value={this.props.blockItem.value} />
+          value={String(this.props.blockItem.value)} />
 
         { this.renderRemoveButton() }
 
