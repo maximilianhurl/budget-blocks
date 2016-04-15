@@ -187,7 +187,6 @@ describe('BudgetList', function () {
     };
 
     const reorderBudgetBlocks = jest.genMockFunction();
-    const animatePositionChange = jest.genMockFunction();
 
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
@@ -199,11 +198,6 @@ describe('BudgetList', function () {
 
     instance.scrollOffset = 10;
     instance.yPos = 20;
-    instance.refs = {
-      cats2: {
-        animatePositionChange: animatePositionChange
-      }
-    };
     instance.layouts = {
       cats1: {
         y: 0,
@@ -218,13 +212,11 @@ describe('BudgetList', function () {
     instance.dragMoveCallback('cats1', 149, true);
     jest.runAllTimers();
 
-    expect(animatePositionChange).not.toBeCalled();
     expect(reorderBudgetBlocks).not.toBeCalled();
 
     instance.dragMoveCallback('cats1', 160, true);
     jest.runAllTimers();
 
-    expect(animatePositionChange).toBeCalledWith();
     expect(reorderBudgetBlocks).toBeCalledWith('cats1', 'cats2');
   });
 

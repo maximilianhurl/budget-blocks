@@ -104,7 +104,6 @@ export class BudgetList extends React.Component {
 
           this.animatingReorder = true;
 
-          this.refs[key].animatePositionChange();
           this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
 
           //ignore drag events whlie animation completes
@@ -143,7 +142,6 @@ export class BudgetList extends React.Component {
           budgetBlock={item.obj}
           key={item.key}
           yOffset={this.yPos}
-          ref={item.key}
           scrollOffset={this.scrollOffset}
           onLayout={(e) => this.handleItemLayout(e, item.key)}
           dragStartCallback={() => this.dragStartCallback()}

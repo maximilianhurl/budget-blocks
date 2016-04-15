@@ -44,7 +44,7 @@ export class BudgetStore {
 
       if (block.items) {
         for (let budgetKey of Object.keys(block.items)) {
-          incomeSubtotal -= parseFloat(block.items[budgetKey].value);
+          incomeSubtotal -= parseFloat(minFloat(block.items[budgetKey].value));
         }
       }
 
@@ -96,7 +96,7 @@ export class BudgetStore {
   onUpdateBudgetBlockItemValue(payload) {
     this.budgets[payload.blockId].items[payload.blockItemId] = {
       'title': this.budgets[payload.blockId].items[payload.blockItemId].title,
-      'value': minFloat(payload.value)
+      'value': payload.value
     };
     this._recalculateBlockTotals();
   }

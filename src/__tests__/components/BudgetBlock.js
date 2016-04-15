@@ -163,8 +163,6 @@ describe('BudgetBlock', function () {
     const instance = shallowRenderer._instance._instance;
     instance.dragEnded();
     expect(dragEndedCallback).toBeCalledWith();
-
-    instance.animatePositionChange();
   });
 
   it('should do stuff when panning', function () {
