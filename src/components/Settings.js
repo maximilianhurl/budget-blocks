@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   }
 });
 
-let RatingTracker = new RatingRequestor('1059221816', {
+let RatingTracker = new RatingRequestor('1099266102', {
   title: 'Leave Rating',
   actionLabels: {
     decline: 'No thanks',

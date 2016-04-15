@@ -27,22 +27,17 @@ export class PersistenceStore {
   */
 
   onPersistState() {
-    console.log('persist state');
     let snapshot = alt.takeSnapshot();
 
     AsyncStorage.setItem(STORAGE_KEY, snapshot).then(() => {
-      console.log('State persisted');
     }).catch((error) => {
       console.error(error);
     });
   }
 
   onLoadPersistentState() {
-    console.log('load state');
 
     AsyncStorage.getItem(STORAGE_KEY).then((persistentState) => {
-      console.log('State loaded from disk');
-      console.log(persistentState);
       if (persistentState) {
         alt.bootstrap(persistentState);
       }

@@ -103,6 +103,7 @@ export class BudgetBlock extends React.Component {
   }
 
   componentWillMount() {
+
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder : () => true,
       onMoveShouldSetResponderCapture: () => true,
@@ -164,6 +165,18 @@ export class BudgetBlock extends React.Component {
   }
 
   render() {
+
+    //animate every change to the views
+    LayoutAnimation.configureNext({
+      duration: 200,
+      create: {
+        type: LayoutAnimation.Types.curveEaseInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      update: {
+        type: LayoutAnimation.Types.curveEaseInEaseOut,
+      },
+    });
 
     let budgets = objectMap(this.props.budgetBlock.items).map(item => {
       return (

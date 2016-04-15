@@ -104,6 +104,12 @@ ReactNative.LayoutAnimation = {
   },
   Presets: {
     easeInEaseOut: 'cats'
+  },
+  Types: {
+    curveEaseInEaseOut: 'curved cats'
+  },
+  Properties: {
+    opacity: 'Visible cats'
   }
 };
 
