@@ -3,6 +3,8 @@ jest.dontMock('../../components/BudgetList');
 jest.dontMock('../../stores/BudgetStore');
 jest.dontMock('../../utils/objectMap');
 
+jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
+
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
 
@@ -17,6 +19,10 @@ describe('BudgetList', function () {
 
   var budgetstore = {
     budgets: {}
+  };
+
+  var uistore = {
+    currencySymbol: '£'
   };
 
   it('should render data correctly', function () {
@@ -37,6 +43,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetstore={budgetstore}
+      uistore={uistore}
       budgetactions={budgetactions}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
@@ -49,22 +56,24 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={actions}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
-    output.props.children[3].props.onPress();
-    expect(actions.addBudgetBlock).toBeCalledWith('New outgoing block');
+    output.props.children[2].props.onPress();
+    expect(actions.addBudgetBlock).toBeCalledWith('NAME BLOCK...');
   });
 
-  it('should add budget block', function () {
+  it('should update income', function () {
     var actions = {
       updateIncome: jest.genMockFunction()
     };
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={actions}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
-    output.props.children[1].props.onChangeText('cats');
+    output.props.children[0].props.children[1].props.onChangeText('cats');
     expect(actions.updateIncome).toBeCalledWith('cats');
   });
 
@@ -74,6 +83,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
@@ -99,11 +109,12 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
 
-    let blocks = output.props.children[2];
+    let blocks = output.props.children[1];
 
     instance.handleItemLayout = jest.genMockFunction();
     instance.dragStartCallback = jest.genMockFunction();
@@ -130,6 +141,7 @@ describe('BudgetList', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
       budgetactions={{}}
+      uistore={uistore}
       budgetstore={budgetstore} />);
     shallowRenderer.getRenderOutput();
     var instance = shallowRenderer._instance._instance;
@@ -179,6 +191,7 @@ describe('BudgetList', function () {
 
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetList
+      uistore={uistore}
       budgetactions={{ reorderBudgetBlocks }}
       budgetstore={budgetstore} />);
     shallowRenderer.getRenderOutput();

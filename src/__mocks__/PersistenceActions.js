@@ -1,5 +1,6 @@
+/* global jest */
 
 module.exports = {
-  loadPersistentState: () => {},
-  persistState: () => {},
+  loadPersistentState: jest.genMockFunction(),
+  persistState: jest.genMockFunction(),
 };

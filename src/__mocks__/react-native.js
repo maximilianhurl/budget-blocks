@@ -27,6 +27,12 @@ class PixelRatio extends React.Component {
     static get() { return 1; }
 }
 
+class Image extends React.Component {
+    render() {
+      return null;
+    }
+}
+
 ReactNative.AsyncStorage = {
   setItem() {
     return false;
@@ -43,17 +49,24 @@ ReactNative.Text = Text;
 ReactNative.TouchableOpacity = View;
 ReactNative.TouchableWithoutFeedback = View;
 ReactNative.ToolbarAndroid = View;
-ReactNative.Image = View;
+ReactNative.Image = Image;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
 ReactNative.Platform = {};
-ReactNative.Navigator = {};
+ReactNative.Navigator = {
+  SceneConfigs: {
+    VerticalDownSwipeJump: 'VerticalDownSwipeJump'
+  }
+};
 ReactNative.AppRegistry = {
   registerComponent: () => {}
 };
-ReactNative.AppStateIOS = {};
-ReactNative.StatusBarIOS = {
-  setStyle: () => {}
+ReactNative.AppStateIOS = {
+  addEventListener: () => {},
+  removeEventListener: () => {}
+};
+ReactNative.StatusBar = {
+  setBarStyle: () => {}
 };
 ReactNative.Alert = {
   alert(title, message, buttons) {
@@ -91,6 +104,12 @@ ReactNative.LayoutAnimation = {
   },
   Presets: {
     easeInEaseOut: 'cats'
+  },
+  Types: {
+    curveEaseInEaseOut: 'curved cats'
+  },
+  Properties: {
+    opacity: 'Visible cats'
   }
 };
 

@@ -1,5 +1,4 @@
 import alt from '../alt';
-
 import BudgetActions from '../actions/BudgetActions';
 import uuid from '../utils/uuid';
 import minFloat from '../utils/minFloat';

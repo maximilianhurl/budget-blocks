@@ -1,7 +1,45 @@
 import React from 'react-native';
-let { Text, ScrollView, TouchableHighlight, TextInput } = React;
 import { BudgetBlock } from './BudgetBlock';
 import { orderedBlocks } from '../stores/BudgetStore';
+import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
+
+let {
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  View
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLOURS.DARKBLUE,
+    marginTop: 55,
+    paddingHorizontal: 20,
+    paddingVertical: 25,
+    flex: 1,
+  },
+  incomeInput: {
+    height: 40,
+    paddingHorizontal: 5,
+    color: 'white',
+    flex: 0.9,
+    fontSize: 20,
+  },
+  incomeCurrency: {
+    paddingTop: 10,
+    marginRight: 2,
+    fontSize: 20,
+  },
+  incomeBorder: {
+    borderBottomColor: '#000000',
+    borderBottomWidth: 2,
+    marginBottom: 20,
+    flex: 1,
+    flexDirection: 'row',
+  }
+});
 
 export class BudgetList extends React.Component {
 
@@ -83,11 +121,18 @@ export class BudgetList extends React.Component {
   }
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('New outgoing block');
+    this.props.budgetactions.addBudgetBlock('NAME BLOCK...');
   }
 
   updateIncome(text) {
     this.props.budgetactions.updateIncome(text);
+  }
+
+  getIcomeText() {
+    if (parseFloat(this.props.budgetstore.income) <= 0) {
+      return 'Income...';
+    }
+    return this.props.budgetstore.income;
   }
 
   render() {
@@ -108,37 +153,40 @@ export class BudgetList extends React.Component {
           }}
           blockId={item.key}
           budgetactions={this.props.budgetactions}
+          uistore={this.props.uistore}
           income={this.props.budgetstore.income}/>
       );
     });
 
     return (
       <ScrollView
-        style={{ marginTop: 60 }}
         scrollEnabled={!this.state.reordering}
         onScroll={(e) => this.onScroll(e)}
         onLayout={(e) => this.onLayout(e)}
-        scrollEventThrottle={20}>
+        scrollEventThrottle={20}
+        style={[styles.container]}>
 
-        <Text>Income: £ { this.props.budgetstore.income }</Text>
-        <TextInput
-          style={{
-            height: 40, width: 270, borderColor: 'gray',
-            borderWidth: 1, backgroundColor: 'white', marginBottom: 20
-          }}
-          onChangeText={(text) => this.updateIncome(text)}
-          keyboardType={'numeric'}
-          value={this.props.budgetstore.income} />
+        <View style={[styles.incomeBorder]}>
+          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.BOLDFONT]}>
+              { this.props.uistore.currencySymbol }
+          </Text>
+          <TextInput
+            style={[styles.incomeInput, GLOBAL_STYLES.REGULARFONT]}
+            onChangeText={(text) => this.updateIncome(text)}
+            keyboardType={'numeric'}
+            value={this.getIcomeText()} />
+        </View>
 
         { budgets }
 
-        <TouchableHighlight onPress={() => this.addBudgetBlock()}>
+        <TouchableOpacity
+          onPress={() => this.addBudgetBlock()}
+          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 20}]}>
           <Text
-            style={{height: 40, width: 270, backgroundColor: 'gray', color: 'white', marginTop: 10}}
-            >
-            Add Block
+            style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+            + ADD BLOCK
           </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
       </ScrollView>
     );

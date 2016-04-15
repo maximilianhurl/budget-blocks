@@ -1,10 +1,12 @@
 /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlockItem');
 
+jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
+
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
 
-let { View, TextInput, TouchableHighlight, Text } = React; // eslint-disable-line no-unused-vars
+let { View, TextInput, TouchableOpacity, Text } = React; // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -22,22 +24,21 @@ describe('BudgetBlockItem', function () {
     value: 10
   };
 
+  var uistore = {
+    editControlsVisible: true
+  };
+
   it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
       blockItemId={blockItemId}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
-    expect(output.props.children[0]).toEqual(
-      <Text>Budget: { blockItem.title }</Text>
-    );
-    expect(output.props.children[1].props.value).toEqual(blockItem.title);
-    expect(output.props.children[2]).toEqual(
-      <Text>£{ blockItem.value }</Text>
-    );
-    expect(output.props.children[3].props.value).toEqual(blockItem.value);
+    expect(output.props.children[0].props.value).toEqual(blockItem.title);
+    expect(output.props.children[2].props.value).toEqual(blockItem.value);
   });
 
   it('should update title', function () {
@@ -49,10 +50,11 @@ describe('BudgetBlockItem', function () {
       blockId={blockId}
       blockItemId={blockItemId}
       budgetactions={actions}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
-    output.props.children[1].props.onChangeText('cats');
+    output.props.children[0].props.onChangeText('cats');
     expect(actions.updateBudgetBlockItemTitle).toBeCalledWith(blockId, blockItemId, 'cats');
   });
 
@@ -65,10 +67,11 @@ describe('BudgetBlockItem', function () {
       blockId={blockId}
       blockItemId={blockItemId}
       budgetactions={actions}
+      uistore={uistore}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
-    output.props.children[3].props.onChangeText('cats');
+    output.props.children[2].props.onChangeText('cats');
     expect(actions.updateBudgetBlockItemValue).toBeCalledWith(blockId, blockItemId, 'cats');
   });
 
@@ -80,12 +83,25 @@ describe('BudgetBlockItem', function () {
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
       blockItemId={blockItemId}
+      uistore={uistore}
       budgetactions={actions}
       blockItem={blockItem}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
-    output.props.children[4].props.onPress();
+    output.props.children[3].props.onPress();
     expect(actions.removeBudgetBlockItem).toBeCalledWith(blockId, blockItemId);
+  });
+
+  it('should not render remove', function () {
+    var shallowRenderer = TestUtils.createRenderer();
+    shallowRenderer.render(<BudgetBlockItem
+      blockId={blockId}
+      blockItemId={blockItemId}
+      uistore={{ editControlsVisible: false }}
+      budgetactions={{}}
+      blockItem={blockItem}/>);
+    var output = shallowRenderer.getRenderOutput();
+    expect(output.props.children[3]).toBe(null);
   });
 
 

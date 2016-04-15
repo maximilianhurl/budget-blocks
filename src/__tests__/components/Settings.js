@@ -1,22 +1,23 @@
 /* global jest, describe, it, expect */
-jest.dontMock('../app');
-jest.setMock('alt-container/native', require('../__mocks__/native'));
+jest.dontMock('../../components/Settings');
 
 import TestUtils from 'react-addons-test-utils';
 import React from 'react-native'; // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
-// do not understand ES6 modules yet
-const App = require('../app').App;
+// do not Settings ES6 modules yet
+const Settings = require('../../components/Settings').Settings;
 
-describe('app.js', function () {
+describe('Settings', function () {
 
   const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
-  it('should render', function () {
+  it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
-    shallowRenderer.render(<App/>);
+    shallowRenderer.render(<Settings uistore={{
+      currencySymbol: '£'
+    }}/>);
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
   });

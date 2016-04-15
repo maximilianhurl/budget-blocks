@@ -1,6 +1,8 @@
 /* global jest, describe, it, expect, beforeEach */
 
 jest.dontMock('../../actions/BudgetActions');
+jest.dontMock('../../actions/UIActions');
+jest.dontMock('../../actions/PersistenceActions');
 jest.setMock('alt', require('../../__mocks__/alt'));
 
 
@@ -76,7 +78,22 @@ describe('Test PersistenceActions', function () {
   });
 
   it('should generate actions', function () {
-    expect(PersistenceActions).toEqual([]);
+    expect(PersistenceActions).toEqual(['loadPersistentState', 'persistState']);
+  });
+
+});
+
+
+describe('Test UIActions', function () {
+
+  var UIActions;
+
+  beforeEach(function() {
+    UIActions = require('../../actions/UIActions').default;
+  });
+
+  it('should generate actions', function () {
+    expect(UIActions).toEqual(['toggleCurrencyPicker', 'setCurrencySymbol', 'toggleEditControls']);
   });
 
 });

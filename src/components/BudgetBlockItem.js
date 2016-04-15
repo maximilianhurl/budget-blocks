@@ -1,5 +1,42 @@
 import React from 'react-native';
-let { Text, View, TextInput, TouchableHighlight, Alert } = React;
+import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+let { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } = React;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 10,
+    marginHorizontal: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOURS.DARKBUTTON,
+  },
+  title: {
+    flex: 0.6,
+  },
+  total: {
+    marginLeft: 5,
+  },
+  input: {
+    flex: 0.4,
+    height: 20,
+    color: COLOURS.DARKTEXT,
+    margin: 0,
+    padding:0,
+    marginBottom: 5,
+  },
+  removeButton: {
+    flex: 0.1,
+  },
+  removeButtonText: {
+    textAlign: 'right'
+  },
+  currency: {
+    fontSize: 16,
+  }
+});
 
 
 export class BudgetBlockItem extends React.Component {
@@ -22,34 +59,45 @@ export class BudgetBlockItem extends React.Component {
     );
   }
 
+  renderRemoveButton() {
+    if (this.props.uistore.editControlsVisible) {
+      return (<TouchableOpacity
+        underlayColor={COLOURS.TOUCHHIGHLIGHT}
+        style={[styles.removeButton]}
+        onPress={() => Alert.alert(
+          'Are you sure you want to remove this outgoing?',
+          null,
+          [
+            {text: 'Remove', onPress: () => this.removeBlockItem()},
+            {text: 'Cancel'},
+          ]
+        )}>
+        <Text style={[styles.removeButtonText]}>
+          <Icon name="close-circled" size={20} color="black" />
+        </Text>
+      </TouchableOpacity>);
+    }
+    return null;
+  }
+
   render() {
     return (
-      <View style={{marginTop: 10}}>
-        <Text>Budget: { this.props.blockItem.title }</Text>
+      <View style={[styles.container]}>
         <TextInput
-          style={{height: 20, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+          style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
           value={ this.props.blockItem.title } />
-        <Text>£{ this.props.blockItem.value }</Text>
+        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
+          { this.props.uistore.currencySymbol }
+        </Text>
         <TextInput
-          style={{height: 18, width: 200, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+          style={[styles.input, styles.total]}
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
           value={this.props.blockItem.value} />
-        <TouchableHighlight
-          onPress={() => Alert.alert(
-            'Are you sure you want to remove this outgoing?',
-            null,
-            [
-              {text: 'Remove', onPress: () => this.removeBlockItem()},
-              {text: 'Cancel'},
-            ]
-          )}>
-          <Text
-            style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-            Remove Outgoing
-          </Text>
-        </TouchableHighlight>
+
+        { this.renderRemoveButton() }
+
       </View>
     );
   }

@@ -1,10 +1,70 @@
 import React from 'react-native';
-let {
-  Text, View, TextInput, TouchableHighlight,
-  PanResponder, Animated, LayoutAnimation, Alert
-} = React;
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
+import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+let {
+  Text, View, TextInput, TouchableOpacity,
+  PanResponder, Animated, LayoutAnimation, Alert,
+  StyleSheet
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    flex: 1,
+  },
+  innerContainer: {
+    backgroundColor: COLOURS.LIGHTBLUE,
+  },
+  innerContent: {
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
+  titleContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  title: {
+    color: 'white',
+    flex: 0.8,
+    height: 20,
+    margin: 0,
+    fontSize: 18,
+  },
+  move: {
+    flex: 0.07,
+    height: 20,
+    margin: 0,
+    textAlign: 'center',
+  },
+  removeBtn: {
+    flex: 0.07,
+  },
+  removeBtnText: {
+    textAlign: 'right',
+  },
+  totalContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: COLOURS.DARKBUTTON,
+    flexDirection: 'row',
+  },
+  totalCurrency: {
+    marginRight: 5,
+    marginTop: 3,
+    fontSize: 16,
+  },
+  totalValue: {
+    color: 'white',
+    fontSize: 18,
+  }
+});
 
 
 export class BudgetBlock extends React.Component {
@@ -43,6 +103,7 @@ export class BudgetBlock extends React.Component {
   }
 
   componentWillMount() {
+
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder : () => true,
       onMoveShouldSetResponderCapture: () => true,
@@ -74,7 +135,7 @@ export class BudgetBlock extends React.Component {
   };
 
   addBudgetBlockItem() {
-    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'New outgoing', 0);
+    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'Outgoing...', '0');
   };
 
   updateTitle(title) {
@@ -83,7 +144,39 @@ export class BudgetBlock extends React.Component {
     );
   };
 
+  renderRemoveButton() {
+    if (this.props.uistore.editControlsVisible) {
+      return (<TouchableOpacity
+        style={[styles.removeBtn]}
+        onPress={() => Alert.alert(
+          'Are you sure you want to remove this block?',
+          null,
+          [
+            {text: 'Remove', onPress: () => this.removeBlock()},
+            {text: 'Cancel'},
+          ]
+        )}>
+         <Text style={[styles.removeBtnText]}>
+          <Icon name="close-circled" size={18} color="white" />
+        </Text>
+      </TouchableOpacity>);
+    }
+    return null;
+  }
+
   render() {
+
+    //animate every change to the views
+    LayoutAnimation.configureNext({
+      duration: 200,
+      create: {
+        type: LayoutAnimation.Types.curveEaseInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      update: {
+        type: LayoutAnimation.Types.curveEaseInEaseOut,
+      },
+    });
 
     let budgets = objectMap(this.props.budgetBlock.items).map(item => {
       return (
@@ -92,55 +185,50 @@ export class BudgetBlock extends React.Component {
           blockItem={item.obj}
           blockItemId={item.key}
           blockId={this.props.blockId}
+          uistore={this.props.uistore}
           budgetactions={this.props.budgetactions}
           />
       );
     });
 
     return (
-      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={{
-        marginBottom: 20,
-        width: 270,
-        backgroundColor: this.state.reordering ? 'green' : 'transparent',
-      }}>
-        <Animated.View style={{
-          top: this.state.pan.y,
-          backgroundColor: 'grey',
-        }}>
-
-          <Text {...this.panResponder.panHandlers}>MOVE ME</Text>
-
-          <Text>Block Title: { this.props.budgetBlock.title }</Text>
-          <TextInput
-            style={{height: 20, width: 270, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
-            onChangeText={(text) => this.updateTitle(text)}
-            value={ this.props.budgetBlock.title } />
-
-          <TouchableHighlight
-            onPress={() => Alert.alert(
-              'Are you sure you want to remove this block?',
-              null,
-              [
-                {text: 'Remove', onPress: () => this.removeBlock()},
-                {text: 'Cancel'},
-              ]
-            )}>
-            <Text
-              style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-              Remove Block
+      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={[
+        { backgroundColor: this.state.reordering ? 'gray' : 'transparent' },
+        styles.container
+      ]}>
+        <Animated.View style={[{top: this.state.pan.y}, styles.innerContainer]}>
+          <View style={[styles.titleContainer]}>
+            <TextInput
+              style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
+              onChangeText={(text) => this.updateTitle(text)}
+              value={ this.props.budgetBlock.title } />
+            <Text style={[styles.move]} {...this.panResponder.panHandlers}>
+              <Icon name="navicon-round" size={20} color="white" />
             </Text>
-          </TouchableHighlight>
+
+            { this.renderRemoveButton() }
+
+          </View>
 
           { budgets }
 
-          <TouchableHighlight onPress={() => this.addBudgetBlockItem()}>
-            <Text
-              style={{height: 40, width: 200, backgroundColor: 'gray', color: 'white', marginTop: 10}}>
-              Add outgoing
+          <TouchableOpacity
+            onPress={() => this.addBudgetBlockItem()}
+            style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}>
+            <Text style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
+              + ADD OUTGOING
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
-          <Text>Subtotal: £{ this.props.budgetBlock.subtotal }</Text>
+          <View style={[styles.totalContainer, styles.innerContent]}>
+            <Text style={[styles.totalCurrency, GLOBAL_STYLES.BOLDFONT]}>
+              { this.props.uistore.currencySymbol }
+            </Text>
+            <Text style={[styles.totalValue, GLOBAL_STYLES.REGULARFONT]}>
+              { this.props.budgetBlock.subtotal || 'Total' }
+            </Text>
+          </View>
+
 
         </Animated.View>
       </Animated.View>
