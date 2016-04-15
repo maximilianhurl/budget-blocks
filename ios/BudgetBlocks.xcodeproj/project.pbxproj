@@ -27,6 +27,7 @@
 		508385401CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */; };
 		508385451CC0261D003F0F89 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 508385421CC0261D003F0F89 /* Ionicons.ttf */; };
 		508385461CC0261D003F0F89 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 508385421CC0261D003F0F89 /* Ionicons.ttf */; };
+		50EDD4171CC156EB00659504 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EDD4161CC156EB00659504 /* icon1.png */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,7 @@
 		5083853B1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
 		5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
 		508385421CC0261D003F0F89 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		50EDD4161CC156EB00659504 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,6 +266,7 @@
 		5083852F1CBEEA3C003F0F89 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				50EDD4161CC156EB00659504 /* icon1.png */,
 				5083853A1CBEEA45003F0F89 /* Fonts */,
 			);
 			name = Assets;
@@ -541,6 +544,7 @@
 			files = (
 				5083853F1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */,
 				508385451CC0261D003F0F89 /* Ionicons.ttf in Resources */,
+				50EDD4171CC156EB00659504 /* icon1.png in Resources */,
 				5083853D1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -656,6 +660,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxhurl.budgetblocks;
@@ -674,6 +679,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxhurl.budgetblocks;
