@@ -1,8 +1,10 @@
 import alt from '../alt';
-
-var React = require('react-native');
-const { AsyncStorage } = React;
+import React from 'react-native';
 import PersistenceActions from '../actions/PersistenceActions';
+import BudgetActions from '../actions/BudgetActions';
+import BudgetStore from '../stores/BudgetStore';
+
+const { AsyncStorage } = React;
 
 const STORAGE_KEY = '@BudgetBlocks:state-data';
 
@@ -10,6 +12,19 @@ export class PersistenceStore {
 
   constructor () {
     this.bindActions(PersistenceActions);
+    this.bindListeners({
+      onPersistState: [
+        BudgetActions.updateIncome,
+        BudgetActions.addBudgetBlock,
+        BudgetActions.removeBudgetBlock,
+        BudgetActions.updateBudgetBlockTitle,
+        BudgetActions.addBudgetBlockItem,
+        BudgetActions.removeBudgetBlockItem,
+        BudgetActions.updateBudgetBlockItemValue,
+        BudgetActions.updateBudgetBlockItemTitle,
+        BudgetActions.reorderBudgetBlocks,
+      ]
+    });
   }
 
   /*
@@ -27,6 +42,8 @@ export class PersistenceStore {
   */
 
   onPersistState() {
+    this.waitFor(BudgetStore);
+
     let snapshot = alt.takeSnapshot();
 
     AsyncStorage.setItem(STORAGE_KEY, snapshot).then(() => {

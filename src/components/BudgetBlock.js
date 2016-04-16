@@ -165,7 +165,7 @@ export class BudgetBlock extends React.Component {
 
     //animate every change to the views
     LayoutAnimation.configureNext({
-      duration: 200,
+      duration: 250,
       create: {
         type: LayoutAnimation.Types.curveEaseInEaseOut,
         property: LayoutAnimation.Properties.opacity,

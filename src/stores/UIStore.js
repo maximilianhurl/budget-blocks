@@ -6,12 +6,11 @@ export class UIStore {
   constructor () {
     this.currencySymbol = '£';
     this.currencySymbols = ['£', '$', '€'];
-
     this.currencyPickerVisible = false;
-
     this.editControlsVisible = false;
 
     this.bindActions(UIActions);
+
   }
 
   onToggleCurrencyPicker() {
