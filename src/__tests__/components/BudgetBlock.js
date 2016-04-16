@@ -1,6 +1,7 @@
   /* global jest, describe, it, expect */
 jest.dontMock('../../components/BudgetBlock');
 jest.dontMock('../../utils/objectMap');
+jest.dontMock('../../utils/zeroOrNaN');
 
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 
@@ -163,8 +164,6 @@ describe('BudgetBlock', function () {
     const instance = shallowRenderer._instance._instance;
     instance.dragEnded();
     expect(dragEndedCallback).toBeCalledWith();
-
-    instance.animatePositionChange();
   });
 
   it('should do stuff when panning', function () {

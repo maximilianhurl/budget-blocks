@@ -1,4 +1,4 @@
-/* global jest, describe, it, expect */
+/* global jest, describe, it, expect, beforeEach */
 jest.dontMock('../../components/BudgetBlockItem');
 
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
@@ -28,6 +28,16 @@ describe('BudgetBlockItem', function () {
     editControlsVisible: true
   };
 
+  var actions;
+
+  beforeEach(function() {
+    actions = {
+      updateBudgetBlockItemTitle: jest.genMockFunction(),
+      removeBudgetBlockItem: jest.genMockFunction(),
+      updateBudgetBlockItemValue: jest.genMockFunction(),
+    };
+  });
+
   it('should render data correctly', function () {
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
@@ -38,13 +48,10 @@ describe('BudgetBlockItem', function () {
     var output = shallowRenderer.getRenderOutput();
     expect(output).toBeTruthy();
     expect(output.props.children[0].props.value).toEqual(blockItem.title);
-    expect(output.props.children[2].props.value).toEqual(blockItem.value);
+    expect(output.props.children[2].props.value).toEqual(String(blockItem.value));
   });
 
   it('should update title', function () {
-    var actions = {
-      updateBudgetBlockItemTitle: jest.genMockFunction()
-    };
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
@@ -59,9 +66,6 @@ describe('BudgetBlockItem', function () {
   });
 
   it('should update value', function () {
-    var actions = {
-      updateBudgetBlockItemValue: jest.genMockFunction()
-    };
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}
@@ -76,9 +80,6 @@ describe('BudgetBlockItem', function () {
   });
 
   it('should remove block', function () {
-    var actions = {
-      removeBudgetBlockItem: jest.genMockFunction()
-    };
     var shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<BudgetBlockItem
       blockId={blockId}

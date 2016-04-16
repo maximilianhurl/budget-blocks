@@ -16,18 +16,21 @@ describe('Test BudgetActions', function () {
   });
 
   it('should generate actions', function () {
-    expect(Object.getOwnPropertyNames(Object.getPrototypeOf(BudgetActions))).toEqual([
+    const generatedactions = Object.getOwnPropertyNames(Object.getPrototypeOf(BudgetActions));
+    const actions = [
       'constructor',
       'updateIncome',
+      'updateBudgetBlockItemTitle',
+      'reorderBudgetBlocks',
+      'addBlockLayout',
       'addBudgetBlock',
       'removeBudgetBlock',
       'updateBudgetBlockTitle',
       'addBudgetBlockItem',
       'removeBudgetBlockItem',
-      'updateBudgetBlockItemValue',
-      'updateBudgetBlockItemTitle',
-      'reorderBudgetBlocks'
-    ]);
+      'updateBudgetBlockItemValue'
+    ];
+    actions.forEach((action) => expect(generatedactions).toContain(action));
   });
 
   it('actions should return correct data', function () {

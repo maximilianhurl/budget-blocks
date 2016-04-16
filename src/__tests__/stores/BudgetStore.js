@@ -153,4 +153,33 @@ describe('Test BudgetStore', function () {
     expect(store.budgets[block1Id].order).toEqual(2);
   });
 
+  it('Should set layout and delete when block removed', function () {
+    store.budgets = {};
+    store.onUpdateIncome(200);
+    store.onAddBudgetBlock('cats');
+    let blockId = Object.keys(store.budgets)[0];
+    const layout = {
+      blockId: blockId,
+      layout: 'cats'
+    };
+    store.onAddBlockLayout(layout);
+    expect(store.blockLayouts).toEqual({[blockId]: layout.layout});
+    store.onRemoveBudgetBlock(blockId);
+    expect(store.blockLayouts).toEqual({});
+  });
+
+  it('should re-order blocks on remove', function () {
+    store.budgets = {};
+    store.onUpdateIncome(200);
+    store.onAddBudgetBlock('cats');
+    let block1Id = Object.keys(store.budgets)[0];
+    store.onAddBudgetBlock('dogs');
+    let block2Id = Object.keys(store.budgets)[1];
+
+    expect(store.budgets[block1Id].order).toEqual(1);
+    expect(store.budgets[block2Id].order).toEqual(2);
+    store.onRemoveBudgetBlock(block1Id);
+    expect(store.budgets[block2Id].order).toEqual(1);
+  });
+
 });

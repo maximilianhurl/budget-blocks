@@ -18,6 +18,7 @@ export class BudgetStore {
   constructor () {
     this.budgets = {};
     this.income = '0';
+    this.blockLayouts = {};
 
     //could do `this.bindActions(BudgetActions);` instead
     this.bindListeners({
@@ -29,7 +30,8 @@ export class BudgetStore {
       onRemoveBudgetBlockItem: BudgetActions.REMOVE_BUDGET_BLOCK_ITEM,
       onUpdateBudgetBlockItemValue: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_VALUE,
       onUpdateBudgetBlockItemTitle: BudgetActions.UPDATE_BUDGET_BLOCK_ITEM_TITLE,
-      onReorderBudgetBlocks: BudgetActions.REORDER_BUDGET_BLOCKS
+      onReorderBudgetBlocks: BudgetActions.REORDER_BUDGET_BLOCKS,
+      onAddBlockLayout: BudgetActions.ADD_BLOCK_LAYOUT,
     });
   }
 
@@ -44,7 +46,7 @@ export class BudgetStore {
 
       if (block.items) {
         for (let budgetKey of Object.keys(block.items)) {
-          incomeSubtotal -= parseFloat(block.items[budgetKey].value);
+          incomeSubtotal -= parseFloat(minFloat(block.items[budgetKey].value));
         }
       }
 
@@ -71,6 +73,15 @@ export class BudgetStore {
 
   onRemoveBudgetBlock(blockId) {
     delete this.budgets[blockId];
+    delete this.blockLayouts[blockId];
+
+    // reorder blocks after block removed
+    var index = 1;
+    for (let block of orderedBlocks(this.budgets)) {
+      this.budgets[block.key].order = index;
+      index++;
+    }
+
     this._recalculateBlockTotals();
   }
 
@@ -96,7 +107,7 @@ export class BudgetStore {
   onUpdateBudgetBlockItemValue(payload) {
     this.budgets[payload.blockId].items[payload.blockItemId] = {
       'title': this.budgets[payload.blockId].items[payload.blockItemId].title,
-      'value': minFloat(payload.value)
+      'value': payload.value
     };
     this._recalculateBlockTotals();
   }
@@ -116,6 +127,12 @@ export class BudgetStore {
     this.budgets[payload.replacedBlockId].order = movingBlockOrder;
 
     this._recalculateBlockTotals();
+  }
+
+  // block ui
+
+  onAddBlockLayout(payload) {
+    this.blockLayouts[payload.blockId] = payload.layout;
   }
 
 }

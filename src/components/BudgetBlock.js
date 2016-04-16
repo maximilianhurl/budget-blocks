@@ -2,6 +2,7 @@ import React from 'react-native';
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
+import zeroOrNaN from '../utils/zeroOrNaN';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 let {
@@ -78,10 +79,6 @@ export class BudgetBlock extends React.Component {
       pan: new Animated.ValueXY(0, 0),
       reordering: false,
     };
-  }
-
-  animatePositionChange() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   }
 
   dragEnded() {
@@ -168,7 +165,7 @@ export class BudgetBlock extends React.Component {
 
     //animate every change to the views
     LayoutAnimation.configureNext({
-      duration: 200,
+      duration: 250,
       create: {
         type: LayoutAnimation.Types.curveEaseInEaseOut,
         property: LayoutAnimation.Properties.opacity,
@@ -192,7 +189,7 @@ export class BudgetBlock extends React.Component {
     });
 
     return (
-      <Animated.View ref="outerView" onLayout={(e) => this.onLayout(e)} style={[
+      <Animated.View onLayout={(e) => this.onLayout(e)} style={[
         { backgroundColor: this.state.reordering ? 'gray' : 'transparent' },
         styles.container
       ]}>
@@ -225,7 +222,8 @@ export class BudgetBlock extends React.Component {
               { this.props.uistore.currencySymbol }
             </Text>
             <Text style={[styles.totalValue, GLOBAL_STYLES.REGULARFONT]}>
-              { this.props.budgetBlock.subtotal || 'Total' }
+              { zeroOrNaN(this.props.income) && this.props.budgetBlock.subtotal === 0 ?
+                'Total' : this.props.budgetBlock.subtotal }
             </Text>
           </View>
 

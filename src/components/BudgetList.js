@@ -48,8 +48,6 @@ export class BudgetList extends React.Component {
 
     this.yPos = 0;
     this.scrollOffset = 0;
-    this.layouts = {};
-
     this.animatingReorder = false;
 
     this.state = {
@@ -88,15 +86,15 @@ export class BudgetList extends React.Component {
     eventYPos = eventYPos + this.scrollOffset - this.yPos;
 
     var scrollerTop = eventYPos;
-    var scrollerBottom = eventYPos + this.layouts[dragItemKey].height;
+    var scrollerBottom = eventYPos + this.props.budgetstore.blockLayouts[dragItemKey].height;
 
-    var bh = this.layouts[dragItemKey].height / 2;
+    var bh = this.props.budgetstore.blockLayouts[dragItemKey].height / 2;
 
-    for (let key of Object.keys(this.layouts)) {
+    for (let key of Object.keys(this.props.budgetstore.blockLayouts)) {
 
       //check if dragged item overlaps any other blocks
       if (dragItemKey !== key) {
-        let layout = this.layouts[key];
+        let layout = this.props.budgetstore.blockLayouts[key];
         if (
           (scrollerTop >= layout.y && scrollerTop <= layout.y + layout.height - bh && !movingDown) ||
           (scrollerBottom >= layout.y + bh && scrollerBottom <= layout.y + layout.height && movingDown)
@@ -104,11 +102,10 @@ export class BudgetList extends React.Component {
 
           this.animatingReorder = true;
 
-          this.refs[key].animatePositionChange();
           this.props.budgetactions.reorderBudgetBlocks(dragItemKey, key);
 
           //ignore drag events whlie animation completes
-          setTimeout(() => this.animatingReorder = false, 300 );
+          setTimeout(() => this.animatingReorder = false, 255);
           break;
         }
       }
@@ -117,7 +114,7 @@ export class BudgetList extends React.Component {
   }
 
   handleItemLayout (e, key) {
-    this.layouts[key] = e.nativeEvent.layout;
+    this.props.budgetactions.addBlockLayout(key, e.nativeEvent.layout);
   }
 
   addBudgetBlock() {
@@ -143,7 +140,6 @@ export class BudgetList extends React.Component {
           budgetBlock={item.obj}
           key={item.key}
           yOffset={this.yPos}
-          ref={item.key}
           scrollOffset={this.scrollOffset}
           onLayout={(e) => this.handleItemLayout(e, item.key)}
           dragStartCallback={() => this.dragStartCallback()}

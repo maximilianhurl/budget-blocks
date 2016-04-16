@@ -17,6 +17,8 @@ describe('Test PersistenceStore', function () {
     persistenceActions = require('../../actions/PersistenceActions');
     const PersistenceStore = require('../../stores/PersistenceStore').PersistenceStore;
     PersistenceStore.prototype.bindActions = jest.genMockFunction();
+    PersistenceStore.prototype.bindListeners = jest.genMockFunction();
+    PersistenceStore.prototype.waitFor = jest.genMockFunction();
     store = new PersistenceStore();
   });
 
@@ -37,6 +39,8 @@ describe('Test PersistenceStore', function () {
     expect(React.AsyncStorage.setItem.mock.calls.length).toBeGreaterThan(0);
     expect(React.AsyncStorage.setItem).lastCalledWith('@BudgetBlocks:state-data', snapshot);
     expect(store.bindActions).lastCalledWith(persistenceActions);
+    expect(store.bindListeners).toBeCalled();
+    expect(store.waitFor).toBeCalled();
   });
 
   it('Should load state', function () {

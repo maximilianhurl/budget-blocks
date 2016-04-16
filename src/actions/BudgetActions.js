@@ -68,6 +68,13 @@ export class BudgetActions {
       replacedBlockId: replacedBlockId
     };
   }
+
+  addBlockLayout(blockId, layout) {
+    return {
+      blockId: blockId,
+      layout: layout
+    };
+  }
 }
 
 export default alt.createActions(BudgetActions);
