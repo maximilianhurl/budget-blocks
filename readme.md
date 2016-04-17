@@ -6,6 +6,7 @@
 
 A basic budgeting app for iOS and soon Android
 
+![screenshot](https://raw.githubusercontent.com/maximilianhurl/budget-blocks/master/assets/screenshot.png)
 
 ## Requirements
 
