@@ -86,6 +86,7 @@ export class BudgetBlockItem extends React.Component {
         <TextInput
           style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
+          underlineColorAndroid={COLOURS.LIGHTBLUE}
           value={ this.props.blockItem.title } />
         <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
           { this.props.uistore.currencySymbol }
@@ -94,6 +95,7 @@ export class BudgetBlockItem extends React.Component {
           style={[styles.input, styles.total, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
+          underlineColorAndroid={COLOURS.LIGHTBLUE}
           value={String(this.props.blockItem.value)} />
 
         { this.renderRemoveButton() }

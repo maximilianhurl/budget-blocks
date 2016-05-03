@@ -168,6 +168,7 @@ export class BudgetList extends React.Component {
           </Text>
           <TextInput
             style={[styles.incomeInput, GLOBAL_STYLES.REGULARFONT]}
+            underlineColorAndroid={COLOURS.DARKBLUE}
             onChangeText={(text) => this.updateIncome(text)}
             keyboardType={'numeric'}
             value={this.getIcomeText()} />

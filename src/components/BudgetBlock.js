@@ -198,6 +198,7 @@ export class BudgetBlock extends React.Component {
             <TextInput
               style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
               onChangeText={(text) => this.updateTitle(text)}
+              underlineColorAndroid="black"
               value={ this.props.budgetBlock.title } />
             <Text style={[styles.move]} {...this.panResponder.panHandlers}>
               <Icon name="navicon-round" size={20} color="white" />
