@@ -4,9 +4,8 @@ jest.dontMock('../../components/BudgetBlockItem');
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
-
-let { View, TextInput, TouchableOpacity, Text } = React; // eslint-disable-line no-unused-vars
+import { View, TextInput, TouchableOpacity, Text } from 'react-native'; // eslint-disable-line no-unused-vars
+import React from 'react';  // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()

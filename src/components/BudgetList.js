@@ -1,16 +1,15 @@
-import React from 'react-native';
+import React from 'react';
 import { BudgetBlock } from './BudgetBlock';
 import { orderedBlocks } from '../stores/BudgetStore';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
-
-let {
+import {
   Text,
   ScrollView,
   TouchableOpacity,
   TextInput,
   StyleSheet,
   View
-} = React;
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

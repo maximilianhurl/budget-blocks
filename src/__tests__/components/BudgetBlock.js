@@ -6,8 +6,8 @@ jest.dontMock('../../utils/zeroOrNaN');
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native';
-const { TextInput } = React;
+import { TextInput } from 'react-native';
+import React from 'react';  // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -15,8 +15,6 @@ const { TextInput } = React;
 const BudgetBlock = require('../../components/BudgetBlock').BudgetBlock;
 
 describe('BudgetBlock', function () {
-
-  const ReactNotNative = require('react'); // eslint-disable-line no-unused-vars
 
   var block = {
     items: [

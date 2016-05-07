@@ -1,15 +1,14 @@
-import React from 'react-native';
+import React from 'react';
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
 import zeroOrNaN from '../utils/zeroOrNaN';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-let {
+import {
   Text, View, TextInput, TouchableOpacity,
   PanResponder, Animated, LayoutAnimation, Alert,
   StyleSheet
-} = React;
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

@@ -1,8 +1,7 @@
-import React from 'react-native';
+import React from 'react';
+import { AppRegistry, AppStateIOS, StatusBar } from 'react-native';
 import { NavContainer } from './src/NavContainer';
 import PersistenceActions from './src/actions/PersistenceActions';
-
-const { AppRegistry, AppStateIOS, StatusBar } = React;
 
 export default class BudgetBlocks extends React.Component {
 

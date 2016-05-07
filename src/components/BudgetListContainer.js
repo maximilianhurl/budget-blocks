@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React from 'react';
 import AltContainer from 'alt-container/native';
 import BudgetActions from '../actions/BudgetActions';
 import BudgetStore from '../stores/BudgetStore';

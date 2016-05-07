@@ -1,16 +1,16 @@
-import React from 'react-native';
+import React from 'react';
 import { BudgetListContainer } from './components/BudgetListContainer';
 import { SettingsContainer } from './components/SettingsContainer';
 import { COLOURS, GLOBAL_STYLES } from './utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-let {
+import {
   Navigator,
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
   Image
-} = React;
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

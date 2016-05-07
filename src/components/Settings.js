@@ -1,8 +1,7 @@
-import React from 'react-native';
+import React from 'react';
 import RatingRequestor from 'react-native-rating-requestor';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
-
-let {
+import {
   View,
   Text,
   StyleSheet,
@@ -11,7 +10,7 @@ let {
   Animated,
   Easing,
   Dimensions
-} = React;
+} from 'react-native';
 
 
 const styles = StyleSheet.create({

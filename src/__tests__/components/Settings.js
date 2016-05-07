@@ -2,12 +2,12 @@
 jest.dontMock('../../components/Settings');
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
 // do not Settings ES6 modules yet
 const Settings = require('../../components/Settings').Settings;
+import React from 'react';  // eslint-disable-line no-unused-vars
 
 describe('Settings', function () {
 

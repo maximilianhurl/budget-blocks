@@ -1,8 +1,7 @@
-import React from 'react-native';
+import React from 'react';
 import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-let { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } = React;
+import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
