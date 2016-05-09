@@ -1,7 +1,7 @@
 import React from 'react';
 import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 0.4,
-    height: 20,
+    height: 21,
     color: COLOURS.DARKTEXT,
     margin: 0,
     padding:0,
     marginBottom: 5,
+    fontSize: (Platform.OS === 'ios') ? 16 : 18,
   },
   removeButton: {
     flex: 0.1,
@@ -33,7 +34,8 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   currency: {
-    fontSize: 16,
+    marginTop: (Platform.OS === 'ios') ? 0 : 1,
+    fontSize: (Platform.OS === 'ios') ? 16 : 18,
   }
 });
 

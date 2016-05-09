@@ -27,3 +27,10 @@ A basic budgeting app for iOS and soon Android
     nvm use
     npm install
     npm test
+
+
+## Running on android
+
+    react-native run-android
+    adb reverse tcp:8081 tcp:8081
+    adb shell input keyevent 82

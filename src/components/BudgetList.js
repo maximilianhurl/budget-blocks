@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
-  View
+  View,
+  Platform
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginRight: 2,
     fontSize: 20,
+    marginTop: (Platform.OS === 'ios') ? 0 : 7,
   },
   incomeBorder: {
     borderBottomColor: '#000000',
