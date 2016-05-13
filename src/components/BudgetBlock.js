@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Text, View, TextInput, TouchableOpacity,
   PanResponder, Animated, LayoutAnimation, Alert,
-  StyleSheet
+  StyleSheet, Platform
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     flex: 0.8,
-    height: 20,
     margin: 0,
+    paddingVertical: 0,
     fontSize: 18,
   },
   move: {
@@ -112,8 +112,7 @@ export class BudgetBlock extends React.Component {
       },
       onPanResponderMove: (event) => {
         const gestureYPos = (event.nativeEvent.pageY - this.layoutYPos - this.props.yOffset) + this.props.scrollOffset;
-
-        const touches = event.touchHistory.touchBank[1];
+        const touches = event.touchHistory.touchBank[(Platform.OS === 'ios') ? 1 : 0];
         const movingDown = touches.previousPageY < touches.currentPageY ? true : false;
 
         this.state.pan.setValue({x: 0, y: gestureYPos});
