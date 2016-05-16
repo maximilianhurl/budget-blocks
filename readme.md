@@ -34,3 +34,4 @@ A basic budgeting app for iOS and soon Android
     react-native run-android
     adb reverse tcp:8081 tcp:8081
     adb shell input keyevent 82
+    adb logcat *:S ReactNative:V ReactNativeJS:V

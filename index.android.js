@@ -3,7 +3,7 @@ import { AppRegistry, AppState } from 'react-native';
 import { NavContainer } from './src/NavContainer';
 import PersistenceActions from './src/actions/PersistenceActions';
 
-class BudgetBlocks extends React.Component {
+export default class BudgetBlocks extends React.Component {
 
   componentWillMount() {
     this.handleAppStateChange('started');
