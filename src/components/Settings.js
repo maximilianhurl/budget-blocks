@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
   }
 });
 
-let RatingTracker = new RatingRequestor('1099266102', {
+let RatingTracker = new RatingRequestor({
+  appStoreId: '1099266102',
+  marketId: null,
   title: 'Leave Rating',
   actionLabels: {
     decline: 'No thanks',
