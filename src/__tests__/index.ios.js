@@ -5,7 +5,7 @@ jest.setMock('../actions/PersistenceActions', require('../__mocks__/PersistenceA
 jest.setMock('react-native-vector-icons/Ionicons', require('../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 const BudgetBlocks = require('../../index.ios').default;
 

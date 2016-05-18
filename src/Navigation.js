@@ -104,7 +104,7 @@ export class NavBar extends React.Component {
           style={[
             styles.settings, onSettings ? styles.navBarButtonActive : null
           ]}>
-          <Icon name="gear-a" size={20} color="black" />
+          <Icon name="ios-settings" size={20} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.uiactions.toggleEditControls()}

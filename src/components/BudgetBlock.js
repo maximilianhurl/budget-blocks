@@ -152,7 +152,7 @@ export class BudgetBlock extends React.Component {
           ]
         )}>
          <Text style={[styles.removeBtnText]}>
-          <Icon name="close-circled" size={18} color="white" />
+          <Icon name="md-close-circle" size={18} color="white" />
         </Text>
       </TouchableOpacity>);
     }
@@ -199,7 +199,7 @@ export class BudgetBlock extends React.Component {
               underlineColorAndroid="black"
               value={ this.props.budgetBlock.title } />
             <Text style={[styles.move]} {...this.panResponder.panHandlers}>
-              <Icon name="navicon-round" size={20} color="white" />
+              <Icon name="ios-menu" size={20} color="white" />
             </Text>
 
             { this.renderRemoveButton() }

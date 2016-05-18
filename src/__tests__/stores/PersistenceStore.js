@@ -6,7 +6,7 @@ jest.setMock('react-native', require('../../__mocks__/react-native'));
 
 
 import alt from '../../alt';
-import React from 'react-native';
+import React from 'react';
 
 describe('Test PersistenceStore', function () {
 

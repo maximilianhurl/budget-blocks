@@ -74,7 +74,7 @@ export class BudgetBlockItem extends React.Component {
           ]
         )}>
         <Text style={[styles.removeButtonText]}>
-          <Icon name="close-circled" size={20} color="black" />
+          <Icon name="md-close-circle" size={20} color="black" />
         </Text>
       </TouchableOpacity>);
     }
