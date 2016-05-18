@@ -152,7 +152,7 @@ export class BudgetBlock extends React.Component {
           ]
         )}>
          <Text style={[styles.removeBtnText]}>
-          <Icon name="md-close-circle" size={18} color="white" />
+          <Icon name="md-close-circle" size={20} color="white" />
         </Text>
       </TouchableOpacity>);
     }
