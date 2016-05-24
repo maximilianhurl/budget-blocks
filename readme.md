@@ -18,7 +18,7 @@ A basic budgeting app for iOS and soon Android
 ## Building the project
 
     nvm use
-    ./install
+    npm install
     npm start
 
 
