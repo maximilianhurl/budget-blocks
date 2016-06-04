@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   totalCurrency: {
     marginRight: 5,
-    marginTop: 3,
+    marginTop: 1,
     fontSize: 16,
   },
   totalValue: {

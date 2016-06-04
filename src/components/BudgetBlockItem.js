@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   currency: {
-    marginTop: (Platform.OS === 'ios') ? 0 : 1,
-    fontSize: (Platform.OS === 'ios') ? 16 : 18,
+    marginTop: 0,
+    fontSize: (Platform.OS === 'ios') ? 16 : 17,
   }
 });
 

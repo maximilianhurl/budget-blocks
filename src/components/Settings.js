@@ -9,8 +9,7 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  Dimensions,
-  Platform
+  Dimensions
 } from 'react-native';
 
 
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
   },
   currencySymbol: {
     fontSize: 18,
-    marginTop: (Platform.OS === 'ios') ? 0 : 2,
+    marginTop: 0,
     marginLeft: 8,
   },
   currencyButton: {

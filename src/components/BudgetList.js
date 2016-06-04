@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginRight: 2,
     fontSize: 20,
-    marginTop: (Platform.OS === 'ios') ? 0 : 7,
+    marginTop: (Platform.OS === 'ios') ? 0 : 4,
   },
   incomeBorder: {
     borderBottomColor: '#000000',
@@ -179,7 +179,7 @@ export class BudgetList extends React.Component {
 
         <TouchableOpacity
           onPress={() => this.addBudgetBlock()}
-          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 20}]}>
+          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 40}]}>
           <Text
             style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
             + ADD BLOCK
