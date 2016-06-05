@@ -119,7 +119,7 @@ export class BudgetList extends React.Component {
   }
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('NAME BLOCK...');
+    this.props.budgetactions.addBudgetBlock('');
   }
 
   updateIncome(text) {
@@ -128,7 +128,7 @@ export class BudgetList extends React.Component {
 
   getIcomeText() {
     if (parseFloat(this.props.budgetstore.income) <= 0) {
-      return 'Income...';
+      return '';
     }
     return this.props.budgetstore.income;
   }
@@ -170,6 +170,8 @@ export class BudgetList extends React.Component {
           <TextInput
             style={[styles.incomeInput, GLOBAL_STYLES.REGULARFONT]}
             underlineColorAndroid={COLOURS.DARKBLUE}
+            placeholder="Income..."
+            placeholderTextColor="white"
             onChangeText={(text) => this.updateIncome(text)}
             keyboardType={'numeric'}
             value={this.getIcomeText()} />

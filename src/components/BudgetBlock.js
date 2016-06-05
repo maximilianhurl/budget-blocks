@@ -130,7 +130,7 @@ export class BudgetBlock extends React.Component {
   };
 
   addBudgetBlockItem() {
-    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'Outgoing...', '0');
+    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, '', '0');
   };
 
   updateTitle(title) {
@@ -197,6 +197,8 @@ export class BudgetBlock extends React.Component {
               style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
               onChangeText={(text) => this.updateTitle(text)}
               underlineColorAndroid="black"
+              placeholder="NAME BLOCK..."
+              placeholderTextColor="white"
               value={ this.props.budgetBlock.title } />
             <Text style={[styles.move]} {...this.panResponder.panHandlers}>
               <Icon name="ios-menu" size={20} color="white" />

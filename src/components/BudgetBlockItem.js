@@ -88,6 +88,8 @@ export class BudgetBlockItem extends React.Component {
           style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
           underlineColorAndroid={COLOURS.LIGHTBLUE}
+          placeholder="Outgoing..."
+          placeholderTextColor={COLOURS.DARKTEXT}
           value={ this.props.blockItem.title } />
         <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
           { this.props.uistore.currencySymbol }

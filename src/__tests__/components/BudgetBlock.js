@@ -105,7 +105,7 @@ describe('BudgetBlock', function () {
     const output = shallowRenderer.getRenderOutput();
     const innerView = output.props.children;
     innerView.props.children[2].props.onPress();
-    expect(actions.addBudgetBlockItem).toBeCalledWith(blockId, 'Outgoing...', '0');
+    expect(actions.addBudgetBlockItem).toBeCalledWith(blockId, '', '0');
   });
 
   it('should update block title', function () {

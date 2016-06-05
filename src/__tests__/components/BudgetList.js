@@ -64,7 +64,7 @@ describe('BudgetList', function () {
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     output.props.children[2].props.onPress();
-    expect(budgetactions.addBudgetBlock).toBeCalledWith('NAME BLOCK...');
+    expect(budgetactions.addBudgetBlock).toBeCalledWith('');
   });
 
   it('should update income', function () {
