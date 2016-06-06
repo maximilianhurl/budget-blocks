@@ -11,6 +11,7 @@ export const COLOURS = {
 export const GLOBAL_STYLES = {
   REGULARFONT: { fontFamily: 'GlacialIndifference-Regular' },
   BOLDFONT: { fontFamily: 'GlacialIndifference-Bold' },
+  CURRENCYFONT: { fontFamily: 'Raleway-Bold' },
   ADDBUTTON: {
     borderRadius: 2,
     padding: 8,

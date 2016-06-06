@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   currency: {
     marginTop: 0,
-    fontSize: (Platform.OS === 'ios') ? 16 : 17,
+    fontSize: 16,
   }
 });
 
@@ -91,7 +91,7 @@ export class BudgetBlockItem extends React.Component {
           placeholder="Outgoing..."
           placeholderTextColor={COLOURS.DARKTEXT}
           value={ this.props.blockItem.title } />
-        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
+        <Text style={[styles.currency, GLOBAL_STYLES.CURRENCYFONT]}>
           { this.props.uistore.currencySymbol }
         </Text>
         <TextInput

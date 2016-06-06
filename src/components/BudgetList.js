@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   incomeCurrency: {
-    paddingTop: 10,
     marginRight: 2,
     fontSize: 20,
-    marginTop: (Platform.OS === 'ios') ? 0 : 4,
+    paddingTop: 9,
+    marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   incomeBorder: {
     borderBottomColor: '#000000',
@@ -164,7 +164,7 @@ export class BudgetList extends React.Component {
         style={[styles.container]}>
 
         <View style={[styles.incomeBorder]}>
-          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.BOLDFONT]}>
+          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.CURRENCYFONT]}>
               { this.props.uistore.currencySymbol }
           </Text>
           <TextInput
