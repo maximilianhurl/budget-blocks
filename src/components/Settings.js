@@ -43,9 +43,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   currencySymbol: {
-    fontSize: 18,
     marginTop: 0,
-    marginLeft: 8,
+    marginLeft: 6,
   },
   currencyButton: {
     paddingBottom: 5,
@@ -115,7 +114,7 @@ class PickerView extends React.Component {
         <Picker
           selectedValue={this.props.uistore.currencySymbol}
           onValueChange={(symbol) => this.props.uiactions.setCurrencySymbol(symbol)}
-          itemStyle={[{color: 'white'}, GLOBAL_STYLES.BOLDFONT]}
+          itemStyle={[{color: 'white'}, GLOBAL_STYLES.CURRENCYFONT ]}
           style={[{'marginHorizontal': 5}]}>
           {this.props.uistore.currencySymbols.map((currencySymbol) => {
             return (<Picker.Item
@@ -145,7 +144,7 @@ export class Settings extends React.Component {
               CURRENCY SYMBOL
             </Text>
             <Text
-              style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT, styles.currencySymbol]}>
+              style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.CURRENCYFONT, styles.currencySymbol]}>
                 {this.props.uistore.currencySymbol}
             </Text>
           </TouchableOpacity>

@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   totalCurrency: {
     marginRight: 5,
-    marginTop: 1,
+    marginTop: 2,
     fontSize: 16,
   },
   totalValue: {
@@ -219,7 +219,7 @@ export class BudgetBlock extends React.Component {
           </TouchableOpacity>
 
           <View style={[styles.totalContainer, styles.innerContent]}>
-            <Text style={[styles.totalCurrency, GLOBAL_STYLES.BOLDFONT]}>
+            <Text style={[styles.totalCurrency, GLOBAL_STYLES.CURRENCYFONT]}>
               { this.props.uistore.currencySymbol }
             </Text>
             <Text style={[styles.totalValue, GLOBAL_STYLES.REGULARFONT]}>

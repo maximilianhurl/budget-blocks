@@ -25,6 +25,7 @@
 		50B7CE691D05F85200296600 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */; };
 		50B7CE6A1D05F85200296600 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE661D05F85200296600 /* icon1.png */; };
 		50B7CE6B1D05F85200296600 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE671D05F85200296600 /* Ionicons.ttf */; };
+		50DDAE521D0618CF008152B4 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50DDAE511D0618CF008152B4 /* Raleway-Bold.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,7 @@
 		50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
 		50B7CE661D05F85200296600 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
 		50B7CE671D05F85200296600 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		50DDAE511D0618CF008152B4 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -251,6 +253,7 @@
 				50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */,
 				50B7CE661D05F85200296600 /* icon1.png */,
 				50B7CE671D05F85200296600 /* Ionicons.ttf */,
+				50DDAE511D0618CF008152B4 /* Raleway-Bold.ttf */,
 			);
 			name = BudgetBlocks;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50DDAE521D0618CF008152B4 /* Raleway-Bold.ttf in Resources */,
 				50B7CE691D05F85200296600 /* GlacialIndifference-Regular.otf in Resources */,
 				50B7CE681D05F85200296600 /* GlacialIndifference-Bold.otf in Resources */,
 				50B7CE6B1D05F85200296600 /* Ionicons.ttf in Resources */,
