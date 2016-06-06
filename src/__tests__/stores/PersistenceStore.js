@@ -3,16 +3,20 @@
 jest.dontMock('../../stores/PersistenceStore');
 jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('react-native', require('../../__mocks__/react-native'));
+jest.setMock('../../actions/BudgetActions', require('../../__mocks__/BudgetActions'));
+jest.setMock('../../actions/PersistenceActions', require('../../__mocks__/PersistenceActions'));
 
 
-import alt from '../../alt';
-import React from 'react';
+import ReactNative from 'react-native';
 
 describe('Test PersistenceStore', function () {
 
-  var store, persistenceActions;
+  var store, persistenceActions, alt, snapshot;
 
   beforeEach(function () {
+    alt = require('../../alt');
+    alt.takeSnapshot = jest.genMockFunction().mockReturnValue(snapshot);
+
     require('../../stores/PersistenceStore').default;
     persistenceActions = require('../../actions/PersistenceActions');
     const PersistenceStore = require('../../stores/PersistenceStore').PersistenceStore;
@@ -24,10 +28,10 @@ describe('Test PersistenceStore', function () {
 
   it('Should persist state', function () {
 
-    const snapshot = 'internal cats';
+    snapshot = 'internal cats';
 
-    alt.takeSnapshot = jest.genMockFunction().mockReturnValueOnce(snapshot);
-    React.AsyncStorage.setItem = jest.genMockFunction().mockReturnValue({
+    alt.takeSnapshot = jest.genMockFunction().mockReturnValue(snapshot);
+    ReactNative.AsyncStorage.setItem = jest.genMockFunction().mockReturnValue({
       then: () => {
         return {
           catch: () => {}
@@ -36,8 +40,9 @@ describe('Test PersistenceStore', function () {
     });
 
     store.onPersistState();
-    expect(React.AsyncStorage.setItem.mock.calls.length).toBeGreaterThan(0);
-    expect(React.AsyncStorage.setItem).lastCalledWith('@BudgetBlocks:state-data', snapshot);
+
+    expect(ReactNative.AsyncStorage.setItem.mock.calls.length).toBeGreaterThan(0);
+    expect(ReactNative.AsyncStorage.setItem).lastCalledWith('@BudgetBlocks:state-data', snapshot);
     expect(store.bindActions).lastCalledWith(persistenceActions);
     expect(store.bindListeners).toBeCalled();
     expect(store.waitFor).toBeCalled();
@@ -45,10 +50,10 @@ describe('Test PersistenceStore', function () {
 
   it('Should load state', function () {
 
-    const snapshot = 'saved cats';
+    snapshot = 'saved cats';
 
     alt.bootstrap = jest.genMockFunction();
-    React.AsyncStorage.getItem = jest.genMockFunction().mockReturnValue({
+    ReactNative.AsyncStorage.getItem = jest.genMockFunction().mockReturnValue({
       then: (callback) => {
         callback(snapshot);
         return {
@@ -59,7 +64,7 @@ describe('Test PersistenceStore', function () {
 
     store.onLoadPersistentState();
     expect(alt.bootstrap.mock.calls.length).toBeGreaterThan(0);
-    expect(React.AsyncStorage.getItem.mock.calls.length).toBeGreaterThan(0);
+    expect(ReactNative.AsyncStorage.getItem.mock.calls.length).toBeGreaterThan(0);
     expect(alt.bootstrap).lastCalledWith(snapshot);
   });
 
