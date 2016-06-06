@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.maxhurl.budgetblocks"
-    android:versionName="1.1">
+    package="com.maxhurl.budgetblocks">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

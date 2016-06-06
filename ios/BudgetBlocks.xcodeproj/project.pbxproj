@@ -21,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		5029AC171D063AFE00999F6E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5029AC161D063AFE00999F6E /* Default-568h@2x.png */; };
 		50B7CE681D05F85200296600 /* GlacialIndifference-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE641D05F85200296600 /* GlacialIndifference-Bold.otf */; };
 		50B7CE691D05F85200296600 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */; };
 		50B7CE6A1D05F85200296600 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE661D05F85200296600 /* icon1.png */; };
@@ -129,6 +130,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BudgetBlocks/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BudgetBlocks/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		5029AC161D063AFE00999F6E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		50B7CE641D05F85200296600 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
 		50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
 		50B7CE661D05F85200296600 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				50B7CE661D05F85200296600 /* icon1.png */,
 				50B7CE671D05F85200296600 /* Ionicons.ttf */,
 				50DDAE511D0618CF008152B4 /* Raleway-Bold.ttf */,
+				5029AC161D063AFE00999F6E /* Default-568h@2x.png */,
 			);
 			name = BudgetBlocks;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				50B7CE681D05F85200296600 /* GlacialIndifference-Bold.otf in Resources */,
 				50B7CE6B1D05F85200296600 /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				5029AC171D063AFE00999F6E /* Default-568h@2x.png in Resources */,
 				50B7CE6A1D05F85200296600 /* icon1.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -634,6 +638,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -649,12 +654,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",

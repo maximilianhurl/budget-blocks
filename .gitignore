@@ -36,3 +36,5 @@ npm-debug.log
 coverage/
 *.sublime-project
 *.sublime-workspace
+
+*.keystore

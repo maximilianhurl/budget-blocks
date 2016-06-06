@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
 let RatingTracker = new RatingRequestor({
   appStoreId: '1099266102',
-  marketId: null,
+  marketId: 'com.maxhurl.budgetblocks',
   title: 'Leave Rating',
   actionLabels: {
     decline: 'No thanks',
