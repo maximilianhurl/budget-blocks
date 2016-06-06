@@ -83,7 +83,7 @@ describe('nav.js', function () {
 
     var settings = output.props.children[2];
     settings.props.onPress();
-    expect(listNavigator.push).toBeCalled({
+    expect(listNavigator.push).toBeCalledWith({
       name: 'SETTINGS'
     });
   });

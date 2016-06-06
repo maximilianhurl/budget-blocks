@@ -9,8 +9,19 @@
     "eslint": "eslint"
   },
   "jest": {
-    "scriptPreprocessor": "./jest/scriptPreprocessor",
-    "setupEnvScriptFile": "./jest/jestEnvironment",
+    "scriptPreprocessor": "./jest/scriptPreprocessor.js",
+    "setupEnvScriptFile": "./jest/jestEnvironment.js",
+    "haste": {
+      "defaultPlatform": "ios",
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "providesModuleNodeModules": [
+        "react-native"
+      ]
+    },
+    "testRunner": "jasmine1",
     "testFileExtensions": [
       "es6",
       "js"
@@ -21,7 +32,8 @@
       "es6"
     ],
     "testPathIgnorePatterns": [
-      "node_modules/"
+      "node_modules/",
+      "packager/react-packager/src/Activity/"
     ],
     "unmockedModulePathPatterns": [
       "promise",
@@ -36,13 +48,13 @@
       "babel-polyfill"
     ],
     "verbose": true,
-    "preprocessCachingDisabled": true,
     "collectCoverage": true
   },
   "dependencies": {
     "alt": "=0.18.2",
-    "alt-container": "=1.0.2",
-    "react-native": "=0.25.1",
+    "alt-container": "https://github.com/maximilianhurl/container/tarball/build",
+    "react-native": "=0.26.3",
+    "react": "=15.0.2",
     "react-native-rating-requestor": "https://github.com/maximilianhurl/react-native-rating-requestor/tarball/master",
     "react-native-vector-icons": "=2.0.2"
   },
@@ -56,8 +68,8 @@
     "eslint": "=1.10.3",
     "eslint-plugin-react": "=3.15.0",
     "fbjs": "^0.6.1",
-    "jest-cli": "=0.8.2",
-    "react": "=0.14.6",
-    "react-addons-test-utils": "=0.14.6"
+    "jest-cli": "=12.1.1",
+    "react-addons-test-utils": "=15.0.2",
+    "rnpm-plugin-upgrade": "^0.26.0"
   }
 }
