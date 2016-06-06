@@ -21,13 +21,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		5083853D1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5083853B1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf */; };
-		5083853E1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5083853B1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf */; };
-		5083853F1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */; };
-		508385401CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */; };
-		508385451CC0261D003F0F89 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 508385421CC0261D003F0F89 /* Ionicons.ttf */; };
-		508385461CC0261D003F0F89 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 508385421CC0261D003F0F89 /* Ionicons.ttf */; };
-		50EDD4171CC156EB00659504 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EDD4161CC156EB00659504 /* icon1.png */; };
+		50B7CE681D05F85200296600 /* GlacialIndifference-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE641D05F85200296600 /* GlacialIndifference-Bold.otf */; };
+		50B7CE691D05F85200296600 /* GlacialIndifference-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */; };
+		50B7CE6A1D05F85200296600 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE661D05F85200296600 /* icon1.png */; };
+		50B7CE6B1D05F85200296600 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50B7CE671D05F85200296600 /* Ionicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -131,10 +128,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BudgetBlocks/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BudgetBlocks/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		5083853B1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
-		5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
-		508385421CC0261D003F0F89 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
-		50EDD4161CC156EB00659504 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		50B7CE641D05F85200296600 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
+		50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
+		50B7CE661D05F85200296600 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		50B7CE671D05F85200296600 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,7 +240,6 @@
 		13B07FAE1A68108700A75B9A /* BudgetBlocks */ = {
 			isa = PBXGroup;
 			children = (
-				5083852F1CBEEA3C003F0F89 /* Assets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -251,6 +247,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				50B7CE641D05F85200296600 /* GlacialIndifference-Bold.otf */,
+				50B7CE651D05F85200296600 /* GlacialIndifference-Regular.otf */,
+				50B7CE661D05F85200296600 /* icon1.png */,
+				50B7CE671D05F85200296600 /* Ionicons.ttf */,
 			);
 			name = BudgetBlocks;
 			sourceTree = "<group>";
@@ -261,25 +261,6 @@
 				146834041AC3E56700842450 /* libReact.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		5083852F1CBEEA3C003F0F89 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				50EDD4161CC156EB00659504 /* icon1.png */,
-				5083853A1CBEEA45003F0F89 /* Fonts */,
-			);
-			name = Assets;
-			sourceTree = "<group>";
-		};
-		5083853A1CBEEA45003F0F89 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				508385421CC0261D003F0F89 /* Ionicons.ttf */,
-				5083853B1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf */,
-				5083853C1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -381,15 +362,12 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
-					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 4VJW57YJEC;
 					};
 				};
 			};
@@ -532,9 +510,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				508385401CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */,
-				5083853E1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf in Resources */,
-				508385461CC0261D003F0F89 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,11 +517,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5083853F1CBEEA5A003F0F89 /* GlacialIndifference-Regular.otf in Resources */,
-				508385451CC0261D003F0F89 /* Ionicons.ttf in Resources */,
-				50EDD4171CC156EB00659504 /* icon1.png in Resources */,
-				5083853D1CBEEA5A003F0F89 /* GlacialIndifference-Bold.otf in Resources */,
+				50B7CE691D05F85200296600 /* GlacialIndifference-Regular.otf in Resources */,
+				50B7CE681D05F85200296600 /* GlacialIndifference-Bold.otf in Resources */,
+				50B7CE6B1D05F85200296600 /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				50B7CE6A1D05F85200296600 /* icon1.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,10 +590,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -626,7 +597,6 @@
 				INFOPLIST_FILE = BudgetBlocksTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BudgetBlocks.app/BudgetBlocks";
 			};
@@ -637,14 +607,9 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = BudgetBlocksTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BudgetBlocks.app/BudgetBlocks";
 			};
@@ -654,7 +619,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -662,9 +626,11 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxhurl.budgetblocks;
 				PRODUCT_NAME = BudgetBlocks;
 			};
@@ -674,17 +640,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BudgetBlocks/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxhurl.budgetblocks;
 				PRODUCT_NAME = BudgetBlocks;
 			};
@@ -710,7 +676,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
