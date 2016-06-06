@@ -52,7 +52,9 @@ ReactNative.ToolbarAndroid = View;
 ReactNative.Image = Image;
 ReactNative.PixelRatio = PixelRatio;
 ReactNative.NativeModules = {};
-ReactNative.Platform = {};
+ReactNative.Platform = {
+  OS: 'ios'
+};
 ReactNative.Navigator = {
   SceneConfigs: {
     VerticalDownSwipeJump: 'VerticalDownSwipeJump'
@@ -62,6 +64,10 @@ ReactNative.AppRegistry = {
   registerComponent: () => {}
 };
 ReactNative.AppStateIOS = {
+  addEventListener: () => {},
+  removeEventListener: () => {}
+};
+ReactNative.AppState = {
   addEventListener: () => {},
   removeEventListener: () => {}
 };

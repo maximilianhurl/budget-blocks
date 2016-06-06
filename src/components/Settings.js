@@ -1,8 +1,7 @@
-import React from 'react-native';
+import React from 'react';
 import RatingRequestor from 'react-native-rating-requestor';
-import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
-
-let {
+import { COLOURS, GLOBAL_STYLES, } from '../utils/styles';
+import {
   View,
   Text,
   StyleSheet,
@@ -11,7 +10,7 @@ let {
   Animated,
   Easing,
   Dimensions
-} = React;
+} from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -28,6 +27,7 @@ const styles = StyleSheet.create({
   innerContent: {
     marginBottom: 10,
     marginHorizontal: 10,
+    flexDirection: 'row',
   },
   title: {
     color: 'white',
@@ -41,10 +41,19 @@ const styles = StyleSheet.create({
   pickerItem: {
     color: 'white',
     fontSize: 24,
+  },
+  currencySymbol: {
+    marginTop: 0,
+    marginLeft: 6,
+  },
+  currencyButton: {
+    paddingBottom: 5,
   }
 });
 
-let RatingTracker = new RatingRequestor('1099266102', {
+let RatingTracker = new RatingRequestor({
+  appStoreId: '1099266102',
+  marketId: 'com.maxhurl.budgetblocks',
   title: 'Leave Rating',
   actionLabels: {
     decline: 'No thanks',
@@ -105,7 +114,8 @@ class PickerView extends React.Component {
         <Picker
           selectedValue={this.props.uistore.currencySymbol}
           onValueChange={(symbol) => this.props.uiactions.setCurrencySymbol(symbol)}
-          itemStyle={[{color: 'white'}, GLOBAL_STYLES.BOLDFONT]}>
+          itemStyle={[{color: 'white'}, GLOBAL_STYLES.CURRENCYFONT ]}
+          style={[{'marginHorizontal': 5}]}>
           {this.props.uistore.currencySymbols.map((currencySymbol) => {
             return (<Picker.Item
               key={currencySymbol}
@@ -128,10 +138,14 @@ export class Settings extends React.Component {
           <Text style={[styles.title, GLOBAL_STYLES.BOLDFONT, styles.innerContent]}>SETTINGS</Text>
           <TouchableOpacity
             onPress={() => this.props.uiactions.toggleCurrencyPicker()}
-            style={[styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}>
+            style={[styles.currencyButton, styles.innerContent, GLOBAL_STYLES.ADDBUTTON]}>
             <Text
               style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
-              CURRENCY SYMBOL {this.props.uistore.currencySymbol}
+              CURRENCY SYMBOL
+            </Text>
+            <Text
+              style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.CURRENCYFONT, styles.currencySymbol]}>
+                {this.props.uistore.currencySymbol}
             </Text>
           </TouchableOpacity>
 

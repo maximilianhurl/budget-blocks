@@ -5,7 +5,7 @@ jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('alt-container/native', require('../../__mocks__/native'));
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
+import React from 'react';  // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()

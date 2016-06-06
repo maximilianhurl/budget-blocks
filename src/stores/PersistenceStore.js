@@ -1,10 +1,8 @@
 import alt from '../alt';
-import React from 'react-native';
+import { AsyncStorage } from 'react-native';
 import PersistenceActions from '../actions/PersistenceActions';
 import BudgetActions from '../actions/BudgetActions';
 import BudgetStore from '../stores/BudgetStore';
-
-const { AsyncStorage } = React;
 
 const STORAGE_KEY = '@BudgetBlocks:state-data';
 

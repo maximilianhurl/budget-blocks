@@ -3,6 +3,7 @@
 jest.dontMock('../../stores/UIStore');
 jest.setMock('../../alt', require('../../__mocks__/alt'));
 jest.setMock('react-native', require('../../__mocks__/react-native'));
+jest.setMock('../../actions/UIActions', require('../../__mocks__/UIActions'));
 
 
 describe('Test UIStore', function () {

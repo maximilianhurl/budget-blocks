@@ -1,4 +1,4 @@
-package com.budgetblocks;
+package com.maxhurl.budgetblocks;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;

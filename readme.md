@@ -18,7 +18,7 @@ A basic budgeting app for iOS and soon Android
 ## Building the project
 
     nvm use
-    ./install
+    npm install
     npm start
 
 
@@ -27,3 +27,11 @@ A basic budgeting app for iOS and soon Android
     nvm use
     npm install
     npm test
+
+
+## Running on android
+
+    react-native run-android
+    adb reverse tcp:8081 tcp:8081
+    adb shell input keyevent 82
+    adb logcat *:S ReactNative:V ReactNativeJS:V

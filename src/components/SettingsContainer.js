@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React from 'react';
 import AltContainer from 'alt-container/native';
 import UIActions from '../actions/UIActions';
 import UIStore from '../stores/UIStore';

@@ -6,7 +6,7 @@ jest.dontMock('../../utils/objectMap');
 jest.setMock('react-native-vector-icons/Ionicons', require('../../__mocks__/Ionicons'));
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
+import React from 'react';  // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -64,7 +64,7 @@ describe('BudgetList', function () {
       budgetstore={budgetstore} />);
     var output = shallowRenderer.getRenderOutput();
     output.props.children[2].props.onPress();
-    expect(budgetactions.addBudgetBlock).toBeCalledWith('NAME BLOCK...');
+    expect(budgetactions.addBudgetBlock).toBeCalledWith('');
   });
 
   it('should update income', function () {

@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -81,11 +82,11 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.budgetblocks"
+        applicationId "com.maxhurl.budgetblocks"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -98,10 +99,19 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file(BUDGETBLOCKS_RELEASE_STORE_FILE)
+            storePassword BUDGETBLOCKS_RELEASE_STORE_PASSWORD
+            keyAlias BUDGETBLOCKS_RELEASE_KEY_ALIAS
+            keyPassword BUDGETBLOCKS_RELEASE_KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

@@ -1,16 +1,16 @@
-import React from 'react-native';
+import React from 'react';
 import { BudgetBlock } from './BudgetBlock';
 import { orderedBlocks } from '../stores/BudgetStore';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
-
-let {
+import {
   Text,
   ScrollView,
   TouchableOpacity,
   TextInput,
   StyleSheet,
-  View
-} = React;
+  View,
+  Platform
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,9 +28,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   incomeCurrency: {
-    paddingTop: 10,
     marginRight: 2,
     fontSize: 20,
+    paddingTop: 9,
+    marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   incomeBorder: {
     borderBottomColor: '#000000',
@@ -118,7 +119,7 @@ export class BudgetList extends React.Component {
   }
 
   addBudgetBlock() {
-    this.props.budgetactions.addBudgetBlock('NAME BLOCK...');
+    this.props.budgetactions.addBudgetBlock('');
   }
 
   updateIncome(text) {
@@ -127,7 +128,7 @@ export class BudgetList extends React.Component {
 
   getIcomeText() {
     if (parseFloat(this.props.budgetstore.income) <= 0) {
-      return 'Income...';
+      return '';
     }
     return this.props.budgetstore.income;
   }
@@ -163,11 +164,14 @@ export class BudgetList extends React.Component {
         style={[styles.container]}>
 
         <View style={[styles.incomeBorder]}>
-          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.BOLDFONT]}>
+          <Text style={[styles.incomeCurrency, GLOBAL_STYLES.CURRENCYFONT]}>
               { this.props.uistore.currencySymbol }
           </Text>
           <TextInput
             style={[styles.incomeInput, GLOBAL_STYLES.REGULARFONT]}
+            underlineColorAndroid={COLOURS.DARKBLUE}
+            placeholder="Income..."
+            placeholderTextColor="white"
             onChangeText={(text) => this.updateIncome(text)}
             keyboardType={'numeric'}
             value={this.getIcomeText()} />
@@ -177,7 +181,7 @@ export class BudgetList extends React.Component {
 
         <TouchableOpacity
           onPress={() => this.addBudgetBlock()}
-          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 20}]}>
+          style={[GLOBAL_STYLES.ADDBUTTON, {marginBottom: 40}]}>
           <Text
             style={[GLOBAL_STYLES.ADDBUTTONTEXT, GLOBAL_STYLES.BOLDFONT]}>
             + ADD BLOCK

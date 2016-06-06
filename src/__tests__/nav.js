@@ -6,7 +6,7 @@ jest.setMock('react-native-vector-icons/Ionicons', require('../__mocks__/Ionicon
 jest.setMock('../../assets/blocks.png', {});
 
 import TestUtils from 'react-addons-test-utils';
-import React from 'react-native'; // eslint-disable-line no-unused-vars
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 // cannot use es6 modules syntax because
 // jest.dontMock & jest.autoMockOff()
@@ -83,7 +83,7 @@ describe('nav.js', function () {
 
     var settings = output.props.children[2];
     settings.props.onPress();
-    expect(listNavigator.push).toBeCalled({
+    expect(listNavigator.push).toBeCalledWith({
       name: 'SETTINGS'
     });
   });

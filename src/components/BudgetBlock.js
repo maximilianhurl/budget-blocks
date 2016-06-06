@@ -1,15 +1,14 @@
-import React from 'react-native';
+import React from 'react';
 import objectMap from '../utils/objectMap';
 import { BudgetBlockItem } from './BudgetBlockItem';
 import { COLOURS, GLOBAL_STYLES } from '../utils/styles';
 import zeroOrNaN from '../utils/zeroOrNaN';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-let {
+import {
   Text, View, TextInput, TouchableOpacity,
   PanResponder, Animated, LayoutAnimation, Alert,
-  StyleSheet
-} = React;
+  StyleSheet, Platform
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,8 +33,8 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     flex: 0.8,
-    height: 20,
     margin: 0,
+    paddingVertical: 0,
     fontSize: 18,
   },
   move: {
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   },
   totalCurrency: {
     marginRight: 5,
-    marginTop: 3,
+    marginTop: 2,
     fontSize: 16,
   },
   totalValue: {
@@ -113,8 +112,7 @@ export class BudgetBlock extends React.Component {
       },
       onPanResponderMove: (event) => {
         const gestureYPos = (event.nativeEvent.pageY - this.layoutYPos - this.props.yOffset) + this.props.scrollOffset;
-
-        const touches = event.touchHistory.touchBank[1];
+        const touches = event.touchHistory.touchBank[(Platform.OS === 'ios') ? 1 : 0];
         const movingDown = touches.previousPageY < touches.currentPageY ? true : false;
 
         this.state.pan.setValue({x: 0, y: gestureYPos});
@@ -132,7 +130,7 @@ export class BudgetBlock extends React.Component {
   };
 
   addBudgetBlockItem() {
-    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, 'Outgoing...', '0');
+    this.props.budgetactions.addBudgetBlockItem(this.props.blockId, '', '0');
   };
 
   updateTitle(title) {
@@ -154,7 +152,7 @@ export class BudgetBlock extends React.Component {
           ]
         )}>
          <Text style={[styles.removeBtnText]}>
-          <Icon name="close-circled" size={18} color="white" />
+          <Icon name="md-close-circle" size={20} color="white" />
         </Text>
       </TouchableOpacity>);
     }
@@ -198,9 +196,12 @@ export class BudgetBlock extends React.Component {
             <TextInput
               style={[styles.title, GLOBAL_STYLES.BOLDFONT]}
               onChangeText={(text) => this.updateTitle(text)}
+              underlineColorAndroid="black"
+              placeholder="NAME BLOCK..."
+              placeholderTextColor="white"
               value={ this.props.budgetBlock.title } />
             <Text style={[styles.move]} {...this.panResponder.panHandlers}>
-              <Icon name="navicon-round" size={20} color="white" />
+              <Icon name="ios-menu" size={20} color="white" />
             </Text>
 
             { this.renderRemoveButton() }
@@ -218,7 +219,7 @@ export class BudgetBlock extends React.Component {
           </TouchableOpacity>
 
           <View style={[styles.totalContainer, styles.innerContent]}>
-            <Text style={[styles.totalCurrency, GLOBAL_STYLES.BOLDFONT]}>
+            <Text style={[styles.totalCurrency, GLOBAL_STYLES.CURRENCYFONT]}>
               { this.props.uistore.currencySymbol }
             </Text>
             <Text style={[styles.totalValue, GLOBAL_STYLES.REGULARFONT]}>

@@ -1,8 +1,7 @@
-import React from 'react-native';
+import React from 'react';
 import { GLOBAL_STYLES, COLOURS } from '../utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-let { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet } = React;
+import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,11 +20,12 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 0.4,
-    height: 20,
+    height: 21,
     color: COLOURS.DARKTEXT,
     margin: 0,
     padding:0,
     marginBottom: 5,
+    fontSize: (Platform.OS === 'ios') ? 16 : 18,
   },
   removeButton: {
     flex: 0.1,
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   currency: {
+    marginTop: 0,
     fontSize: 16,
   }
 });
@@ -73,7 +74,7 @@ export class BudgetBlockItem extends React.Component {
           ]
         )}>
         <Text style={[styles.removeButtonText]}>
-          <Icon name="close-circled" size={20} color="black" />
+          <Icon name="md-close-circle" size={20} color="black" />
         </Text>
       </TouchableOpacity>);
     }
@@ -86,14 +87,18 @@ export class BudgetBlockItem extends React.Component {
         <TextInput
           style={[styles.input, styles.title, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateTitle(text)}
+          underlineColorAndroid={COLOURS.LIGHTBLUE}
+          placeholder="Outgoing..."
+          placeholderTextColor={COLOURS.DARKTEXT}
           value={ this.props.blockItem.title } />
-        <Text style={[styles.currency, GLOBAL_STYLES.BOLDFONT]}>
+        <Text style={[styles.currency, GLOBAL_STYLES.CURRENCYFONT]}>
           { this.props.uistore.currencySymbol }
         </Text>
         <TextInput
           style={[styles.input, styles.total, GLOBAL_STYLES.REGULARFONT]}
           onChangeText={(text) => this.updateValue(text)}
           keyboardType={'numeric'}
+          underlineColorAndroid={COLOURS.LIGHTBLUE}
           value={String(this.props.blockItem.value)} />
 
         { this.renderRemoveButton() }
